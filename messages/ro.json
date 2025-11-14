@@ -1,0 +1,491 @@
+{
+  "navigation": "Navigare",
+  "home": "Acasă",
+  "about": "Despre noi",
+  "services": "Servicii",
+  "portfolio": "Portofoliu",
+  "contact": "Contacte",
+  "navbar": {
+    "home": "Acasă",
+    "services": "Servicii",
+    "about": "Despre noi",
+    "cases": "Lucrările noastre",
+    "contacts": "Contacte",
+    "phone": "078 886 033"
+  },
+  "hero": {
+    "callButton": "Solicitare apel",
+    "servicesButton": "Serviciile noastre",
+    "title": "AGENȚIE DE PUBLICITATE",
+    "subtitleIntro": "Unde fiecare idee se transformă în",
+    "subtitleAccent": "o realitate strălucitoare!"
+  },
+  "stats": {
+    "experience": "ani de experiență",
+    "projects": "proiecte",
+    "clients": "clienți",
+    "approach": "abordare individuală"
+  },
+  "cases": {
+    "ourWorks": "Lucrările noastre",
+    "loading": "Încărcăm lucrările noastre...",
+    "subtitle": "portofoliul proiectelor noastre de top — de la concept la realizare.",
+    "all": "Toate",
+    "errorLoadingCategories": "Eroare la încărcarea categoriilor",
+    "errorLoadingWorks": "Eroare la încărcarea datelor",
+    "noWorks": "Lucrările din această categorie vor apărea curând"
+  },
+  "contacts": {
+    "title": "Contacte",
+    "subtitle": "Scrie-ne — răspundem în aceeași zi lucrătoare.",
+    "contactInfoTitle": "Contact direct",
+    "phoneLabel": "Telefon",
+    "emailLabel": "Email",
+    "workHoursLabel": "Program",
+    "workHours": "Lu–Vi: 09:00–18:00",
+    "addressLabel": "Adresă",
+    "name": "Nume",
+    "email": "Email",
+    "message": "Mesaj",
+    "send": "Trimite",
+    "success": "Mulțumim! Te contactăm în curând.",
+    "copy": "Copiază",
+    "copied": "Copiat"
+  },
+  "aboutPage": {
+    "title": "Despre noi",
+    "p1": "ART GARAGE este o echipă de profesioniști cu peste 10 ani de experiență în domeniul publicității exterioare și interioare. Dezvoltăm soluții unice și creative care vă ajută să ieșiți în evidență față de concurență și să transmiteți eficient mesajul dumneavoastră către publicul țintă.",
+    "p2": "Suntem mândri de faptul că avem propria noastră producere și o echipă de specialiști calificați, inclusiv designeri, ingineri și tehnicieni, ceea ce ne permite să creăm produse de înaltă calitate „la cheie”. Abordarea noastră se concentrează pe satisfacerea maximă a nevoilor clienților și crearea de soluții care corespundă celor mai înalte standarde.",
+    "p3": "Portofoliul nostru include proiecte variate, realizate în conformitate cu cerințele și obiectivele fiecărui client. Ne străduim ca fiecare lucrare să contribuie la creșterea vizibilității brandului și la promovarea cu succes a afacerii dumneavoastră.",
+    "p4": "Credem că publicitatea corectă nu doar atrage atenția, ci și reprezintă un pas important în stabilirea unor relații solide cu publicul dumneavoastră.",
+    "teamTitle": "Echipa noastră",
+    "faqTitle": "Întrebări frecvente",
+    "faq": {
+      "q1": "Cât durează producția?",
+      "a1": "Proiectele standard — 5–10 zile lucrătoare. Termenul depinde de complexitate și volum.",
+      "q2": "Oferiți ajutor la design?",
+      "a2": "Da. Avem designeri în echipă — pregătim machete și vizualizări.",
+      "q3": "Lucrați în toată țara?",
+      "a3": "Da. Livrăm și efectuăm montaj în toată Moldova."
+    },
+    "roles": {
+      "designer": "Designer",
+      "engineer": "Inginer",
+      "technician": "Tehnician",
+      "projectManager": "Manager de proiect"
+    }
+  },
+  "servicesSection": {
+    "title": "SERVICII",
+    "subtitle": "oferim un ciclu complet de servicii în domeniul publicității exterioare și interioare — de la idee și design până la producție și montaj.",
+    "ctaTitle": "Nu ai timp să studiezi serviciile?",
+    "ctaSubtitle": "Înțelegem obiectivele tale și propunem soluții optime în buget și termen. Spune-ne despre proiect — îți recomandăm cea mai bună opțiune.",
+    "ctaContactTitle": "Contactează-ne",
+    "ctaContactSubtitle": "Selectăm soluții și materiale potrivite pentru nevoile și brandul tău",
+    "getConsultation": "Obține consultanță",
+    "marquee": "• PUBLICITATE EXTERIOR • PUBLICITATE INTERIOR • MATERIALE POS • CADOURI CORPORATIVE • TROFEE • INDICATOARE • STEAGURI • MATERIALE TIPOGRAFICE • TIPAR FORMAT MARE"
+  },
+  "serviceDrawer": {
+    "orderService": "Comandă serviciu",
+    "detailsTitle": "Detalii serviciu",
+    "linkCopied": "Link copiat în clipboard"
+  },
+  "serviceOrderForm": {
+    "title": "Comandă serviciul",
+    "subtitle": "Completează formularul și te contactăm în timpul zilei de lucru",
+    "messageLabel": "Descrie comanda",
+    "messagePlaceholder": "Detaliază comanda: cantitate, dimensiuni, particularități de design, termene etc.",
+    "filesTitle": "Fișiere cu designul",
+    "submittedTitle": "Mulțumim pentru cerere!",
+    "submittedSubtitle": "Te vom contacta în curând pentru detalii.",
+    "nameLabel": "Nume",
+    "namePlaceholder": "Introdu numele tău",
+    "phoneLabel": "Telefon",
+    "phonePlaceholder": "+373 XXX XXX XX",
+    "emailLabel": "Email",
+    "emailPlaceholder": "email@example.com",
+    "submitLabel": "Trimite cererea",
+    "submitSending": "Se trimite...",
+    "privacyConsent": "Apăsând \"Trimite cererea\", ești de acord cu politica noastră de confidențialitate"
+  },
+  "serviceAdvantages": {
+    "heading": "Avantajele serviciului",
+    "base": {
+      "0": {
+        "title": "Calitate înaltă",
+        "description": "Echipamente moderne și materiale verificate"
+      },
+      "1": {
+        "title": "Respectarea termenelor",
+        "description": "Lucrăm în termenele agreate, fără amânări"
+      },
+      "2": {
+        "title": "Abordare individuală",
+        "description": "Ținem cont de specificul proiectului și dorințele tale"
+      },
+      "3": {
+        "title": "Condiții avantajoase",
+        "description": "Optimizăm bugetul fără a compromite calitatea"
+      }
+    },
+    "outdoorAdvertising": {
+      "0": {
+        "title": "Rezistență la intemperii",
+        "description": "Materiale rezistente la ploaie, soare și vânt"
+      },
+      "1": {
+        "title": "Vizibilitate maximă",
+        "description": "Atrage eficient atenția în mediul urban"
+      },
+      "2": {
+        "title": "Durabilitate",
+        "description": "Construcții care își păstrează aspectul mult timp"
+      },
+      "3": {
+        "title": "Diversitate de soluții",
+        "description": "Formate adaptate pentru orice obiectiv de brand"
+      }
+    },
+    "interiorAdvertising": {
+      "0": {
+        "title": "Estetică și precizie",
+        "description": "Montaj curat și armonie vizuală a spațiului"
+      },
+      "1": {
+        "title": "Identitate de brand",
+        "description": "Stil unitar, conform ghidurilor brandului"
+      },
+      "2": {
+        "title": "Flexibilitate în amplasare",
+        "description": "Soluții pentru orice spațiu și scenariu"
+      },
+      "3": {
+        "title": "Navigare clară",
+        "description": "Îmbunătățește experiența vizitatorilor și angajaților"
+      }
+    },
+    "posMaterials": {
+      "0": {
+        "title": "Creștere conversii",
+        "description": "Materiale care stimulează vânzările la punctul de contact"
+      },
+      "1": {
+        "title": "Optimizarea spațiului",
+        "description": "Construcții eficiente pentru expunere și comunicare"
+      },
+      "2": {
+        "title": "Mobilitate",
+        "description": "Mutare ușoară și instalare rapidă"
+      },
+      "3": {
+        "title": "Recunoașterea brandului",
+        "description": "Scoatem în evidență brandul față de competitori"
+      }
+    },
+    "printingMaterials": {
+      "0": {
+        "title": "Informativitate",
+        "description": "Transmitere clară a mesajului și beneficiilor"
+      },
+      "1": {
+        "title": "Calitate tipar",
+        "description": "Culori vii și detalii precise, rezistente"
+      },
+      "2": {
+        "title": "Valoare tactilă",
+        "description": "Materiale plăcute și consistente, care impresionează"
+      },
+      "3": {
+        "title": "Economie",
+        "description": "Tiraje și formate optimizate pentru obiective"
+      }
+    },
+    "additionalServices": {
+      "corporateGifts": {
+        "0": {
+          "title": "Cadouri personalizate",
+          "description": "Personalizare pentru evenimente și audiențe"
+        },
+        "1": {
+          "title": "Branding",
+          "description": "Întărim imaginea brandului pe fiecare element"
+        },
+        "2": {
+          "title": "Calitatea materialelor",
+          "description": "Produse fiabile și plăcute la atingere"
+        },
+        "3": {
+          "title": "Termene",
+          "description": "Producție rapidă pentru data necesară"
+        }
+      }
+    }
+  },
+  "design": {
+    "title": "DESIGN",
+    "subtitle": "creăm soluții vizuale unice\npentru afacerea ta —\nde la concept la implementare.",
+    "twoDThreeD": "2D & 3D Design",
+    "designComplexityTitle": "Dezvoltăm design de orice complexitate",
+    "designComplexityDesc1": "De la grafică plană la construcții și vizualizări 3D. Creăm machete precise și atractive, pregătite pentru producție.",
+    "designComplexityDesc2": "Garantăm conformitatea cu toate cerințele tehnice și o execuție de înaltă calitate.",
+    "orderProject": "Comandă proiect"
+  },
+  "footer": {
+    "description": "Creăm soluții publicitare impresionante pentru afacerea dvs.",
+    "address": "str. Chișinău, nr. Ștefan cel Mare 123",
+    "phone": "+373 123 456 789",
+    "email": "info@artgarage.md",
+    "rights": "Toate drepturile rezervate",
+    "privacy": "Politica de confidențialitate",
+    "terms": "Termeni și condiții",
+    "emailPlaceholder": "Introduceți emailul dvs.",
+    "subscribe": "Abonează-te"
+  },
+  "outdoorAdvertising": {
+    "title": "Publicitate exterior",
+    "subtitle": "Publicitatea exterioară este cel mai popular mod de comunicare, amplasată pe străzi sau în locuri publice, destinat să atragă atenția asupra brandului. Aceasta include panouri publicitare, autocolante pe geamuri, bannere, litere volumetrice și alte construcții care asigură o vizibilitate maximă și un impact puternic asupra audienței.",
+    "consultation": "Solicitare consultanță",
+    "ourWorks": "Lucrările noastre",
+    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesSubtitle": "oferim o gamă completă de servicii în domeniul publicității exterioare — de la dezvoltare la instalare.",
+    "volumetricLetters": "Litere volumetrice",
+    "volumetricLettersDesc": "Litere volumetrice strălucitoare și vizibile pentru fațade și interioare",
+    "pseudoVolumetricLetters": "Litere pseudo-volumetrice",
+    "pseudoVolumetricLettersDesc": "Soluție economică cu efect de volum",
+    "lightbox": "Lightbox / Cutie luminoasă",
+    "lightboxDesc": "Cutii luminoase pentru publicitate non-stop",
+    "advertisingSteles": "Stele publicitare / Totem",
+    "advertisingStelesDesc": "Construcții publicitare la scară largă pentru a atrage atenția",
+    "carBranding": "Branding auto",
+    "carBrandingDesc": "Îmbrăcare completă sau parțială a vehiculelor cu publicitate",
+    "glassStickers": "Aplicare pe sticlă",
+    "glassStickersDesc": "Aplicare decorativă și publicitară pe suprafețe de sticlă",
+    "ctaTitle": "Aveți nevoie de consultanță în publicitate exterior?",
+    "ctaSubtitle": "Specialiștii noștri vă vor ajuta să alegeți soluția optimă pentru afacerea dvs., ținând cont de buget, locație și obiectivele de marketing.",
+    "ctaContactTitle": "Contactați-ne astăzi",
+    "ctaContactSubtitle": "Obțineți o consultanță gratuită și calcularea costului proiectului dvs.",
+    "getConsultation": "Obține consultanță"
+  },
+  "interiorAdvertising": {
+    "title": "Publicitate interior",
+    "subtitle": "Publicitatea interior este o modalitate eficientă de a crea o atmosferă unică în încăperi și de a atrage atenția vizitatorilor. Aceasta include litere volumetrice, cutii luminoase, indicatoare de navigație și alte elemente care ajută brandul să se distingă și să creeze o imagine memorabilă.",
+    "consultation": "Solicitare consultanță",
+    "ourWorks": "Lucrările noastre",
+    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesSubtitle": "oferim o gamă completă de servicii în domeniul publicității interioare — de la dezvoltare la instalare.",
+    "volumetricLetters": "Litere volumetrice",
+    "volumetricLettersDesc": "Litere volumetrice strălucitoare și vizibile pentru interioare",
+    "lightbox": "Lightbox",
+    "lightboxDesc": "Cutii luminoase pentru publicitate eficientă în încăperi",
+    "rollUp": "Roll-up / X-banner",
+    "rollUpDesc": "Standuri mobile pentru expoziții și evenimente",
+    "navigation": "Navigare în încăperi",
+    "navigationDesc": "Sisteme de navigație pentru birouri, centre comerciale și alte obiecte",
+    "textileBanner": "Banner textil",
+    "textileBannerDesc": "Bannere textile de calitate pentru decorarea interioarelor",
+    "pseudoVolumetricLetters": "Litere pseudo-volumetrice",
+    "pseudoVolumetricLettersDesc": "Soluție economică cu efect de volum pentru interioare",
+    "officeStickers": "Aplicare birou",
+    "officeStickersDesc": "Branding al spațiilor de birou cu ajutorul autocolantelor vinilice",
+    "ctaTitle": "Aveți nevoie de consultanță în publicitate interior?",
+    "ctaSubtitle": "Specialiștii noștri vă vor ajuta să alegeți soluția optimă pentru interiorul dvs., ținând cont de stilul încăperii, buget și obiectivele de marketing.",
+    "ctaContactTitle": "Contactați-ne astăzi",
+    "ctaContactSubtitle": "Obțineți o consultanță gratuită și calcularea costului proiectului dvs.",
+    "getConsultation": "Obține consultanță"
+  },
+  "posMaterials": {
+    "title": "Materiale POS",
+    "subtitle": "Materialele POS sunt instrumente de promovare în punctele de vânzare. Dezvoltăm și producem standuri, postere, stickere, pixuri, caiete, sacoșe și figuri la scară reală, care evidențiază brandul și atrag atenția clienților. Abordare personalizată, calitate înaltă și livrare la timp sunt garantate.",
+    "consultation": "Solicitare consultanță",
+    "ourWorks": "Lucrările noastre",
+    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesSubtitle": "oferim o gamă completă de servicii în domeniul materialelor POS — de la dezvoltare la producție.",
+    "brandedAccessories": "Accesorii branduite",
+    "brandedAccessoriesDesc": "Accesorii branduite — o gamă variată de produse promoționale ce promovează eficient brandul și îl fac vizibil. Categoria include hanorace, tricouri, șepci, veste, dosare, șnururi, căni, caiete, sacoșe, pixuri, insigne și multe altele. Aceste articole sunt potrivite pentru evenimente corporative, campanii promoționale sau ca daruri pentru clienți.\n\nTipuri și caracteristici:\n• Produsele pot fi realizate în culori și mărimi diferite, cu logo sau elemente de brand aplicate prin serigrafie, termotransfer, broderie, sublimare, UV etc.\n• Se pot fabrica din materiale variate, în funcție de buget și obiective.\n\nPrețurile și termenele depind de tiraj, material și complexitatea designului. Oferim abordare personalizată, o gamă largă de modele și culori, în funcție de preferințele și nevoile dvs. Garantăm execuția la timp, la cel mai bun preț.",
+    "infoPanels": "Panouri informative",
+    "infoPanelsDesc": "Panouri informative — structuri publicitare și informaționale pentru afișarea datelor, indicatoarelor sau materialelor promoționale. Sunt ideale pentru spații publice, birouri, centre comerciale, evenimente de business sau expoziții, permițând comunicarea clară a informațiilor către public.\n\nTipuri și caracteristici:\n• Panourile pot fi realizate din acril, metal, lemn sau PVC, pentru a se potrivi oricărui interior.\n• Pot fi statice sau cu informație ușor de actualizat, de exemplu prin postere sau inserții schimbabile.\n\nPrețurile și termenele depind de material, dimensiune și complexitatea designului. Oferim condiții flexibile, adaptate bugetului și cerințelor, cu livrare exactă la termen.",
+    "lifeSizeFigures": "Figură mărime naturală",
+    "lifeSizeFiguresDesc": "Figuri la scară reală — structuri publicitare care atrag atenția și creează imagini memorabile pentru branduri sau evenimente. Pot fi cu iluminare (lightbox) sau fără, și pot fi volumetrice ori plane.\n\nTipuri și caracteristici:\n• Pot fi realizate din PVC, acril sau polistiren, în diverse forme și dimensiuni.\n• Iluminarea le face vizibile pe timp de noapte, iar variantele fără iluminare oferă o opțiune optimă în funcție de obiective și buget.\n\nPrețurile și termenele depind de material, dimensiune și complexitatea designului. Oferim abordare personalizată și execuție de calitate, în termen, conform cerințelor dvs.",
+    "stands": "Suporturi / Holdere",
+    "standsDesc": "Suporturi (holdere) — accesorii practice și elegante pentru afișarea informațiilor, materialelor promoționale sau documentelor. Sunt potrivite pentru birouri, expoziții și puncte de vânzare, aduc ordine și subliniază identitatea brandului.\n\nTipuri și caracteristici:\n• Pot fi realizate din plexiglas, lemn sau placaj, pentru a se integra în interior și buget.\n• Personalizarea este posibilă prin gravură sau imprimare, pentru accentuarea identității de brand.\n• Disponibile în formate variate — de la modele compacte de birou la holdere mari pentru mai multe foi.\n\nPrețurile și termenele depind de material, dimensiuni și complexitatea designului. Oferim abordare personalizată și livrare la timp, la cel mai bun preț.",
+    "ctaTitle": "Aveți nevoie de consultanță în materiale POS?",
+    "ctaSubtitle": "Specialiștii noștri vă vor ajuta să alegeți soluții optime pentru punctele de vânzare, ținând cont de specificul afacerii dvs. și de publicul țintă.",
+    "ctaContactTitle": "Contactați-ne astăzi",
+    "ctaContactSubtitle": "Obțineți o consultanță gratuită și calcularea costului proiectului dvs.",
+    "getConsultation": "Obține consultanță"
+  },
+  "printingMaterials": {
+    "title": "Materiale poligrafice",
+    "subtitle": "Materialele tipografice sunt produse publicitare și informative eficiente, care ajută brandurile să transmită informațiile lor publicului. Această categorie include broșuri, carnete, mape, ecusoane, pliante, cărți de vizită, postere și alte materiale imprimate pe hârtie, ideale pentru promovarea afacerilor și prezentări, promoții.",
+    "consultation": "Solicitare consultanță",
+    "ourWorks": "Lucrările noastre",
+    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesSubtitle": "oferim o gamă completă de servicii în domeniul poligrafiei — de la design la tipărire.",
+    "magazines": "Reviste, flyere, broșuri",
+    "magazinesDesc": "Revistele, broșurile și pliantele sunt materiale publicitare eficiente care permit transmiterea informațiilor către publicul țintă. Aceste produse sunt utilizate pe larg în marketing, promovarea serviciilor și pentru distribuirea informațiilor importante despre companie sau produse.\n\nTipuri și caracteristici:\n• Revistele, broșurile și pliantele pot fi realizate în diferite formate și stiluri — de la pliante compacte la reviste colorate de mari dimensiuni.\n• Acestea pot fi tipărite pe diferite tipuri de hârtie, cu opțiuni de finisaj mat sau lucios, pentru a obține efectul vizual dorit și a sublinia calitatea conținutului.\n• De asemenea, este posibilă utilizarea diferitelor tipuri de fixări, cum ar fi spirala, scoabe sau clei.\n\nPrețurile și termenii de livrare depind de tiraj, format și complexitatea designului. Oferim un abordaj personalizat fiecărui proiect, creând produse care corespund cerințelor și bugetului dumneavoastră.",
+    "stickers": "Autocolante și stickere",
+    "stickersDesc": "Autocolantele (stickerele) sunt o soluție convenabilă și eficientă pentru etichetare, publicitate și branding. Ele sunt utilizate pentru personalizarea ambalajelor, vitrinelor, suprafețelor publicitare, precum și ca etichete și indicatoare informative.\n\nTipuri de autocolante:\n• Autocolante din peliculă\n  • Fabricate din peliculă autoadezivă (albă lucioasă, mată sau transparentă).\n  • Rezistente la umiditate și factori externi.\n  • Pot fi cu laminare (pentru protecție suplimentară) sau fără laminare.\n  • Disponibile în două variante: tăiate la contur (formă personalizată) sau dreptunghiulare.\n  • Perfecte pentru utilizare în exterior, plăcuțe publicitare, produse expuse la umiditate.\n• Autocolante din hârtie\n  • Tipărite pe hârtie autoadezivă cu finisaj semi-lucios.\n  • Ideale pentru ambalaje, plicuri, cutii din carton și produse protejate de factorii externi.\n  • Mai greu de îndepărtat — se rup și lasă stratul adeziv.\n\nPuteți comanda atât autocolante în rolă, cât și tăiate conform mărimilor dvs. Prețurile și termenele de livrare depind de tiraj și complexitatea designului. Oferim un abordaj personalizat, ținând cont de toate cerințele dumneavoastră, și garantăm realizarea tuturor comenzilor la timp și la cel mai bun preț. În plus, vă putem oferi servicii de creare a unui design unic pentru autocolantele dumneavoastră.",
+    "ctaTitle": "Aveți nevoie de consultanță în materiale poligrafice?",
+    "ctaSubtitle": "Specialiștii noștri vă vor ajuta să alegeți soluții optime pentru produsele dvs. tipărite, ținând cont de obiective, buget și publicul țintă.",
+    "ctaContactTitle": "Contactați-ne astăzi",
+    "ctaContactSubtitle": "Obțineți o consultanță gratuită și calcularea costului proiectului dvs.",
+    "getConsultation": "Obține consultanță"
+  },
+  "services": {
+    "outdoorAdvertising": {
+      "volumetricLetters": {
+        "title": "Litere volumetrice",
+        "description": "Literele volumetrice sunt elemente care creează un accent vizual deosebit datorită formei 3D și atrag atenția chiar și de la distanță. Sunt perfecte pentru marcarea clădirilor și a teritoriului brandului, adăugând vizibilitate și recunoaștere.\n\nTipuri de litere volumetrice:\n• Fără iluminare — litere fără iluminare, efectul se obține prin forma volumetrică.\n• Cu iluminare frontală — lumina provine din partea frontală a literei, creând un accent luminos.\n• Cu iluminare pe contur — iluminare pe conturul literelor, oferind un efect de strălucire.\n• Cu iluminare din spate — lumina este ascunsă în spatele literelor, evidențiind silueta pe un fundal întunecat.\n\nOferim un ciclu complet de servicii pentru crearea literelor volumetrice:\n• Crearea machetei și vizualizare\n• Măsurări și selecția materialelor\n• Producție și instalare \"la cheie\"\n\nPrețul și termenii depind de complexitatea proiectului și materialele alese. De obicei, producția durează între 7 și 14 zile lucrătoare.",
+        "image": "/Services/signs.jpg"
+      },
+      "pseudoVolumetricLetters": {
+        "title": "Litere pseudo-volumetrice",
+        "description": "Literele pseudo-volumetrice creează un efect vizual de volum folosind materiale plate și tehnici speciale. Acestea sunt ideale pentru panouri publicitare, adăugând brandului dumneavoastră expresivitate și atractivitate.\n\nProducem tehnici variate de litere pseudo-volumetrice, astfel încât să puteți alege cea mai bună opțiune pentru brandul dumneavoastră:\n• Litere pseudo-volumetrice pe suporturi distanțate — creează un efect de \"litere plutitoare\", care se desprind de perete, oferindu-le un aspect ușor și modern.\n• Litere pseudo-volumetrice cu iluminare — efectul de volum este amplificat de iluminarea integrată, care conferă literei luminozitate și atrage atenția asupra brandului dumneavoastră.\n• Litere pseudo-volumetrice din metal — litere elegante și durabile, care adaugă brandului dumneavoastră un aer de soliditate și longevitate, fiind ideale pentru proiecte outdoor și de mari dimensiuni.\n• Litere pseudo-volumetrice din PVC — ușoare, rezistente la factori externi și disponibile în mai multe variante de execuție, fiind perfecte pentru publicitate interioară și exterioară.\n• Litere pseudo-volumetrice din acril — pot fi realizate atât în variantă subțire de 3 mm, cât și într-o variantă mai masivă de 10 mm cu un strat suplimentar de acril, creând adâncime și volum.\n\nFiecare dintre aceste opțiuni vă permite să alegeți soluția optimă în funcție de bugetul, designul și obiectivele dumneavoastră. Vă vom ajuta să selectați cea mai bună opțiune pentru dumneavoastră!\n\nOferim un ciclu complet de servicii pentru crearea literelor pseudo-volumetrice, inclusiv:\n• Crearea machetei și vizualizare.\n• Măsurări și selecția materialelor.\n• Producția și instalarea literelor \"la cheie\".\n\nPrețul și termenii depind de complexitatea proiectului și materialele alese. De obicei, producția literelor pseudo-volumetrice durează între 7 și 14 zile lucrătoare. Vă vom ajuta să selectați soluția optimă, care se potrivește bugetului și cerințelor dumneavoastră.",
+        "image": "/Services/signs.jpg"
+      },
+      "lightbox": {
+        "title": "Lightbox / Cutie luminoasă",
+        "description": "Lightbox este un instrument stilat și eficient pentru publicitatea exterioară și interioară, care atrage atenția datorită iluminării sale intense. Este fabricat din plexiglas (sticlă organică) și PVC (plastic), cu posibilitatea de a fi acoperit cu autocolante de diverse culori sau cu imprimare. De asemenea, oferim variante fără iluminare, ceea ce face construcția mai economă și potrivită pentru diverse condiții de utilizare.\n\nLightbox este o construcție publicitară versatilă, care poate fi realizată în diverse variante, pentru a se potrivi perfect nevoilor dumneavoastră:\n• Lightbox cu două fețe (stopper) — ideal pentru plasarea în locuri unde construcția trebuie să fie vizibilă din ambele părți (de exemplu, în centre comerciale, pe stradă).\n• Lightbox cu o singură față — poate fi realizat în diverse forme:\n  • Forme standard: rotundă, pătrată, dreptunghiulară.\n  • Forme personalizate: de exemplu, sub formă de cană sau alte designuri neconvenționale, care permit evidențierea unicitatea brandului dumneavoastră.\n\nFiecare lightbox poate fi adaptat în funcție de condițiile dumneavoastră, creând construcții publicitare luminoase și atrăgătoare, care vor capta atenția publicului țintă.",
+        "image": "/Services/large-format-printing.jpg"
+      },
+      "advertisingSteles": {
+        "title": "Stele publicitare / Totem",
+        "description": "Construcții publicitare la scară largă pentru a atrage atenția. Instalăm în locuri cu trafic ridicat. Perfecte pentru navigație și brandingul teritoriului.",
+        "image": "/Services/installations.jpg"
+      },
+      "carBranding": {
+        "title": "Branding auto",
+        "description": "Brandingul auto (colantare auto) este o metodă eficientă de publicitate mobilă care ajută la creșterea vizibilității companiei, promovarea produselor și serviciilor, precum și la consolidarea imaginii brandului. Este una dintre cele mai econome soluții de promovare, deoarece nu necesită cheltuieli suplimentare pentru închiriere sau plasarea publicității. Astăzi, nu doar marile companii, ci și afacerile mijlocii și antreprenori individuali profită de această oportunitate. Această formă de publicitate nu doar că atrage noi clienți, dar contribuie și la creșterea loialității și încrederii în brand.\n\nTIPURI DE BRANDING AUTO:\n• Branding complet — aplicare peliculă atocolantă cu imprimare aplicată pe întreaga suprafață a mașinii sau pe părți separate (uși, geamuri etc.). Ideal pentru a prezenta în mod vibrant serviciile sau produsele companiei.\n• Tăiere cu plotter / aplicație — tăierea autocolant (oracal) și aplicarea acestora în diferite culori și forme. Perfect pentru logo-uri, informații de contact sau aplicații complexe.\n• Branding combinat — combinație de imprimare color și tăiere cu plotter. Utilizat pentru imagini vibrante, logo-uri și elemente monocolore.\n\nPrețurile și termenul de branding auto depind de complexitatea proiectului și de tipul de aplicare. Oferim un abordaj personalizat fiecărui client, ținând cont de toate cerințele și dorințele pentru a asigura un rezultat care să corespundă perfect obiectivelor dumneavoastră. De asemenea, putem dezvolta designul și macheta unică pentru ca brandingul dumneavoastră să fie vibrant, elegant și eficient. Termenul de realizare depinde de volumul lucrării, dar garantăm finalizarea rapidă a comenzii, fără a compromite calitatea.",
+        "image": "/Services/2w8a3685.jpg"
+      },
+      "glassStickers": {
+        "title": "Aplicare pe sticlă",
+        "description": "Colantarea geamuri este una dintre cele mai eficiente metode de publicitate exterioară, care permite utilizarea geamurilor și vitrinelor pentru atragerea atenției. Prin designuri vii și creative pe suprafețele de sticlă, nu doar că poți promova produse sau servicii, dar și creezi o imagine vizuală unică pentru compania ta. Această metodă de publicitate este perfectă pentru magazine, birouri și alte spații  comerciale, contribuind totodată la îmbunătățirea aspectului fațadei.\n\nOferim o varietate largă de opțiuni pentru aplicarea autocolantelor pe geamuri pentru publicitatea exterioară, care vor ajuta afacerea dumneavoastră să devină vizibilă și atractivă:\n• Aplicare completă — geamul este acoperit complet cu material publicitar, creând un design vibrant și memorabil. Este perfect pentru vitrinele magazinelor și birourilor, precum și pentru standurile expoziționale.\n• Aplicare parțială — reclama este aplicată doar pe o parte a geamului, de exemplu, pe partea inferioară sau pe colțuri. Acesta permite păstrarea vizibilității și utilizarea eficientă a spațiului pentru publicitate.\n• Peliculă perforată sau OWV — ideală pentru vitrine, deoarece păstrează vizibilitatea din interior, în timp ce afară oferă o publicitate vibrantă și de impact. O soluție excelentă pentru magazine și birouri care doresc să iasă în evidență.\n• Peliculă mată — creează efectul unui geam mat, asigurând un plus de intimitate și un design elegant. Potrivită pentru aplicarea de logo-uri și elemente publicitare.\n• Autocolant vitraliu — peliculă decorativă care imită vitraliile sau creează elemente de design unice. Această opțiune este perfectă pentru cei care doresc să combine funcționalitatea cu estetica.\n• Tăiere la plotter — prin tăierea cu plotter, decupăm forme precise pentru logo-uri, texte și elemente grafice. Alegerea ideală pentru linii clare și exacte.\n• Grafic de lucru — plasarea informațiilor despre programul de lucru, datele de contact sau promoțiile direct pe vitrină. O modalitate excelentă de a informa clienții chiar pe loc.\n\nFiecare tip de aplicare permite utilizarea eficientă a suprafețelor de sticlă pentru publicitate, atrăgând atenția și subliniind unicitatea afacerii dumneavoastră.\n\nPrețurile și termenele de livrare depind de complexitatea proiectului și tipul de aplicare a autocolantului. Oferim soluții personalizate pentru fiecare client, ținând cont de cerințele și bugetul dumneavoastră. Termenii de realizare variază în funcție de volumul lucrării, însă garantăm o execuție rapidă și de calitate.\n\nDe asemenea, oferim un serviciu complet, de la dezvoltarea designului până la montarea finală. Echipa noastră de specialiști va colabora cu dumneavoastră la fiecare etapă a procesului, asigurându-se că rezultatul final este perfect adaptat nevoilor și cerințelor afacerii dumneavoastră.",
+        "image": "/Services/interior-advertising.jpg"
+      }
+    },
+    "interiorAdvertising": {
+      "volumetricLetters": {
+        "title": "Litere volumetrice",
+        "description": "Literele 3D (litere volumetrice) în interior sunt o modalitate stilată și impresionantă de a evidenția un logo sau un text în încăpere. Acestea creează un efect de adâncime și volum, atrăgând atenția și subliniind unicitatea brandului sau a companiei.\n\nTipuri și caracteristici:\n• Literele 3D pot fi realizate din diverse materiale, precum acril, metal sau plastic, oferind o gamă variată de texturi și efecte.\n• Literele pot fi iluminare sau nu, ceea ce adaugă un plus de expresivitate.\n• Aceste litere sunt ideale pentru birouri, holuri, magazine, standuri expoziționale și alte spații comerciale.\n\nPrețurile și termenii de execuție depind de complexitatea proiectului și materialele selectate. Oferim un abordaj personalizat, creând soluții care se potrivesc perfect cu interiorul dumneavoastră și respectă bugetul. Vom finaliza lucrarea în timpul agreat, asigurându-ne că rezultatul este de înaltă calitate.",
+        "image": "/Services/signs.jpg"
+      },
+      "lightbox": {
+        "title": "Lightbox",
+        "description": "Lightbox-ul în interior funcționează ca un cort de iluminat stilat, care atrage atenția datorită iluminării intense și formei selectate. Este ideal pentru amplasarea în birouri, magazine sau standuri expoziționale, adăugând un accent modern în orice spațiu.\n\nTipuri și caracteristici:\n• Lightbox-urile pot fi instalate pe pereți, utilizate la recepție sau ca structuri independente, creând un accent vizibil în orice spațiu.\n• Pot fi realizate din plexiglas (acril) cu peliculă (oracal) sau din material textil cu imprimare, oferind opțiuni adaptabile în funcție de design și cerințe.\n• Lightbox-urile pot fi unilaterale sau bilaterale, asigurând vizibilitatea reclamei din diferite unghiuri.\n\nPrețurile și termenii depind de dimensiunile și complexitatea proiectului. Oferim un abordaj personalizat, ținând cont de dorințele și cerințele dumneavoastră, și garantăm finalizarea lucrărilor la timp.",
+        "image": "/Services/large-format-printing.jpg"
+      },
+      "rollUp": {
+        "title": "Roll-up / X-banner",
+        "description": "Roll-up și X-banner sunt structuri publicitare mobile, care sunt ideale pentru evenimente temporare, expoziții, prezentări și campanii publicitare. Acestea sunt ușor de transportat și instalat, creând o decorare profesională pentru orice eveniment.\n\nTipuri și caracteristici:\n• Roll-up reprezintă un banner cu un mecanism de rulare, care permite desfășurarea rapidă și fixarea structurii. Este compact, stabil și perfect pentru utilizarea în încăperi cu spațiu limitat.\n• X-banner este o structură ușoară cu o bază în formă de cruce, pe care se întinde bannerul. Este o opțiune mai economă, potrivită și pentru campanii temporare și expoziții.\n\nPrețurile și termenii depind de materialele alese, dimensiuni și design. Putem oferi crearea unui design unic pentru roll-up-ul sau X-banner-ul dumneavoastră, sau putem imprima un design furnizat de client. Garantăm finalizarea tuturor lucrărilor la timp și la prețuri accesibile, ținând cont de cerințele și preferințele dumneavoastră.",
+        "image": "/Services/flags.jpg"
+      },
+      "navigation": {
+        "title": "Navigație în interior",
+        "description": "Navigația în interiorul clădirilor reprezintă un sistem de semnalizare și plăcuțe destinate să ajute persoanele să se orienteze mai ușor în cadrul unei clădiri. Aceste construcții sunt esențiale pentru a semnaliza locațiile importante, cum ar fi toaletele, birourile, sălile de conferință și altele, facilitând accesul vizitatorilor către spațiile dorite.\n\nTipuri și caracteristici:\n• Plăcuțele de navigație pot fi realizate din materiale variate, precum acril, metal, plastic sau placaj, pentru a se potrivi perfect cu designul interior.\n• Pot fi unilaterale sau bilaterale, iar tipul lor depinde de locația de instalare și de necesități.\n• Aceste plăcuțe sunt ideale pentru birouri, hoteluri, spitale, centre comerciale și orice alt loc public în care este necesară o navigare clară și ușoară.\n\nPrețurile și termenul de livrare sunt influențate de materialele alese, dimensiuni și complexitatea proiectului. Oferim un abordaj personalizat, ținând cont de preferințele dumneavoastră, și garantăm că lucrările vor fi finalizate la timp.",
+        "image": "/Services/signs.jpg"
+      },
+      "textileBanner": {
+        "title": "Banner textil",
+        "description": "Bannerul textil este o structură publicitară reutilizabilă, care are la baza carcasă modulară modernă din aluminiu tubular, ușor de asamblat și demontat, print-ul realizat pe material textil de înaltă calitate, ideală pentru utilizare în interior. Aceasta se remarcă prin rezistență, ușurință în montare, întreținere, ceea ce o face o alegere excelentă pentru publicitate la expoziții, magazine și alte evenimente interne.\n\nTipuri și caracteristici:\n• Bannerele textile pot avea două fețe, permițând afișarea publicității pe ambele părți, atrăgând eficient atenția.\n• Sunt destinate utilizării în interior, ideale pentru expoziții, birouri, centre comerciale și alte spații interioare.\n• Bannerele sunt ușor de transportat și instalat, ceea ce le face convenabile pentru utilizare repetată.\n• Cadrul din aluminiu poate fi de diferite dimensiuni și forme, astfel încât fiecare să poată găsi varianta potrivită.\n\nPrețurile și termenii depind de dimensiuni și complexitatea designului. Oferim un abordaj personalizat, ținând cont de dorințele dumneavoastră, și garantăm finalizarea tuturor lucrărilor la timp.",
+        "image": "/Services/flags.jpg"
+      },
+      "pseudoVolumetricLetters": {
+        "title": "Litere pseudo-volumetrice",
+        "description": "Literele pseudo-volumetrice în interior sunt o soluție excelentă pentru a crea un efect de text volumetric elegant. Acestea pot fi aplicate pe pereți sau alte suprafețe, iar grosimea și designul lor depind de preferințele clientului. Aceste litere adaugă un efect de volum și expresivitate vizuală în orice interior.\n\nTipuri și caracteristici:\n• Grosimea literelor pseudo-volumetrice poate varia de la 2 mm la 10 mm sau mai mult, în funcție de preferințele dumneavoastră.\n• Literele pot fi realizate din acril (sticlă organică) sau PVC.\n• Este posibil să realizăm litere iluminate, care adaugă un efect suplimentar și strălucire interiorului.\n• Aceste litere sunt ideale pentru decorarea birourilor, magazinelor, standurilor expoziționale și altor spații comerciale.\n\nPrețurile și termenii depind de materialele alese și complexitatea designului. Oferim un abordaj personalizat și garantăm finalizarea lucrării la timp și la un preț accesibil, ținând cont de toate cerințele și dorințele dumneavoastră.",
+        "image": "/Services/signs.jpg"
+      },
+      "officeStickers": {
+        "title": "Aplicare birou",
+        "description": "Colantarea în interior este o soluție eficientă pentru a crea un spațiu de lucru stilat și profesional. Prin această metodă, nu doar că îmbunătățiți aspectul camerei, dar adăugați și un element de branding, subliniind unicitatea companiei.\n\nTipuri și caracteristici:\n• Pelicula mată este ideală pentru a crea un aspect elegant și modern. Aceasta nu doar că adaugă stil, dar și protejează de reflexiile luminoase, îmbunătățind confortul în spațiul de lucru.\n• Se poate aplica pe geamuri, pereți și uși, maximizând utilizarea eficientă a spațiului.\n• De asemenea, se pot aplica logo-uri, slogane sau imagini corporative, contribuind la promovarea brandului.\n\nPrețurile și termenii depind de dimensiunea și complexitatea lucrării. Oferim un abordaj personalizat pentru fiecare proiect, ținând cont de toate cerințele și bugetul dumneavoastră. Lucrările sunt finalizate în termenii agreați, asigurând garanția calității.",
+        "image": "/Services/interior-advertising.jpg"
+      }
+    },
+    "posMaterials": {
+      "brandedAccessories": {
+        "title": "Accesorii branduite",
+        "description": "Accesorii branduite — o gamă variată de produse promoționale ce promovează eficient brandul și îl fac vizibil. Categoria include hanorace, tricouri, șepci, veste, dosare, șnururi, căni, caiete, sacoșe, pixuri, insigne și multe altele. Aceste articole sunt potrivite pentru evenimente corporative, campanii promoționale sau ca daruri pentru clienți.\n\nTipuri și caracteristici:\n• Produsele pot fi realizate în culori și mărimi diferite, cu logo sau elemente de brand aplicate prin serigrafie, termotransfer, broderie, sublimare, UV etc.\n• Se pot fabrica din materiale variate, în funcție de buget și obiective.\n\nPrețurile și termenele depind de tiraj, material și complexitatea designului. Oferim abordare personalizată, o gamă largă de modele și culori, în funcție de preferințele și nevoile dvs. Garantăm execuția la timp, la cel mai bun preț.",
+        "image": "/Services/corporate-gifts.jpg"
+      },
+      "infoPanels": {
+        "title": "Panouri informative",
+        "description": "Panouri informative — structuri publicitare și informaționale pentru afișarea datelor, indicatoarelor sau materialelor promoționale. Sunt ideale pentru spații publice, birouri, centre comerciale, evenimente de business sau expoziții, permițând comunicarea clară a informațiilor către public.\n\nTipuri și caracteristici:\n• Panourile pot fi realizate din acril, metal, lemn sau PVC, pentru a se potrivi oricărui interior.\n• Pot fi statice sau cu informație ușor de actualizat, de exemplu prin postere sau inserții schimbabile.\n\nPrețurile și termenele depind de material, dimensiune și complexitatea designului. Oferim condiții flexibile, adaptate bugetului și cerințelor, cu livrare exactă la termen.",
+        "image": "/Services/signs.jpg"
+      },
+      "lifeSizeFigures": {
+        "title": "Figură mărime naturală",
+        "description": "Figuri la scară reală — structuri publicitare care atrag atenția și creează imagini memorabile pentru branduri sau evenimente. Pot fi cu iluminare (lightbox) sau fără, și pot fi volumetrice ori plane.\n\nTipuri și caracteristici:\n• Pot fi realizate din PVC, acril sau polistiren, în diverse forme și dimensiuni.\n• Iluminarea le face vizibile pe timp de noapte, iar variantele fără iluminare oferă o opțiune optimă în funcție de obiective și buget.\n\nPrețurile și termenele depind de material, dimensiune și complexitatea designului. Oferim abordare personalizată și execuție de calitate, în termen, conform cerințelor dvs.",
+        "image": "/Services/installations.jpg"
+      },
+      "stands": {
+        "title": "Suporturi / Holdere",
+        "description": "Suporturi (holdere) — accesorii practice și elegante pentru afișarea informațiilor, materialelor promoționale sau documentelor. Sunt potrivite pentru birouri, expoziții și puncte de vânzare, aduc ordine și subliniază identitatea brandului.\n\nTipuri și caracteristici:\n• Pot fi realizate din plexiglas, lemn sau placaj, pentru a se integra în interior și buget.\n• Personalizarea este posibilă prin gravură sau imprimare, pentru accentuarea identității de brand.\n• Disponibile în formate variate — de la modele compacte de birou la holdere mari pentru mai multe foi.\n\nPrețurile și termenele depind de material, dimensiuni și complexitatea designului. Oferim abordare personalizată și livrare la timp, la cel mai bun preț.",
+        "image": "/Services/expo-stands.jpg"
+      }
+    },
+    "printingMaterials": {
+      "magazines": {
+        "title": "Reviste, flyere, broșuri",
+        "description": "Revistele, broșurile și pliantele sunt materiale publicitare eficiente care permit transmiterea informațiilor către publicul țintă. Aceste produse sunt utilizate pe larg în marketing, promovarea serviciilor și pentru distribuirea informațiilor importante despre companie sau produse.\n\nTipuri și caracteristici:\n• Revistele, broșurile și pliantele pot fi realizate în diferite formate și stiluri — de la pliante compacte la reviste colorate de mari dimensiuni.\n• Acestea pot fi tipărite pe diferite tipuri de hârtie, cu opțiuni de finisaj mat sau lucios, pentru a obține efectul vizual dorit și a sublinia calitatea conținutului.\n• De asemenea, este posibilă utilizarea diferitelor tipuri de fixări, cum ar fi spirala, scoabe sau clei.\n\nPrețurile și termenii de livrare depind de tiraj, format și complexitatea designului. Oferim un abordaj personalizat fiecărui proiect, creând produse care corespund cerințelor și bugetului dumneavoastră.",
+        "image": "/Services/printing-materials.jpg"
+      },
+      "stickers": {
+        "title": "Autocolante și stickere",
+        "description": "Autocolantele (stickerele) sunt o soluție convenabilă și eficientă pentru etichetare, publicitate și branding. Ele sunt utilizate pentru personalizarea ambalajelor, vitrinelor, suprafețelor publicitare, precum și ca etichete și indicatoare informative.\n\nTipuri de autocolante:\n• Autocolante din peliculă\n  • Fabricate din peliculă autoadezivă (albă lucioasă, mată sau transparentă).\n  • Rezistente la umiditate și factori externi.\n  • Pot fi cu laminare (pentru protecție suplimentară) sau fără laminare.\n  • Disponibile în două variante: tăiate la contur (formă personalizată) sau dreptunghiulare.\n  • Perfecte pentru utilizare în exterior, plăcuțe publicitare, produse expuse la umiditate.\n• Autocolante din hârtie\n  • Tipărite pe hârtie autoadezivă cu finisaj semi-lucios.\n  • Ideale pentru ambalaje, plicuri, cutii din carton și produse protejate de factorii externi.\n  • Mai greu de îndepărtat — se rup și lasă stratul adeziv.\n\nPuteți comanda atât autocolante în rolă, cât și tăiate conform mărimilor dvs. Prețurile și termenele de livrare depind de tiraj și complexitatea designului. Oferim un abordaj personalizat, ținând cont de toate cerințele dumneavoastră, și garantăm realizarea tuturor comenzilor la timp și la cel mai bun preț. În plus, vă putem oferi servicii de creare a unui design unic pentru autocolantele dumneavoastră.",
+        "image": "/Services/flags.jpg"
+      }
+    },
+    "additionalServices": {
+      "dtfPrinting": {
+        "title": "DTF print",
+        "description": "Imprimarea DTF (Direct-to-Film) este o metodă inovativă de imprimare, perfectă pentru crearea de imprimeuri vii și de calitate pentru îmbrăcăminte.\nDTF UV este o tehnologie avansată de imprimare destinată aplicării imaginilor pe suprafețe dure, cum ar fi sticla, plasticul, metalul, lemnul, materialele promoționale și altele. Această metodă permite crearea de imagini durabile, rezistente la apă și la radiațiile UV.\n\nOferim două opțiuni de servicii:\n• Achiziționarea unui rulou cu autocolante — alegere excelentă pentru aplicare independentă pe textile sau suprafețe dure. Rulourile se aplică cu presă termică sau fier de călcat (pentru textile), iar DTF UV — ca un sticker clasic.\n• Produsul final cu imprimare — serviciu complet: imprimăm imaginile și le aplicăm pe îmbrăcăminte sau pe orice obiect, livrând produsul gata de utilizare.\n\nAvantajele imprimării DTF și DTF UV:\n• Imagini vii și clare, care își păstrează culorile chiar și după multiple spălări (DTF) sau expunere la factori de mediu (DTF UV).\n• Versatilitate: DTF este potrivit pentru diferite tipuri de țesături, iar DTF UV pentru suprafețe dure.\n• Aplicare rapidă și precisă, scurtând timpul de producție.\n• Durabilitate: autocolantele nu își pierd calitatea și nu crapă în timp.\n\nPuteți comanda la noi atât ruloul cu DTF stickere pentru aplicare independentă, cât și produsul final cu imprimare. Garantăm calitate înaltă și execuție rapidă a comenzilor!",
+        "image": "/Services/DTF-pechat.jpg"
+      },
+      "installations": {
+        "title": "Instalații",
+        "description": "Instalațiile sunt obiecte custom care transformă spațiul, creând accente vii și atrag atenția. Noi creăm instalații care devin o parte integră a brandului sau proiectului dumneavoastră, reflectând individualitatea și originalitatea prin fiecare detaliu.\n\nProducere instalații urbane de orice complexitate\nOferim servicii pentru crearea instalațiilor unice, pentru interior și exterior. De la idee la implementare — însoțim proiectul pe toate etapele: proiectare 3D, producție și instalare.\nLucrările noastre decorează Chișinăul: bradul de Crăciun pentru MAIB, fundița de pe fațada BLISS și ghinda pentru ProCredit Bank. Fiecare instalație — un proiect unic, cu detalii gândite pentru a sublinia stilul clientului.\n\nAvantajele serviciilor noastre:\n• Ciclul complet de lucru: de la proiectarea în 3D până la montare.\n• Soluții unice: fiecare instalație este concepută ținând cont de dorințele clientului.\n• Calitate înaltă: materiale verificate și tehnologii moderne.\n• Creativitate și atenție la detalii: rezultat perfect în fiecare amănunt.\n\nDacă aveți nevoie de o instalație memorabilă pentru proiect sau campanie, vă oferim cea mai bună soluție!",
+        "image": "/Services/installations.jpg"
+      },
+      "corporateGifts": {
+        "title": "Cadouri corporative",
+        "description": "Cadouri corporative — modalitate eficientă de a sublinia unicitatea companiei, de a spori loialitatea clienților și angajaților și de a face evenimentele memorabile. Oferim o gamă variată de suveniruri cu logo și elemente de brand — pentru evenimente corporate și parteneri.\n\nTipuri și caracteristici:\n1. Cadouri personalizate\n• Suveniruri elegante și funcționale cu logo: pixuri, carnetele, căni termo, stick-uri USB etc.\n• Merchandising corporativ: tricouri, hanorace, șepci cu broderie sau imprimare etc.\n2. Seturi cadou\n• Seturi clasice — cutii frumos ambalate cu produse promoționale corporative.\n• Cadouri gastronomice — seturi cu cafea, ceai, dulciuri, miere, nuci și alte delicii.\n• Seturi premium — produse exclusive și accesorii personalizate de înaltă calitate.\n3. Soluții originale de ambalare\n• Cutii personalizate — soluție elegantă și practică, cu imprimarea logo-ului.\n• Pungi PET transparente — minimalism modern cu inserție personalizată.\n• Torbe eco — potrivite pentru utilizare zilnică și care subliniază grija pentru mediu.\n4. Cadouri vii\n• Buchete, plante în ghiveci și aranjamente florale — cadou rafinat pentru angajați și clienți.\n\nPrețuri și termene:\nGarantăm realizarea comenzilor în cel mai scurt timp, ținând cont de dorințele și bugetul dvs. Abordare individuală și condiții flexibile — pentru ca fiecare cadou să fie exact așa cum vă doriți.",
+        "image": "/Services/corporate-gifts.jpg"
+      },
+      "trophies": {
+        "title": "Trofee",
+        "description": "Premiile sunt simboluri ale recunoașterii realizărilor și succeselor: pentru evenimente corporative, competiții sportive sau evenimente culturale. Fabricăm trofee, medalii și diplome unice — un premiu valoros și o operă de artizanat.\n\nTipuri de premii pe care le fabricăm:\n• Trofee și medalii — din metal, acril (sticlă organică), lemn, placaj și altele. Design personalizat, reflectând specificul evenimentului.\n• Diplome — două tipuri: diplome clasice din hârtie în rame din lemn și diplome elegante din aluminiu, livrate într-o cutie de catifea. Complemente perfecte pentru orice premiu.\n\nDe ce să ne alegeți pe noi:\nNe concentrăm pe calitate și abordaj personalizat. Materiale de top, atenție la detalii — pentru ca premiul să sublinieze importanța momentului și să devină o amintire valoroasă.\n\nComandați un premiu unic — faceți evenimentul de neuitat!",
+        "image": "/Services/trophies.jpg"
+      },
+      "signs": {
+        "title": "Indicatoare",
+        "description": "Indicatoare — semne pentru informare și orientare, ajută oamenii să se orienteze în spațiu. Fabricăm indicatoare pentru spații comerciale, evenimente (forumuri, festivaluri, expoziții) și pentru drumuri.\n\nIndicatoare rutiere\nRespectă pe deplin standardele actuale de siguranță și design. Asigură o navigație comodă și sigură pe drumuri și străzi. Materiale de calitate și tehnologii moderne — semne ușor de citit și rezistente.\n\nIndicatoare pentru spații comerciale și evenimente\nRealizăm semne expresive și creative, reflectând stilul brandului/evenimentului și ajutând participanții să se orienteze ușor la fața locului. Atenție la fiecare detaliu — integrare armonioasă în concept și navigație confortabilă.\n\nComandați indicatori — îi producem în termenii potriviți, în strictă conformitate cu cerințele, pentru trafic sau evenimente.",
+        "image": "/Services/signs.jpg"
+      },
+      "flags": {
+        "title": "Steaguri",
+        "description": "Steagurile — modalitate vibrantă și eficientă de a atrage atenția, de a sublinia stilul și identitatea brandului, și de a crea o atmosferă memorabilă la evenimente. Oferim soluții pentru orice — publicitate outdoor și interior.\n\nSteaguri pentru exterior\nFeather flag (Pană, Velă) și Flying flag (Picătură) — alegere ideală pentru evenimente în aer liber, expoziții, puncte comerciale și promo. Atrage atenția prin formă unică și culori vii, rezistente la intemperii.\n\nSteaguri pentru interior\nProducem steaguri de birou și steaguri textile mari — pentru birouri, conferințe, expoziții și evenimente corporate. Sublinează unicitatea brandului și devin un element expresiv de interior.\n\nGarantăm calitatea materialelor și execuția precisă — steagurile vor rezista mult timp și vor arăta impecabil!",
+        "image": "/Services/flags.jpg"
+      },
+      "photoZone": {
+        "title": "Zona foto",
+        "description": "Zona foto — zonă sau construcție amenajată pentru fotografii vibrante și spectaculoase. Utilizată la expoziții, evenimente corporative, prezentări — creează atmosferă și devine accentul evenimentului.\n\nProducția zonelor foto\nCiclu complet: idee, proiectare 3D, producție și montare. Proiecte pentru evenimente de orice complexitate — fotografii vii și memorabile, ținând cont de dorințele clientului și particularitățile evenimentului.\n\nAvantajele serviciilor noastre:\n• Ciclul complet de lucru: de la proiectare 3D până la montare.\n• Abordare individuală: ținem cont de toate dorințele clientului și aspectele evenimentului.\n• Creativitate și atenție la detalii: zone foto care atrag atenția și rămân memorabile.\n• Diversitate de materiale și designuri: acril (sticlă organică), banner, placaj, plastic, lemn, textil și altele.\n\nVă ajutăm să creați o zonă foto unică — centrul atenției evenimentului!",
+        "image": "/Services/photo-zone.jpg"
+      },
+      "millingOrLaser": {
+        "title": "Frezare și tăiere laser",
+        "description": "Tăierea cu freza, laser și gravarea — tehnologii moderne pentru debitarea precisă și rapidă a materialelor cu detalii fine. Aplicații: de la construcții publicitare la elemente de decor și piese industriale.\n\nTăiere cu freza\nPrelucrare cu freză pe conturul prestabilit. Ideală pentru lemn, placaj, acril, MDF, plastic și metal. Tăiem piese de orice formă și complexitate, cu mare precizie.\n\nTăiere cu laser\nLucru precis cu fascicul laser. Potrivită pentru materiale subțiri: placaj, carton, PET, acril (sticlă organică), dar și plastic și metal. Margini netede, fără deteriorări mecanice; lucrăm cu detalii foarte complexe și mici.\n\nGravare cu laser\nImagini precise și durabile fără vopsele — aspect delicat și contemporan pentru produse.\n\nAvantaje:\n• Precizie ridicată — geometrie ideală și contururi perfecte.\n• Gama largă de materiale — lemn, placaj, acril, metal, plastic și altele.\n• Execuție rapidă — tehnologii moderne și respectarea termenelor.\n• Flexibilitate în design — de la forme simple la modele complexe cu detalii fine.\n\nExecutăm comenzi de la detalii mici la construcții mari. Indiferent de complexitate — calitate excelentă și precizie la fiecare etapă.",
+        "image": "/Services/milling-or-laser.jpg"
+      },
+      "largeFormatPrinting": {
+        "title": "Imprimare de format mare",
+        "description": "Tipar de format mare — tehnologie pentru suprafețe mari: publicitate outdoor și indoor. Imprimăm pe bannere, mesh, autocolante (Oracal), acril (sticlă organică), PVC, compozit, placaj, pânză (canvas), tapete și altele. Materiale durabile și imagini vii — pentru panouri, construcții, standuri și obiecte de mari dimensiuni.\n\nTipar UV pe foi\nTehnologie modernă: radiația UV fixează instant cerneala — culori intense, detalii clare, durabilitate ridicată. Avantaje:\n• Imprimare pe materiale rigide: plastic (PVC), acril (sticlă organică), placaj, lemn etc.\n• Rezistență la umiditate, soare și deteriorări mecanice.\n• Imprimare cu cerneală albă și lăcuire selectivă pentru accente vizuale.\n• Fără miros.\n\nTipar pe role\nPentru materiale flexibile: banner, autocolant (Oracal), pânză, mesh, tapete. Ideal pentru:\n• Publicitate indoor și outdoor.\n• Stickere, etichete, branding pentru vitrine.\n• Postere artistice, foto-tapete și suprafețe branduite.\n\nComandați la noi nu doar tipar, ci și produsul final cu montare — de la imprimare până la instalare, fără griji suplimentare.",
+        "image": "/Services/large-format-printing.jpg"
+      },
+      "expoStands": {
+        "title": "Standuri expoziționale",
+        "description": "Standurile expoziționale — structuri concepute pentru târguri, prezentări și evenimente, destinate expunerii produselor sau serviciilor. Materiale și forme variate, cu opțiuni de iluminare și elemente volumetrice. Creăm standuri exclusive și memorabile, care evidențiază brandul și atrag atenția.\n\nProducția standurilor pentru expoziții\nCiclu complet: idee, proiectare 3D, producție, montare. Ne plac provocările — ajutăm clienții să iasă în evidență și să creeze un stand memorabil. Abordare individuală, ținând cont de particularitățile brandului.\n\nStandul poate fi reutilizabil — din materiale rezistente, cu iluminare și elemente volumetrice: efect impresionant și durabilitate, ideal pentru evenimente de durată și utilizare repetată. Varianta pentru un singur eveniment — din bannere: masiv și frumos, deși destinat utilizării unice, păstrează atractivitatea și va atrage atenția.\n\nAvantaje:\n• Ciclul complet de lucru: de la proiectare 3D până la montare.\n• Abordare individuală: ținem cont de dorințele clientului și particularitățile brandului.\n• Diversitate de materiale: compozit, plastic, acril (sticlă organică), iluminare LED, placaj, lemn și altele.\n• Creativitate și atenție la detalii: creăm standuri unice care se evidențiază și atrag atenția.\n\nDoriți ca standul să devină accentul evenimentului și să rămână memorabil? Vă oferim soluția optimă!",
+        "image": "/Services/expo-stands.jpg"
+      }
+    }
+  }
+}

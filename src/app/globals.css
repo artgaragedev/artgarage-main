@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  --fs-ui: 14px;
+  --fs-paragraph: 16px;
+  --fs-h2: 24px;
+  --fs-h1: 60px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container-max-width {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Dark theme overrides (optional; utilities use the `.dark` class) */
+.dark {
+  color-scheme: dark;
+}
