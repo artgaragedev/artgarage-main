@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useEffect, useMemo, useCallback } from 'react';
+import { FC, useState, useEffect, useMemo, useCallback, useLayoutEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,6 +16,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
 
   const [activeCategory, setActiveCategory] = useState<string>('');
   const [activeSubcategory, setActiveSubcategory] = useState(t('all'));
+  const [mounted, setMounted] = useState(false);
 
   // Получаем данные из Supabase
   const { data: categories, isLoading: categoriesLoading, error: categoriesError, refetch: refetchCategories } = useCategories(locale as 'ru' | 'ro')
@@ -27,20 +28,28 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
     locale as 'ru' | 'ro'
   )
 
-  // Устанавливаем первую категорию как активную при загрузке
-  // Используем layoutEffect для синхронного выполнения до рендера
+  // Отслеживаем монтирование компонента
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Используем useLayoutEffect для синхронной установки категории ДО отрисовки
+  // Это критично для предотвращения пустого экрана на production
+  useLayoutEffect(() => {
     if (categories && categories.length > 0 && !activeCategory) {
-      // Устанавливаем категорию синхронно
       setActiveCategory(categories[0].name);
     }
   }, [categories, activeCategory]);
 
-  // Если категории загружены, но activeCategory еще не установлена, устанавливаем прямо сейчас
-  // Это предотвращает показ skeleton когда данные уже есть
-  if (categories && categories.length > 0 && !activeCategory && !categoriesLoading) {
-    setActiveCategory(categories[0].name);
-  }
+  // Сбрасываем и перезагружаем данные при изменении pathname
+  useEffect(() => {
+    if (mounted && pathname) {
+      // Перезагружаем данные при навигации
+      refetchCategories();
+      refetchWorks();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, mounted]);
 
   // Получить подкатегории для активной категории (мемоизировано)
   const getActiveSubcategories = useMemo(() => {
@@ -95,9 +104,13 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
     });
   }, [allWorks, activeCategory, activeSubcategory, t]);
 
-  // Показываем загрузку пока не готовы ВСЕ данные
-  // Это гарантирует что все карточки появятся одновременно (как на странице "Наши работы")
-  const isLoading = categoriesLoading || worksLoading || !categories || !allWorks || !activeCategory;
+  // Показываем загрузку только если идет реальная загрузка данных
+  // Если данные есть (из кэша), не блокируем рендер - useLayoutEffect установит категорию
+  const isLoading =
+    (categoriesLoading && !categories) ||
+    (worksLoading && !allWorks) ||
+    (!categories || categories.length === 0) ||
+    (!allWorks || allWorks.length === 0);
 
   if (isLoading) {
     return (
@@ -153,6 +166,35 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <WorkCardSkeleton key={i} />
             ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Защита от пустой страницы: если не грузим, нет ошибок, но данных нет - показываем fallback
+  if (!isLoading && !categoriesError && !worksError && (!categories || !allWorks || categories.length === 0 || allWorks.length === 0)) {
+    return (
+      <section className="py-16 bg-gray-50 dark:bg-[#0b0b0b]">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+              {t('ourWorks')}
+            </h2>
+            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-6 max-w-md mx-auto">
+              <p className="text-yellow-800 dark:text-yellow-200 font-medium mb-4">
+                Данные не загрузились. Попробуйте обновить страницу.
+              </p>
+              <button
+                onClick={() => {
+                  refetchCategories();
+                  refetchWorks();
+                }}
+                className="bg-[#EA3C23] text-white px-6 py-2 rounded-lg hover:bg-[#d63519] transition-colors"
+              >
+                Обновить
+              </button>
+            </div>
           </div>
         </div>
       </section>
