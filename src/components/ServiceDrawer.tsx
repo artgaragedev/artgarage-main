@@ -3,7 +3,6 @@
 import { FC, useEffect } from 'react';
 import { X, Share2, Check } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import {
   Drawer,
@@ -32,7 +31,6 @@ const ServiceDrawer: FC<ServiceDrawerProps> = ({ isOpen, onClose, serviceKey, se
   const t = useTranslations();
   const tCases = useTranslations('cases');
   const locale = useLocale() as 'ru' | 'ro';
-  const router = useRouter();
   // Не используем next/navigation useSearchParams, чтобы избежать лишних перерендеров
 
   // Маппинг категорий услуг на slug'и категорий работ
@@ -162,46 +160,8 @@ const ServiceDrawer: FC<ServiceDrawerProps> = ({ isOpen, onClose, serviceKey, se
     };
   }, [isOpen, onClose]);
 
-  // Обновление URL при открытии/закрытии drawer
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
 
-    // Для дополнительных услуг на главной странице полностью избегаем
-    // изменения поисковых параметров, чтобы не провоцировать навигацию/перерендер.
-    // Состояние Drawer управляется локально, а deep-link (\"?service=...\")
-    // обрабатывается при первоначальной загрузке на уровне секции.
-    if (!categoryRoute) {
-      return;
-    }
-
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    const current = params.get('service');
-
-    const updateUrlWithoutReload = (newUrl: string) => {
-      // Меняем URL без перезагрузки страницы
-      window.history.replaceState(null, '', newUrl);
-    };
-
-    if (isOpen && serviceKey) {
-      // Обновляем только если значение отличается
-      if (current !== serviceKey) {
-        params.set('service', serviceKey);
-        const query = params.toString();
-        const newUrl = `${baseRoute}${query ? '?' + query : ''}`;
-        router.replace(newUrl, { scroll: false });
-      }
-    } else if (!isOpen) {
-      if (current) {
-        params.delete('service');
-        const query = params.toString();
-        const newUrl = `${baseRoute}${query ? '?' + query : ''}`;
-        router.replace(newUrl, { scroll: false });
-      }
-    }
-  }, [isOpen, serviceKey, currentLocale, categoryRoute, router]);
-
-  if (!isOpen || !serviceData) return null;
+  if (!serviceData) return null;
 
   // Специальный компонент для DTF-печати
   if (serviceKey === 'dtfPrinting') {

@@ -61,7 +61,7 @@ function DrawerHandle({
 }
 
 const drawerOverlayVariants = cva(
-  "fixed inset-0 z-40 bg-black/50 backdrop-blur-sm",
+  "fixed inset-0 z-[110] bg-black/50 backdrop-blur-sm",
   {
     variants: {
       state: {
@@ -89,7 +89,7 @@ function DrawerOverlay({
 }
 
 const drawerContentVariants = cva(
-  "group/drawer-content bg-background fixed z-50 flex h-auto flex-col",
+  "group/drawer-content bg-background fixed z-[120] flex h-auto flex-col",
   {
     variants: {
       direction: {

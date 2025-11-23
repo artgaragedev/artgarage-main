@@ -1,8 +1,8 @@
 'use client';
 
-import { FC, useEffect, useState, Suspense } from 'react';
+import { FC, useEffect, useState, Suspense, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import ServiceCard from './ServiceCard';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import ServiceDrawer from './ServiceDrawer';
@@ -33,15 +33,40 @@ const ServicesSection: FC = () => {
   const tPos = useTranslations('posMaterials');
   const tPrint = useTranslations('printingMaterials');
   const tAdditional = useTranslations('services.additionalServices');
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
 
+  // Создание нового query string с обновленным параметром
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+  // Удаление параметра из query string
+  const removeQueryParam = useCallback(
+    (name: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete(name);
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   // Обработчик для открытия сервиса из URL параметра
-  const handleServiceFromUrl = (service: string) => {
+  const handleServiceFromUrl = useCallback((service: string) => {
     setSelectedService(service);
     setIsDrawerOpen(true);
-  };
+  }, []);
 
   // Основные категории (большие карточки) с подкатегориями
   const primaryServices = [
@@ -111,37 +136,23 @@ const ServicesSection: FC = () => {
     { title: tAdditional('expoStands.title'), image: "/Services/expo-stands.jpg", key: 'expoStands' }
   ];
 
-  const handleServiceClick = (serviceKey: string) => {
+  const handleServiceClick = useCallback((serviceKey: string) => {
     setSelectedService(serviceKey);
     setIsDrawerOpen(true);
 
-    // Обновляем URL без перезагрузки страницы для deep-link
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      params.set('service', serviceKey);
-      const query = params.toString();
-      const newUrl = `${url.pathname}${query ? '?' + query : ''}`;
-      window.history.replaceState(null, '', newUrl);
-    }
-  };
+    // Обновляем URL используя Next.js router (правильный способ)
+    const newQueryString = createQueryString('service', serviceKey);
+    router.push(`${pathname}?${newQueryString}`, { scroll: false });
+  }, [createQueryString, pathname, router]);
 
-  const handleCloseDrawer = () => {
+  const handleCloseDrawer = useCallback(() => {
     setIsDrawerOpen(false);
     setSelectedService('');
 
-    // Удаляем параметр из URL без навигации
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      if (params.has('service')) {
-        params.delete('service');
-        const query = params.toString();
-        const newUrl = `${url.pathname}${query ? '?' + query : ''}`;
-        window.history.replaceState(null, '', newUrl);
-      }
-    }
-  };
+    // Удаляем параметр из URL используя Next.js router
+    const newQueryString = removeQueryParam('service');
+    router.push(`${pathname}${newQueryString ? '?' + newQueryString : ''}`, { scroll: false });
+  }, [removeQueryParam, pathname, router]);
 
 
   return (
