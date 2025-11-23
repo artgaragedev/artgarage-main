@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, Suspense } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import ServiceCard from './ServiceCard';
@@ -10,7 +10,7 @@ import OrderFormModal from '@/components/OrderFormModal';
 import { useWorks, useCategories } from '@/hooks/useSupabaseData';
 import WorkCard from './WorkCard';
 
-const PrintingServicesSection: FC = () => {
+function PrintingServicesSectionContent() {
   const t = useTranslations('printingMaterials');
   const tCases = useTranslations('cases');
   const locale = useLocale() as 'ru' | 'ro';
@@ -258,6 +258,14 @@ const PrintingServicesSection: FC = () => {
       {/* Модалка с формой заказа */}
       <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={t('title')} />
     </section>
+  );
+}
+
+const PrintingServicesSection: FC = () => {
+  return (
+    <Suspense fallback={<div className="w-full h-screen flex items-center justify-center">Loading...</div>}>
+      <PrintingServicesSectionContent />
+    </Suspense>
   );
 };
 

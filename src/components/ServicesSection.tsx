@@ -26,7 +26,8 @@ function ServiceParamsHandler({
   return null;
 }
 
-const ServicesSection: FC = () => {
+// Основной контент с useSearchParams обернутый в Suspense
+function ServicesSectionContent() {
   const tSection = useTranslations('servicesSection');
   const tOutdoor = useTranslations('outdoorAdvertising');
   const tInterior = useTranslations('interiorAdvertising');
@@ -339,6 +340,29 @@ const ServicesSection: FC = () => {
       {/* Модалка с формой заказа */}
       <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={tSection('title')} />
     </section>
+  );
+}
+
+// Главный компонент с Suspense boundary
+const ServicesSection: FC = () => {
+  return (
+    <Suspense fallback={
+      <section className="w-full bg-[#F3F3F3] dark:bg-[#0b0b0b] relative overflow-visible">
+        <div className="container-max-width pt-16 pb-8 px-2 sm:px-0" style={{ padding: '4rem 0 2rem' }}>
+          <div className="px-2 sm:px-0">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="px-4 py-2 md:px-6 md:py-3 flex items-center" style={{ backgroundColor: '#EA3C23' }}>
+                <h2 className="font-bold text-white text-2xl md:text-4xl leading-none tracking-tight m-0">
+                  Загрузка...
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    }>
+      <ServicesSectionContent />
+    </Suspense>
   );
 };
 
