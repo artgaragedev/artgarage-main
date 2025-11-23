@@ -38,7 +38,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <StatsSection />
       <ServicesSection />
       <DesignSection />
-      <CasesSection />
+      <CasesSection key={`home-cases-${locale}`} />
       <Footer />
     </div>
   );

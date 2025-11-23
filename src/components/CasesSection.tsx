@@ -28,11 +28,19 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
   )
 
   // Устанавливаем первую категорию как активную при загрузке
+  // Используем layoutEffect для синхронного выполнения до рендера
   useEffect(() => {
     if (categories && categories.length > 0 && !activeCategory) {
+      // Устанавливаем категорию синхронно
       setActiveCategory(categories[0].name);
     }
   }, [categories, activeCategory]);
+
+  // Если категории загружены, но activeCategory еще не установлена, устанавливаем прямо сейчас
+  // Это предотвращает показ skeleton когда данные уже есть
+  if (categories && categories.length > 0 && !activeCategory && !categoriesLoading) {
+    setActiveCategory(categories[0].name);
+  }
 
   // Получить подкатегории для активной категории (мемоизировано)
   const getActiveSubcategories = useMemo(() => {
@@ -87,8 +95,8 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
     });
   }, [allWorks, activeCategory, activeSubcategory, t]);
 
-  // Показываем загрузку пока не готовы ВСЕ данные (категории, работы, и выбрана категория)
-  // Это предотвращает постепенную загрузку карточек
+  // Показываем загрузку пока не готовы ВСЕ данные
+  // Это гарантирует что все карточки появятся одновременно (как на странице "Наши работы")
   const isLoading = categoriesLoading || worksLoading || !categories || !allWorks || !activeCategory;
 
   if (isLoading) {
@@ -373,7 +381,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
             className="text-center py-12"
           >
             <p
-              className="text-gray-500 dark:text-gray-400"
+              className="text-gray-500 dark:text-gray-400 mb-4"
               style={{
                 fontFamily: 'Montserrat, sans-serif',
                 fontSize: '1.1rem'
@@ -381,6 +389,15 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
             >
               {t('noWorks')}
             </p>
+            {/* Дебаг информация в dev режиме */}
+            {process.env.NODE_ENV === 'development' && (
+              <div className="text-xs text-gray-400">
+                <p>Categories: {categories?.length || 0}</p>
+                <p>All Works: {allWorks?.length || 0}</p>
+                <p>Active Category: {activeCategory || 'none'}</p>
+                <p>Filtered: {filteredWorks.length}</p>
+              </div>
+            )}
           </motion.div>
         )}
       </div>
