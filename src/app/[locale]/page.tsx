@@ -41,7 +41,9 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         <ServicesSection />
       </Suspense>
       <DesignSection />
-      <CasesSection />
+      <Suspense fallback={<div className="container-max-width py-8">Загружаем проекты...</div>}>
+        <CasesSection key={`cases-${locale}`} />
+      </Suspense>
       <Footer />
     </div>
   );

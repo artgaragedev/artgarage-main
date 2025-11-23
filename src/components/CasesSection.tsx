@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -26,12 +26,6 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
     },
     locale as 'ru' | 'ro'
   )
-
-  // Перезагружаем данные при изменении маршрута
-  useEffect(() => {
-    refetchCategories();
-    refetchWorks();
-  }, [pathname, refetchCategories, refetchWorks]);
 
   // Устанавливаем первую категорию как активную при загрузке
   useEffect(() => {
@@ -88,7 +82,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
   }) || [];
 
   // Показываем загрузку со skeleton loaders
-  if (categoriesLoading || worksLoading) {
+  if (categoriesLoading || worksLoading || !activeCategory) {
     return (
       <section id="cases" className="w-screen bg-white dark:bg-[#0b0b0b] relative z-10">
         {/* Заголовок */}
