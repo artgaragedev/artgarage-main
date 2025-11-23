@@ -16,10 +16,104 @@ const montserrat = Montserrat({
   display: 'swap'
 })
 
-export const metadata: Metadata = {
-  title: "Art Garage",
-  description: "Creative full-cycle agency",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const resolvedLocale = locales.includes(locale as (typeof locales)[number]) ? locale : 'ru';
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://artgarage.md';
+
+  const metadata = {
+    ru: {
+      title: 'Art Garage | Рекламное агентство полного цикла в Молдове',
+      description: 'Art Garage — креативное рекламное агентство полного цикла в Кишиневе. Наружная реклама, интерьерная реклама, POS материалы, полиграфия, DTF печать, инсталляции.',
+      keywords: 'рекламное агентство, наружная реклама, интерьерная реклама, POS материалы, полиграфия, DTF печать, объемные буквы, световые короба, Кишинев, Молдова',
+    },
+    ro: {
+      title: 'Art Garage | Agenție de publicitate full-cycle în Moldova',
+      description: 'Art Garage — agenție creativă de publicitate full-cycle în Chișinău. Publicitate exterioară, publicitate interioară, materiale POS, poligrafie, imprimare DTF, instalații.',
+      keywords: 'agenție de publicitate, publicitate exterioară, publicitate interioară, materiale POS, poligrafie, imprimare DTF, litere volumetrice, cutii luminoase, Chișinău, Moldova',
+    }
+  };
+
+  const currentMetadata = metadata[resolvedLocale as keyof typeof metadata] || metadata.ru;
+
+  return {
+    title: {
+      default: currentMetadata.title,
+      template: `%s | Art Garage`
+    },
+    description: currentMetadata.description,
+    keywords: currentMetadata.keywords,
+    authors: [{ name: 'Art Garage' }],
+    creator: 'Art Garage',
+    publisher: 'Art Garage',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    metadataBase: new URL(siteUrl),
+    alternates: {
+      canonical: `${siteUrl}/${resolvedLocale}`,
+      languages: {
+        'ru': `${siteUrl}/ru`,
+        'ro': `${siteUrl}/ro`,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: resolvedLocale === 'ru' ? 'ru_RU' : 'ro_RO',
+      url: `${siteUrl}/${resolvedLocale}`,
+      siteName: 'Art Garage',
+      title: currentMetadata.title,
+      description: currentMetadata.description,
+      images: [
+        {
+          url: `${siteUrl}/og-image.jpg`,
+          width: 1200,
+          height: 630,
+          alt: 'Art Garage - Creative Studio',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: currentMetadata.title,
+      description: currentMetadata.description,
+      images: [`${siteUrl}/og-image.jpg`],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    verification: {
+      // google: 'your-google-verification-code',
+      // yandex: 'your-yandex-verification-code',
+    },
+    icons: {
+      icon: [
+        { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+        { url: '/icon.png', sizes: '16x16', type: 'image/png' },
+      ],
+      apple: [
+        { url: '/icon.png', sizes: '180x180', type: 'image/png' },
+      ],
+      other: [
+        {
+          rel: 'mask-icon',
+          url: '/icon.png',
+        },
+      ],
+    },
+  };
+}
 
 export default async function RootLayout({
   children,

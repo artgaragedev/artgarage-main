@@ -1,8 +1,37 @@
 import { Suspense } from 'react'
 import ContactsSection from '@/components/ContactsSection'
 import Footer from '@/components/Footer'
+import { Metadata } from 'next'
+import { generatePageMetadata } from '@/lib/metadata'
 
-export default function ContactsPage({ params }: { params: { locale: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return generatePageMetadata(
+    {
+      ru: {
+        title: 'Контакты Art Garage | Свяжитесь с нами',
+        description: 'Контактная информация Art Garage. Адрес офиса в Кишиневе, телефон, email. Форма обратной связи для заказа услуг.',
+      },
+      ro: {
+        title: 'Contacte Art Garage | Contactați-ne',
+        description: 'Informații de contact Art Garage. Adresa biroului în Chișinău, telefon, email. Formular de contact pentru comandarea serviciilor.',
+      },
+    },
+    locale,
+    'contacts'
+  );
+}
+
+export default async function ContactsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  await params;
   return (
     <>
       <Suspense>
