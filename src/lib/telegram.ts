@@ -91,7 +91,7 @@ export async function sendTelegramFiles(
       const fileField = isImage ? 'photo' : 'document';
 
       // Создаем blob из buffer
-      const blob = new Blob([file.buffer], { type: file.type });
+      const blob = new Blob([new Uint8Array(file.buffer)], { type: file.type });
       formData.append(fileField, blob, file.name);
       formData.append('chat_id', chatId);
       formData.append('caption', `📎 ${file.name}`);
