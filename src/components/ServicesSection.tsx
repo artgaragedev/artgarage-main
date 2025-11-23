@@ -1,12 +1,30 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, Suspense } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import ServiceCard from './ServiceCard';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import ServiceDrawer from './ServiceDrawer';
 import OrderFormModal from '@/components/OrderFormModal';
+
+// Изолированный компонент для обработки searchParams
+function ServiceParamsHandler({
+  onServiceSelect
+}: {
+  onServiceSelect: (service: string) => void
+}) {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam) {
+      onServiceSelect(serviceParam);
+    }
+  }, [searchParams, onServiceSelect]);
+
+  return null;
+}
 
 const ServicesSection: FC = () => {
   const tSection = useTranslations('servicesSection');
@@ -15,10 +33,15 @@ const ServicesSection: FC = () => {
   const tPos = useTranslations('posMaterials');
   const tPrint = useTranslations('printingMaterials');
   const tAdditional = useTranslations('services.additionalServices');
-  const searchParams = useSearchParams();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
+
+  // Обработчик для открытия сервиса из URL параметра
+  const handleServiceFromUrl = (service: string) => {
+    setSelectedService(service);
+    setIsDrawerOpen(true);
+  };
 
   // Основные категории (большие карточки) с подкатегориями
   const primaryServices = [
@@ -120,17 +143,14 @@ const ServicesSection: FC = () => {
     }
   };
 
-  // Авто-открытие Drawer при наличии `?service=` на главной
-  useEffect(() => {
-    const serviceParam = searchParams.get('service');
-    if (serviceParam) {
-      setSelectedService(serviceParam);
-      setIsDrawerOpen(true);
-    }
-  }, [searchParams]);
 
   return (
     <section className="w-full bg-[#F3F3F3] dark:bg-[#0b0b0b] relative overflow-visible">
+      {/* Обработчик URL параметров */}
+      <Suspense fallback={null}>
+        <ServiceParamsHandler onServiceSelect={handleServiceFromUrl} />
+      </Suspense>
+
       {/* Заголовок услуг */}
       <div
         className="container-max-width pt-16 pb-8 px-2 sm:px-0"

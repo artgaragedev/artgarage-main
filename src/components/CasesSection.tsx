@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useEffect, useRef } from 'react';
+import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -34,8 +34,8 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
     }
   }, [categories, activeCategory]);
 
-  // Получить подкатегории для активной категории
-  const getActiveSubcategories = () => {
+  // Получить подкатегории для активной категории (мемоизировано)
+  const getActiveSubcategories = useMemo(() => {
     if (!categories || !allWorks) return [];
 
     const activeWorks = allWorks.filter(work =>
@@ -50,7 +50,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
     });
 
     return Array.from(subcategories);
-  };
+  }, [categories, allWorks, activeCategory, t]);
 
   // Обработчик смены категории
   const handleCategoryChange = (categoryName: string) => {
@@ -58,13 +58,12 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
     setActiveSubcategory(t('all')); // Сбрасываем подкатегорию при смене категории
   };
 
-  // Функция для подсчета работ в категории
-  const getCategoryWorkCount = (categoryName: string) => {
+  // Мемоизированные функции для подсчета работ
+  const getCategoryWorkCount = useCallback((categoryName: string) => {
     return allWorks?.filter(work => work.category?.name === categoryName).length || 0;
-  };
+  }, [allWorks]);
 
-  // Функция для подсчета работ в подкатегории
-  const getSubcategoryWorkCount = (subcategoryName: string) => {
+  const getSubcategoryWorkCount = useCallback((subcategoryName: string) => {
     if (subcategoryName === t('all')) {
       return allWorks?.filter(work => work.category?.name === activeCategory).length || 0;
     }
@@ -72,22 +71,27 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
       work.category?.name === activeCategory &&
       work.subcategory?.name === subcategoryName
     ).length || 0;
-  };
+  }, [allWorks, activeCategory, t]);
 
-  // Фильтрация работ по активной категории и подкатегории
-  const filteredWorks = allWorks?.filter(work => {
-    // Если категория не выбрана, показываем все работы (защита от пустого экрана)
-    if (!activeCategory) return true;
+  // Фильтрация работ по активной категории и подкатегории (мемоизировано для производительности)
+  const filteredWorks = useMemo(() => {
+    if (!allWorks) return [];
 
-    const categoryMatch = work.category?.name === activeCategory;
-    const subcategoryMatch = activeSubcategory === t('all') || work.subcategory?.name === activeSubcategory;
-    return categoryMatch && subcategoryMatch;
-  }) || [];
+    return allWorks.filter(work => {
+      // Если категория не выбрана, показываем все работы (защита от пустого экрана)
+      if (!activeCategory) return true;
 
-  // Показываем загрузку со skeleton loaders только во время первоначальной загрузки данных
-  const isInitialLoading = (categoriesLoading || worksLoading) && (!categories || !allWorks);
+      const categoryMatch = work.category?.name === activeCategory;
+      const subcategoryMatch = activeSubcategory === t('all') || work.subcategory?.name === activeSubcategory;
+      return categoryMatch && subcategoryMatch;
+    });
+  }, [allWorks, activeCategory, activeSubcategory, t]);
 
-  if (isInitialLoading) {
+  // Показываем загрузку пока не готовы ВСЕ данные (категории, работы, и выбрана категория)
+  // Это предотвращает постепенную загрузку карточек
+  const isLoading = categoriesLoading || worksLoading || !categories || !allWorks || !activeCategory;
+
+  if (isLoading) {
     return (
       <section id="cases" className="w-screen bg-white dark:bg-[#0b0b0b] relative z-10">
         {/* Заголовок */}
@@ -283,7 +287,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
 
         {/* Фильтр подкатегорий */}
         <div className="flex flex-nowrap md:flex-wrap items-center gap-3 pb-2 mt-6 overflow-x-auto md:overflow-x-visible pl-2 sm:pl-0">
-        {getActiveSubcategories().map((subcategory) => {
+        {getActiveSubcategories.map((subcategory) => {
           const workCount = getSubcategoryWorkCount(subcategory);
           const isActive = activeSubcategory === subcategory;
 

@@ -5,7 +5,6 @@ import DesignSection from '@/components/DesignSection';
 import CasesSection from '@/components/CasesSection';
 import DatabaseFix from '@/components/DatabaseFix';
 import Footer from '@/components/Footer';
-import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { generatePageMetadata } from '@/lib/metadata';
 
@@ -37,9 +36,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <DatabaseFix />
       <HeroSection />
       <StatsSection />
-      <Suspense fallback={<div className="container-max-width py-8">Загружаем услуги...</div>}>
-        <ServicesSection />
-      </Suspense>
+      <ServicesSection />
       <DesignSection />
       <CasesSection />
       <Footer />

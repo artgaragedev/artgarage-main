@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useState, memo } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
 import OrderFormModal from '@/components/OrderFormModal';
@@ -44,6 +44,8 @@ const WorkCard: FC<WorkCardProps> = ({ image, title, category }) => {
             src={cleanImage}
             alt={title}
             fill
+            loading="lazy"
+            priority={false}
             className="object-cover group-hover:scale-110 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
@@ -103,6 +105,7 @@ const WorkCard: FC<WorkCardProps> = ({ image, title, category }) => {
                 <img
                   src={cleanImage}
                   alt={title}
+                  loading="lazy"
                   className="max-w-full max-h-[calc(95vh-140px)] sm:max-h-[calc(90vh-180px)] w-auto h-auto object-contain"
                 />
               </div>
@@ -203,4 +206,5 @@ const WorkCard: FC<WorkCardProps> = ({ image, title, category }) => {
   );
 };
 
-export default WorkCard;
+// Мемоизируем компонент для предотвращения ненужных ре-рендеров
+export default memo(WorkCard);
