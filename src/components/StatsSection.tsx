@@ -34,10 +34,10 @@ export default function StatsSection() {
     <section
       className="w-screen bg-white dark:bg-[#0b0b0b] relative z-10"
       style={{
-        padding: '2rem 1rem'
+        padding: '2rem 0'
       }}
     >
-      <div className="container-max-width grid auto-rows-fr items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container-max-width px-2 sm:px-0 grid auto-rows-fr items-stretch grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {stats.map((stat, index) => (
           <SpotlightCard
             key={index}

@@ -2,6 +2,7 @@
 
 import { FC, useState, useRef } from 'react';
 import { Upload, X, FileImage, File, CheckCircle } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface FileUploadProps {
   onFilesChange: (files: File[]) => void;
@@ -10,12 +11,13 @@ interface FileUploadProps {
   maxSize?: number; // в MB
 }
 
-const FileUpload: FC<FileUploadProps> = ({ 
-  onFilesChange, 
-  maxFiles = 5, 
+const FileUpload: FC<FileUploadProps> = ({
+  onFilesChange,
+  maxFiles = 5,
   acceptedTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'application/pdf'],
-  maxSize = 10 
+  maxSize = 10
 }) => {
+  const t = useTranslations('fileUpload');
   const [files, setFiles] = useState<File[]>([]);
   const [dragActive, setDragActive] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
@@ -24,14 +26,14 @@ const FileUpload: FC<FileUploadProps> = ({
   const validateFile = (file: File): string | null => {
     // Проверка типа файла
     if (!acceptedTypes.includes(file.type)) {
-      return `Тип файла ${file.type} не поддерживается. Разрешенные типы: ${acceptedTypes.join(', ')}`;
+      return t('errorFileType', { type: file.type, accepted: acceptedTypes.join(', ') });
     }
-    
+
     // Проверка размера файла
     if (file.size > maxSize * 1024 * 1024) {
-      return `Размер файла ${file.name} превышает ${maxSize}MB`;
+      return t('errorFileSize', { name: file.name, maxSize: maxSize.toString() });
     }
-    
+
     return null;
   };
 
@@ -42,7 +44,7 @@ const FileUpload: FC<FileUploadProps> = ({
 
     // Проверка общего количества файлов
     if (files.length + fileArray.length > maxFiles) {
-      newErrors.push(`Максимум ${maxFiles} файлов. Вы пытаетесь добавить ${files.length + fileArray.length} файлов.`);
+      newErrors.push(t('errorMaxFiles', { maxFiles: maxFiles.toString(), total: (files.length + fileArray.length).toString() }));
       setErrors(newErrors);
       return;
     }
@@ -141,21 +143,21 @@ const FileUpload: FC<FileUploadProps> = ({
         
         <div className="flex flex-col items-center justify-center space-y-2">
           <Upload className="w-10 h-10 text-gray-400 mb-2" />
-          <p 
+          <p
             className="text-gray-600 dark:text-gray-400 font-medium"
             style={{
               fontFamily: 'Montserrat, sans-serif'
             }}
           >
-            Перетащите файлы сюда или нажмите для выбора
+            {t('dragDropText')}
           </p>
-          <p 
+          <p
             className="text-gray-500 dark:text-gray-500 text-sm"
             style={{
               fontFamily: 'Montserrat, sans-serif'
             }}
           >
-            Поддерживаются: JPG, PNG, SVG, PDF (макс. {maxSize}MB)
+            {t('supportedFormats', { maxSize: maxSize.toString() })}
           </p>
           <button
             type="button"
@@ -166,7 +168,7 @@ const FileUpload: FC<FileUploadProps> = ({
               fontWeight: 500
             }}
           >
-            Выбрать файлы
+            {t('selectFilesButton')}
           </button>
         </div>
       </div>
@@ -185,13 +187,13 @@ const FileUpload: FC<FileUploadProps> = ({
       {/* Отображение загруженных файлов */}
       {files.length > 0 && (
         <div className="mt-4 space-y-2">
-          <p 
+          <p
             className="text-sm font-medium text-gray-700 dark:text-gray-300"
             style={{
               fontFamily: 'Montserrat, sans-serif'
             }}
           >
-            Загруженные файлы ({files.length}/{maxFiles}):
+            {t('uploadedFiles', { count: files.length.toString(), max: maxFiles.toString() })}
           </p>
           {files.map((file, index) => (
             <div

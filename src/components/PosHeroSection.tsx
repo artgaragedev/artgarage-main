@@ -1,12 +1,15 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
+import OrderFormModal from '@/components/OrderFormModal';
 
 const PosHeroSection: FC = () => {
   const t = useTranslations('posMaterials');
+  const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
+
   return (
     <section className="relative w-full h-[70vh] min-h-[600px] overflow-hidden bg-black">
       {/* Фоновое изображение */}
@@ -21,13 +24,12 @@ const PosHeroSection: FC = () => {
       </div>
 
       {/* Контент */}
-      <div className="relative z-10 container-max-width h-full flex items-center">
+      <div className="relative z-10 container-max-width h-full flex items-center px-2 sm:px-0">
         <div className="max-w-3xl">
           <h1
-            className="text-white font-bold mb-6"
+            className="text-white font-bold mb-6 text-3xl sm:text-5xl md:text-6xl"
             style={{
               fontFamily: 'Montserrat, sans-serif',
-              fontSize: '56px',
               fontWeight: 900,
               lineHeight: '1.1',
               letterSpacing: '-0.02em'
@@ -50,6 +52,7 @@ const PosHeroSection: FC = () => {
           
           <div className="flex flex-col sm:flex-row gap-5">
             <InteractiveHoverButton
+              onClick={() => setIsOrderFormOpen(true)}
               className="bg-[#EA3C23] text-white flex items-center justify-center hover:bg-[#D63419] transition-colors"
               style={{
                 fontFamily: 'Montserrat, sans-serif',
@@ -83,6 +86,9 @@ const PosHeroSection: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Модалка с формой заказа */}
+      <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={t('title')} />
     </section>
   );
 };

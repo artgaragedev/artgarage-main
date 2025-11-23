@@ -1,93 +1,51 @@
 'use client';
 
 import { FC } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Check } from 'lucide-react';
-import DTFImageGallery from './DTFImageGallery';
 import ServiceOrderForm from './ServiceOrderForm';
-// Иконки для селектора больше не используются
+import { useWorks, useCategories } from '@/hooks/useSupabaseData';
+import WorkCard from './WorkCard';
 
 interface DTFPrintingServiceProps {
   onClose: () => void;
 }
 
 const DTFPrintingService: FC<DTFPrintingServiceProps> = ({ onClose }) => {
-  const t = useTranslations();
-  
+  const t = useTranslations('dtfPrintingPage');
+  const tCases = useTranslations('cases');
+  const locale = useLocale() as 'ru' | 'ro';
 
-  const advantages = [
-    {
-      title: "Яркие цвета",
-      description: "Насыщенные и стойкие цвета, которые не выцветают со временем"
-    },
-    {
-      title: "Универсальность",
-      description: "Подходит для различных типов тканей и твердых поверхностей"
-    },
-    {
-      title: "Долговечность",
-      description: "Изображения выдерживают многочисленные стирки и воздействия"
-    },
-    {
-      title: "Быстрое производство",
-      description: "Оперативное выполнение заказов без потери качества"
-    }
-  ];
+  // Загружаем категории, чтобы получить ID категории "DTF Печать"
+  const { data: categories } = useCategories(locale);
+  const dtfCategoryId = categories?.find((c: any) => c.slug === 'dtf-pechat')?.id || '';
 
-  const examples = [
-    {
-      title: "Футболки с принтом",
-      description: "Яркие принты на текстиле для корпоративного стиля или мерча"
-    },
-    {
-      title: "Кружки и сувениры",
-      description: "Персонализированные подарки с качественной печатью"
-    },
-    {
-      title: "Наклейки на одежду",
-      description: "Уникальные дизайны для самостоятельного нанесения"
-    },
-    {
-      title: "Брендирование предметов",
-      description: "Нанесение логотипов на любые твердые поверхности"
-    }
-  ];
+  // Загружаем работы для категории "DTF Печать"
+  const { data: worksData, isLoading } = useWorks(
+    dtfCategoryId
+      ? { categoryId: dtfCategoryId, isPublished: true }
+      : { isPublished: true, limit: 0 },
+    locale
+  );
+  const isCategoryResolving = !dtfCategoryId;
+  const isWorksLoading = isLoading || isCategoryResolving;
 
-  // Опции селектора удалены
 
-  // Примеры работ для галереи
-  const galleryImages = [
-    {
-      src: "/Services/DTF-pechat.jpg",
-      alt: "DTF-печать на футболке",
-      title: "Футболки с принтом",
-      description: "Яркие и долговечные принты на текстиле для корпоративного стиля или мерча"
-    },
-    {
-      src: "/Services/corporate-gifts.jpg",
-      alt: "Корпоративные подарки",
-      title: "Брендированные кружки",
-      description: "Качественная печать на сувенирной продукции для продвижения вашего бренда"
-    },
-    {
-      src: "/Services/flags.jpg",
-      alt: "Наклейки на одежду",
-      title: "Наклейки на текстиль",
-      description: "Уникальные дизайны для самостоятельного нанесения на одежду"
-    },
-    {
-      src: "/Services/photo-zone.jpg",
-      alt: "Брендирование предметов",
-      title: "Фотозоны с DTF-печатью",
-      description: "Эффектные фотозоны с качественной печатью для мероприятий"
-    }
-  ];
+  const advantages = [0, 1, 2, 3].map(i => ({
+    title: t(`advantages.${i}.title`),
+    description: t(`advantages.${i}.description`)
+  }));
+
+  const examples = [0, 1, 2, 3].map(i => ({
+    title: t(`examples.${i}.title`),
+    description: t(`examples.${i}.description`)
+  }));
 
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Заголовок и основное описание */}
       <div className="mb-8">
-        <h2 
+        <h2
           className="text-3xl font-bold text-black dark:text-white mb-4"
           style={{
             fontFamily: 'Montserrat, sans-serif',
@@ -95,18 +53,18 @@ const DTFPrintingService: FC<DTFPrintingServiceProps> = ({ onClose }) => {
             lineHeight: '1.2'
           }}
         >
-          DTF-печать: Яркие решения для вашего бизнеса
+          {t('title')}
         </h2>
-        
+
         <div className="mb-6">
           <img
             src="/Services/DTF-pechat.jpg"
-            alt="DTF-печать"
+            alt={t('gallery.0.alt')}
             className="w-full h-auto rounded-xl shadow-lg"
           />
         </div>
 
-        <p 
+        <p
           className="text-gray-700 dark:text-gray-300 mb-6"
           style={{
             fontFamily: 'Montserrat, sans-serif',
@@ -114,21 +72,20 @@ const DTFPrintingService: FC<DTFPrintingServiceProps> = ({ onClose }) => {
             lineHeight: '1.6'
           }}
         >
-          DTF печать (Direct-to-Film) — это инновационный метод печати, идеально подходящий для создания ярких и качественных наклеек на одежду. 
-          DTF UV — это усовершенствованная технология печати, предназначенная для нанесения изображений на твердые поверхности, такие как стекло, пластик, металл, дерево, сувенирная продукция и другие.
+          {t('description')}
         </p>
       </div>
 
       {/* Преимущества технологии */}
       <div className="mb-8">
-        <h3 
+        <h3
           className="text-2xl font-bold text-black dark:text-white mb-4"
           style={{
             fontFamily: 'Montserrat, sans-serif',
             fontWeight: 600
           }}
         >
-          Преимущества DTF-печати
+          {t('advantagesTitle')}
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -163,7 +120,7 @@ const DTFPrintingService: FC<DTFPrintingServiceProps> = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Галерея примеров работ */}
+      {/* Примеры применения */}
       <div className="mb-8">
         <h3
           className="text-2xl font-bold text-black dark:text-white mb-4"
@@ -172,22 +129,7 @@ const DTFPrintingService: FC<DTFPrintingServiceProps> = ({ onClose }) => {
             fontWeight: 600
           }}
         >
-          Примеры наших работ
-        </h3>
-        
-        <DTFImageGallery images={galleryImages} />
-      </div>
-
-      {/* Примеры применения */}
-      <div className="mb-8">
-        <h3 
-          className="text-2xl font-bold text-black dark:text-white mb-4"
-          style={{
-            fontFamily: 'Montserrat, sans-serif',
-            fontWeight: 600
-          }}
-        >
-          Примеры применения
+          {t('examplesTitle')}
         </h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -217,14 +159,45 @@ const DTFPrintingService: FC<DTFPrintingServiceProps> = ({ onClose }) => {
         </div>
       </div>
 
+      {/* Наши работы: вывод карточек из Supabase */}
+      <div className="mb-8">
+        <h3
+          className="text-2xl font-bold text-black dark:text-white mb-4"
+          style={{
+            fontFamily: 'Montserrat, sans-serif',
+            fontWeight: 600
+          }}
+        >
+          {tCases('ourWorks')}
+        </h3>
+
+        {isWorksLoading ? (
+          <div className="text-center py-8">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#EA3C23]"></div>
+            <p className="mt-2 text-gray-600 dark:text-gray-400">{tCases('loading')}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {worksData && worksData.length > 0 ? (
+              worksData.map((work: any) => (
+                <WorkCard
+                  key={work.id}
+                  image={work.main_image_url || (work.work_images?.[0]?.image_url ?? '/Services/DTF-pechat.jpg')}
+                  title={work.title}
+                  category={work.category?.name}
+                />
+              ))
+            ) : (
+              <div className="col-span-full text-gray-600 dark:text-gray-400">
+                {tCases('noWorks')}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Форма заказа */}
-      <ServiceOrderForm
-        title="Заказать услугу"
-        subtitle="Заполните форму и мы свяжемся с вами в течение рабочего дня"
-        messageLabel="Опишите ваш заказ"
-        messagePlaceholder="Расскажите подробнее о вашем заказе: количество, размеры, особенности дизайна, сроки и т.д."
-        fileSectionTitle="Файлы с дизайном"
-      />
+      <ServiceOrderForm serviceName={t('title')} />
     </div>
   );
 };

@@ -3,10 +3,10 @@
 import { FC, useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
-import CurvedLoop from './CurvedLoop';
 import ServiceCard from './ServiceCard';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import ServiceDrawer from './ServiceDrawer';
+import OrderFormModal from '@/components/OrderFormModal';
 
 const ServicesSection: FC = () => {
   const tSection = useTranslations('servicesSection');
@@ -15,23 +15,10 @@ const ServicesSection: FC = () => {
   const tPos = useTranslations('posMaterials');
   const tPrint = useTranslations('printingMaterials');
   const tAdditional = useTranslations('services.additionalServices');
-  const sectionCurveAmount = -200;
   const searchParams = useSearchParams();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
-  const [viewportWidth, setViewportWidth] = useState(0);
-  useEffect(() => {
-    const update = () => setViewportWidth(window.innerWidth);
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-  const viewBoxWidth = Math.max(1440, viewportWidth);
-  const baselineY = 40 + Math.max(0, -sectionCurveAmount);
-  const svgHeight = Math.max(120, baselineY);
-  const startX = -0.07 * viewBoxWidth;
-  const endX = viewBoxWidth + 0.07 * viewBoxWidth;
-  const controlX = viewBoxWidth / 2;
+  const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
 
   // Основные категории (большие карточки) с подкатегориями
   const primaryServices = [
@@ -144,87 +131,44 @@ const ServicesSection: FC = () => {
 
   return (
     <section className="w-full bg-[#F3F3F3] dark:bg-[#0b0b0b] relative overflow-visible">
-      {/* Верхняя кривая фона для совпадения с CurvedLoop (-200) */}
-      <svg
-        className="absolute inset-x-0 top-0 w-full z-0"
-        viewBox={`0 0 ${viewBoxWidth} ${svgHeight}`}
-        preserveAspectRatio="none"
-        aria-hidden
-        style={{ height: svgHeight }}
-      >
-        {/* Маска верхней части: вырезает дугу из фона секции (совпадает с CurvedLoop) */}
-        <path
-          className="block dark:hidden"
-          d={`M${startX},${baselineY} Q${controlX},${baselineY + sectionCurveAmount} ${endX},${baselineY} L${endX},0 L${startX},0 Z`}
-          fill="#FFFFFF"
-        />
-        <path
-          className="hidden dark:block"
-          d={`M${startX},${baselineY} Q${controlX},${baselineY + sectionCurveAmount} ${endX},${baselineY} L${endX},0 L${startX},0 Z`}
-          fill="#0b0b0b"
-        />
-      </svg>
-
-      {/* CurvedLoop с анимированным текстом */}
-      <div className="relative z-10">
-        <CurvedLoop 
-          marqueeText={tSection('marquee')}
-          curveAmount={-200}
-          speed={1.5}
-        />
-      </div>
-      
-      {/* Заголовок услуг под CurvedLoop */}
+      {/* Заголовок услуг */}
       <div
-        className="container-max-width pt-4 pb-8"
+        className="container-max-width pt-16 pb-8 px-2 sm:px-0"
         style={{
-          padding: '1rem 0 2rem'
+          padding: '4rem 0 2rem'
         }}
       >
-        <div className="flex items-start justify-between gap-8">
-          <div className="flex items-center gap-2">
+        <div className="px-2 sm:px-0">
+          {/* Заголовок */}
+          <div className="flex items-center gap-2 mb-3">
             {/* Цветная плашка с заголовком */}
-            <div 
-               className="px-6 py-3 flex items-center"
+            <div
+               className="px-4 py-2 md:px-6 md:py-3 flex items-center"
                style={{
                  backgroundColor: '#EA3C23'
                }}
              >
-              <h2 
-                className="font-bold text-white"
-                style={{
-                  fontSize: '32px',
-                  lineHeight: '1',
-                  letterSpacing: '-0.01em',
-                  margin: 0
-                }}
+              <h2
+                className="font-bold text-white text-2xl md:text-4xl leading-none tracking-tight m-0"
               >
                 {tSection('title')}
               </h2>
             </div>
-            
+
             {/* SVG элемент справа */}
-            <img 
-              src="/titile.svg" 
+            <img
+              src="/titile.svg"
               alt="Title decoration"
-              className="h-full"
-              style={{
-                height: '2.5rem'
-              }}
+              className="h-8 md:h-10"
             />
           </div>
-          
-          {/* Подзаголовок справа, выровнен по верхней границе */}
-          <div className="self-start max-w-[58rem] flex-1 text-right">
-            <p 
-              className="text-black dark:text-white font-extrabold"
+
+          {/* Подзаголовок под заголовком */}
+          <div className="max-w-3xl">
+            <p
+              className="text-slate-600 dark:text-slate-300 font-normal leading-relaxed text-lg md:text-xl lg:text-2xl m-0 first-letter:uppercase"
               style={{
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '24px',
-                lineHeight: '1.219',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-                margin: 0
+                fontFamily: 'Montserrat, sans-serif'
               }}
             >
               {tSection('subtitle')}
@@ -237,13 +181,13 @@ const ServicesSection: FC = () => {
 
       {/* Полноширинный Masonry Grid */}
       <div
-          className="container-max-width pb-24"
+          className="container-max-width pb-24 px-2 sm:px-0"
           style={{
             padding: '0 0 6rem'
           }}
         >
         {/* Основные услуги — 2 колонки, full-width */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row-dense gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row-dense gap-6 mb-8 px-2 sm:px-0">
           {primaryServices.map((service, index) => (
             <ServiceCard
               key={`primary-${index}`}
@@ -258,7 +202,7 @@ const ServicesSection: FC = () => {
         </div>
 
         {/* Дополнительные услуги — 3 колонки, full-width */}
-        <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row-dense gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-flow-row-dense gap-4 px-2 sm:px-0">
           {secondaryServices.map((service, index) => (
             <ServiceCard
               key={`secondary-${index}`}
@@ -271,7 +215,7 @@ const ServicesSection: FC = () => {
           
           {/* Блок с призывом к действию - занимает 2 колонки */}
           <div 
-            className="col-span-2 md:col-span-2"
+            className="col-span-1 md:col-span-2"
             style={{
               padding: '2rem',
               background: 'linear-gradient(135deg, #EA3C23 0%, #FF6B4A 100%)',
@@ -332,6 +276,7 @@ const ServicesSection: FC = () => {
                   {tSection('ctaContactSubtitle')}
                 </p>
                 <InteractiveHoverButton
+                  onClick={() => setIsOrderFormOpen(true)}
                   className="bg-white text-black border border-black flex items-center justify-center hover:bg-gray-50 transition-colors"
                   style={{
                     fontFamily: 'Montserrat, sans-serif',
@@ -359,6 +304,9 @@ const ServicesSection: FC = () => {
         serviceKey={selectedService}
         serviceCategory="additionalServices"
       />
+
+      {/* Модалка с формой заказа */}
+      <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={tSection('title')} />
     </section>
   );
 };

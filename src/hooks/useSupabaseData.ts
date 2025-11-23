@@ -85,6 +85,21 @@ export const useCategories = (locale: 'ru' | 'ro' = 'ru') => {
     fetchCategories()
   }, [fetchCategories])
 
+  // Перезагружаем данные при возврате на страницу
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchCategories()
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [fetchCategories])
+
   return {
     ...state,
     refetch: fetchCategories
@@ -245,6 +260,21 @@ export const useWorks = (filter: WorksFilter = {}, locale: 'ru' | 'ro' = 'ru') =
 
   useEffect(() => {
     fetchWorks()
+  }, [fetchWorks])
+
+  // Перезагружаем данные при возврате на страницу
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        fetchWorks()
+      }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [fetchWorks])
 
   return {

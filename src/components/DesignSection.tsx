@@ -1,190 +1,164 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
+import OrderFormModal from '@/components/OrderFormModal';
 
 const DesignSection: FC = () => {
   const t = useTranslations('design');
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <section className="relative w-screen bg-white dark:bg-[#0b0b0b] transition-colors duration-300">
-      {/* Content */}
-      <div>{/* Design section title */}
-      <div
-        className="container-max-width pb-8"
-        style={{
-          paddingTop: '100px',
-          paddingBottom: '2rem'
-        }}
-      >
-        <div className="flex items-start justify-between gap-8">
-          <div className="flex items-center gap-2">
-            {/* Colored banner with title */}
-            <div 
-               className="px-6 py-3 flex items-center"
-               style={{
-                 backgroundColor: '#EA3C23'
-               }}
-             >
-              <h2 
-                className="font-bold text-white"
+    <section className="relative w-full overflow-hidden bg-white dark:bg-[#0b0b0b] py-16 sm:py-24">
+      <div className="max-w-[1280px] mx-auto px-2 sm:px-6 space-y-12">
+
+        {/* Header */}
+        <div className={`transition-all duration-1000 ${
+          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`} style={{ transitionDelay: '100ms' }}>
+          <div>
+            {/* Заголовок */}
+            <div className="flex items-center gap-2 mb-3">
+              {/* Цветная плашка с заголовком */}
+              <div
+                className="px-4 py-2 md:px-6 md:py-3 flex items-center"
                 style={{
-                  fontSize: '32px',
-                  lineHeight: '1',
-                  letterSpacing: '-0.01em',
-                  margin: 0
+                  backgroundColor: '#EA3C23'
                 }}
               >
-                {t('title')}
-              </h2>
-            </div>
-            
-            {/* SVG element on the right */}
-            <img 
-              src="/titile.svg" 
-              alt="Title decoration"
-              className="h-full"
-              style={{
-                height: '2.5rem'
-              }}
-            />
-          </div>
-          
-          {/* Subtitle on the right, aligned to top border */}
-          <div className="self-start max-w-[58rem] flex-1 text-right">
-            <p 
-              className="text-black dark:text-white font-extrabold"
-              style={{
-                fontFamily: 'Montserrat, sans-serif',
-                fontSize: '24px',
-                lineHeight: '1.219',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-                margin: 0,
-                whiteSpace: 'pre-line'
-              }}
-            >
-              {t('subtitle')}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Контент секции дизайн */}
-      <div
-        className="container-max-width pb-24"
-        style={{
-          padding: '0 0 6rem'
-        }}
-      >
-        <div className="mx-auto">
-          {/* Two-column grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left column */}
-            <div className="space-y-6">
-              
-              <div 
-                className="relative flex items-center justify-center overflow-hidden"
-                style={{ height: '80vh' }}
-              >
-
-
-                <img 
-                  src="/Services/tree.png" 
-                  alt="Design tree illustration"
-                  className="max-w-full max-h-full object-contain relative z-10"
-                />
-              </div>
-            </div>
-            
-            {/* Right column */}
-            <div className="space-y-6">
-              <div 
-                className="flex flex-col justify-center items-start space-y-8 px-4"
-                style={{ height: '80vh' }}
-              >
-                {/* 2D & 3D banner */}
-                <div 
-                  className="inline-block px-8 py-4 self-start"
+                <h2
+                  className="font-bold text-white text-2xl md:text-4xl leading-none tracking-tight m-0"
                   style={{
-                    border: '2px solid #EA3C23',
-                    backgroundColor: 'transparent',
-                    borderRadius: '12px'
+                    fontFamily: 'Montserrat, sans-serif'
                   }}
                 >
-                  <span 
-                    className="text-black dark:text-white"
+                  {t('title')}
+                </h2>
+              </div>
+
+              {/* SVG элемент справа */}
+              <img
+                src="/titile.svg"
+                alt="Title decoration"
+                className="h-8 md:h-10"
+              />
+            </div>
+
+            {/* Подзаголовок под заголовком */}
+            <div className="max-w-3xl">
+              <p
+                className="text-slate-600 dark:text-slate-300 font-normal leading-relaxed text-lg md:text-xl lg:text-2xl m-0 first-letter:uppercase"
+                style={{
+                  fontFamily: 'Montserrat, sans-serif'
+                }}
+              >
+                {t('subtitle')}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Grid */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-1000 ${
+          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`} style={{ transitionDelay: '200ms' }}>
+
+          {/* Left column - Image */}
+          <div className="relative overflow-hidden rounded-2xl bg-[#F3F3F3] dark:bg-slate-800 p-6">
+            <img
+              src="/Services/tree.png"
+              alt="Design tree illustration"
+              className="w-full h-auto object-contain max-h-[350px] md:max-h-[450px]"
+            />
+          </div>
+
+          {/* Right column - Content */}
+          <div className="relative overflow-hidden rounded-2xl bg-[#F3F3F3] dark:bg-slate-800 p-6 md:p-8">
+            <div className="flex flex-col justify-center space-y-6 h-full">
+
+              {/* 2D & 3D badge */}
+              <div className="inline-block self-start">
+                <div
+                  className="px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-xl border-2 border-[#EA3C23] bg-white dark:bg-[#0b0b0b]"
+                >
+                  <span
+                    className="text-black dark:text-white font-extrabold text-2xl sm:text-3xl md:text-5xl"
                     style={{
-                      fontFamily: "Montserrat, sans-serif",
+                      fontFamily: 'Montserrat, sans-serif',
                       fontWeight: 900,
-                      fontSize: "3rem",
-                      letterSpacing: "0.02em"
+                      letterSpacing: '-0.02em',
                     }}
                   >
                     {t('twoDThreeD')}
                   </span>
                 </div>
+              </div>
 
-                {/* Structured text */}
-                <div className="space-y-4 max-w-lg text-left">
-                  <p 
-                    className="text-black dark:text-white font-semibold"
-                    style={{ 
-                      fontFamily: "Montserrat, sans-serif",
-                      fontSize: "1.25rem", 
-                      fontWeight: 600,
-                      lineHeight: "1.4"
-                    }}
-                  >
-                    {t('designComplexityTitle')}
-                  </p>
-                  
-                  <p 
-                    className="text-black dark:text-white"
-                    style={{ 
-                      fontFamily: "Montserrat, sans-serif",
-                      fontSize: "1rem", 
-                      fontWeight: 400,
-                      lineHeight: "1.6"
+              {/* Text content */}
+              <div className="space-y-4">
+                <h3
+                  className="text-black dark:text-white font-bold text-xl sm:text-2xl"
+                  style={{
+                    fontFamily: 'Montserrat, sans-serif',
+                    fontWeight: 700,
+                    lineHeight: '1.3',
+                  }}
+                >
+                  {t('designComplexityTitle')}
+                </h3>
+
+                <div className="space-y-3">
+                  <p
+                    className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed"
+                    style={{
+                      fontFamily: 'Montserrat, sans-serif',
                     }}
                   >
                     {t('designComplexityDesc1')}
                   </p>
-                  
-                  <p 
-                    className="text-black dark:text-white"
-                    style={{ 
-                      fontFamily: "Montserrat, sans-serif",
-                      fontSize: "1rem", 
-                      fontWeight: 400,
-                      lineHeight: "1.6"
+
+                  <p
+                    className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed"
+                    style={{
+                      fontFamily: 'Montserrat, sans-serif',
                     }}
                   >
                     {t('designComplexityDesc2')}
                   </p>
                 </div>
-                
-                <InteractiveHoverButton 
-                  className="bg-[#EA3C23] text-white flex items-center justify-center hover:bg-[#d63419] transition-colors self-start"
-                  style={{
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 500,
-                    fontSize: 'var(--fs-ui)',
-                    letterSpacing: '0.8px',
-                    lineHeight: '1.219',
-                    padding: '16px 40px',
-                    borderRadius: '146.24px',
-                    minWidth: '180px'
-                  }}
-                >
-                  {t('orderProject')}
-                </InteractiveHoverButton>
               </div>
+
+              {/* CTA Button */}
+              <InteractiveHoverButton
+                onClick={() => setIsOrderFormOpen(true)}
+                className="bg-[#EA3C23] text-white hover:bg-[#D63419] transition-colors self-start"
+                style={{
+                  fontFamily: 'Montserrat, sans-serif',
+                  fontWeight: 500,
+                  fontSize: 'var(--fs-ui)',
+                  letterSpacing: '0.8px',
+                  lineHeight: '1.219',
+                  padding: '16px 40px',
+                  borderRadius: '146.24px',
+                  minWidth: '180px'
+                }}
+              >
+                {t('orderProject')}
+              </InteractiveHoverButton>
             </div>
           </div>
         </div>
       </div>
-      </div>
+
+      {/* Модалка с формой заказа */}
+      <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={t('title')} />
     </section>
   );
 };

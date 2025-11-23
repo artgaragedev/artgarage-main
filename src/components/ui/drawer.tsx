@@ -107,12 +107,14 @@ const drawerContentVariants = cva(
 
 interface DrawerContentProps extends React.ComponentProps<typeof DrawerPrimitive.Content> {
   showScrollIndicator?: boolean;
+  direction?: 'top' | 'bottom' | 'left' | 'right';
 }
 
 function DrawerContent({
   className,
   children,
   showScrollIndicator = true,
+  direction = 'bottom',
   ...props
 }: DrawerContentProps) {
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -149,9 +151,7 @@ function DrawerContent({
         ref={contentRef}
         data-slot="drawer-content"
         className={cn(
-          drawerContentVariants({
-            direction: "bottom"
-          }),
+          drawerContentVariants({ direction }),
           className
         )}
         {...props}

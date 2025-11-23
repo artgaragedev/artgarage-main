@@ -1,28 +1,47 @@
 'use client';
 
 import { FC, useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
 import ServiceCard from './ServiceCard';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import ServiceDrawer from './ServiceDrawer';
+import OrderFormModal from '@/components/OrderFormModal';
+import { useWorks, useCategories } from '@/hooks/useSupabaseData';
+import WorkCard from './WorkCard';
 
 const PrintingServicesSection: FC = () => {
   const t = useTranslations('printingMaterials');
+  const tCases = useTranslations('cases');
+  const locale = useLocale() as 'ru' | 'ro';
   const searchParams = useSearchParams();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
+  const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
+
+  // Загружаем категории и работы для "Полиграфические материалы"
+  const { data: categories } = useCategories(locale);
+  const printingCategoryId = categories?.find((c: any) => c.slug === 'poligraficheskie-materialy')?.id || '';
+
+  const { data: worksData, isLoading } = useWorks(
+    printingCategoryId
+      ? { categoryId: printingCategoryId, isPublished: true }
+      : { isPublished: true, limit: 0 },
+    locale
+  );
+  const isCategoryResolving = !printingCategoryId;
+  const isWorksLoading = isLoading || isCategoryResolving;
   // Услуги полиграфических материалов
   const printingServices = [
     {
       title: t('magazines'),
-      image: "/Services/printing-materials.jpg",
+      image: "/Services/printing-magazines.jpg",
       description: t('magazinesDesc'),
       key: 'magazines'
     },
     {
       title: t('stickers'),
-      image: "/Services/flags.jpg",
+      image: "/Services/printing-stickers.jpg",
       description: t('stickersDesc'),
       key: 'stickers'
     }
@@ -49,53 +68,43 @@ const PrintingServicesSection: FC = () => {
 
   return (
     <section className="w-full bg-[#F3F3F3] dark:bg-[#0b0b0b] py-24">
-      <div className="container-max-width">
+      <div className="container-max-width px-2 sm:px-0">
         {/* Заголовок секции */}
-        <div className="mb-16">
-          <div className="flex items-start justify-between gap-8">
-            <div className="flex items-center gap-2">
+        <div className="mb-16 px-2 sm:px-0">
+          <div>
+            {/* Заголовок */}
+            <div className="flex items-center gap-2 mb-3">
               {/* Цветная плашка с заголовком */}
-              <div 
-                 className="px-6 py-3 flex items-center"
-                 style={{
-                   backgroundColor: '#EA3C23'
-                 }}
-               >
-                <h2 
-                  className="font-bold text-white"
+              <div
+                className="px-4 py-2 md:px-6 md:py-3 flex items-center"
+                style={{
+                  backgroundColor: '#EA3C23'
+                }}
+              >
+                <h2
+                  className="font-bold text-white text-2xl md:text-4xl leading-none tracking-tight m-0"
                   style={{
-                    fontSize: '32px',
-                    lineHeight: '1',
-                    letterSpacing: '-0.01em',
-                    margin: 0
+                    fontFamily: 'Montserrat, sans-serif'
                   }}
                 >
                   {t('servicesTitle')}
                 </h2>
               </div>
-              
+
               {/* SVG элемент справа */}
-              <img 
-                src="/titile.svg" 
+              <img
+                src="/titile.svg"
                 alt="Title decoration"
-                className="h-full"
-                style={{
-                  height: '2.5rem'
-                }}
+                className="h-8 md:h-10"
               />
             </div>
-            
-            {/* Подзаголовок справа, выровнен по верхней границе */}
-            <div className="self-start max-w-[58rem] flex-1 text-right">
-              <p 
-                className="text-black dark:text-white font-extrabold"
+
+            {/* Подзаголовок под заголовком */}
+            <div className="max-w-3xl">
+              <p
+                className="text-slate-600 dark:text-slate-300 font-normal leading-relaxed text-lg md:text-xl lg:text-2xl m-0 first-letter:uppercase"
                 style={{
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontSize: '24px',
-                  lineHeight: '1.219',
-                  letterSpacing: '0.05em',
-                  textTransform: 'uppercase',
-                  margin: 0
+                  fontFamily: 'Montserrat, sans-serif'
                 }}
               >
                 {t('servicesSubtitle')}
@@ -116,6 +125,43 @@ const PrintingServicesSection: FC = () => {
               onClick={() => handleServiceClick(service.key)}
             />
           ))}
+        </div>
+
+        {/* Наши работы */}
+        <div className="mb-16">
+          <h3
+            className="text-3xl md:text-4xl font-bold text-black dark:text-white mb-8"
+            style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: 700
+            }}
+          >
+            {tCases('ourWorks')}
+          </h3>
+
+          {isWorksLoading ? (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-[#EA3C23]"></div>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">{tCases('loading')}</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {worksData && worksData.length > 0 ? (
+                worksData.map((work: any) => (
+                  <WorkCard
+                    key={work.id}
+                    image={work.main_image_url || (work.work_images?.[0]?.image_url ?? '/Services/printing-materials.jpg')}
+                    title={work.title}
+                    category={work.category?.name}
+                  />
+                ))
+              ) : (
+                <div className="col-span-full text-center text-gray-600 dark:text-gray-400 py-8">
+                  {tCases('noWorks')}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Призыв к действию */}
@@ -181,6 +227,7 @@ const PrintingServicesSection: FC = () => {
                 {t('ctaContactSubtitle')}
               </p>
               <InteractiveHoverButton
+                onClick={() => setIsOrderFormOpen(true)}
                 className="bg-white text-black border border-black flex items-center justify-center hover:bg-gray-50 transition-colors"
                 style={{
                   fontFamily: 'Montserrat, sans-serif',
@@ -207,6 +254,9 @@ const PrintingServicesSection: FC = () => {
         serviceKey={selectedService}
         serviceCategory="printingMaterials"
       />
+
+      {/* Модалка с формой заказа */}
+      <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={t('title')} />
     </section>
   );
 };

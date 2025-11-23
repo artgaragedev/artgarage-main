@@ -28,40 +28,16 @@ export const AnimatedThemeToggler = ({
     if (!buttonRef.current) return
     const targetTheme = !isDark ? "dark" : "light"
 
-    const startVT = (document as any).startViewTransition?.bind(document)
-    if (startVT) {
-      await startVT(() => {
-        flushSync(() => {
-          setTheme(targetTheme)
-        })
-      }).ready
+    console.log('Before toggle - isDark:', isDark, 'targetTheme:', targetTheme)
+    console.log('HTML element classes before:', document.documentElement.className)
 
-      const { top, left, width, height } =
-        buttonRef.current.getBoundingClientRect()
-      const x = left + width / 2
-      const y = top + height / 2
-      const maxRadius = Math.hypot(
-        Math.max(left, window.innerWidth - left),
-        Math.max(top, window.innerHeight - top)
-      )
+    setTheme(targetTheme)
 
-      document.documentElement.animate(
-        {
-          clipPath: [
-            `circle(0px at ${x}px ${y}px)`,
-            `circle(${maxRadius}px at ${x}px ${y}px)`,
-          ],
-        },
-        {
-          duration,
-          easing: "ease-in-out",
-          pseudoElement: "::view-transition-new(root)",
-        }
-      )
-    } else {
-      setTheme(targetTheme)
-    }
-  }, [isDark, duration])
+    // Проверяем после небольшой задержки
+    setTimeout(() => {
+      console.log('HTML element classes after:', document.documentElement.className)
+    }, 100)
+  }, [isDark, setTheme])
 
   return (
     <button

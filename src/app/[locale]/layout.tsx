@@ -8,6 +8,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { locales } from '@/i18n/request'
 import DevConsoleSilencer from '@/components/DevConsoleSilencer'
+import { PageTransition } from '@/components/PageTransition'
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
@@ -54,15 +55,16 @@ export default async function RootLayout({
         <DevConsoleSilencer />
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem={false}
-          disableTransitionOnChange
           storageKey="theme"
           themes={["light","dark"]}
         >
           <NextIntlClientProvider locale={resolvedLocale} messages={messages}>
             <Navbar />
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

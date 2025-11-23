@@ -1,189 +1,172 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import SplitText from '@/components/SplitText';
+import React, { useState } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { HeroCollage } from '@/components/ui/modern-hero-section';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
+import OrderFormModal from '@/components/OrderFormModal';
 
 export function HeroSection() {
   const t = useTranslations('hero');
   const s = useTranslations('stats');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isLoaded, setIsLoaded] = useState(false);
+  const locale = useLocale();
+  const router = useRouter();
+  const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
+  // Изображения услуг из папки public
+  const serviceImages = [
+    '/Services/outdoor-advertising.jpg',
+    '/Services/interior-advertising.jpg',
+    '/Services/POSM-materialy.jpg',
+    '/Services/printing-materials.jpg',
+    '/Services/DTF-pechat.jpg',
+    '/Services/installations.jpg',
+    '/Services/corporate-gifts.jpg',
+  ];
 
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(timer);
-    };
-  }, []);
+  // Пустой массив статистики (не показываем)
+  const stats: { value: string; label: string }[] = [];
 
   return (
-    <section className="relative w-screen overflow-hidden bg-white dark:bg-[#0b0b0b]" style={{ paddingBottom: '80px' }}>
-      
-      {/* Основной контент */}
-      <div className="container-max-width relative z-10 flex items-center px-6 py-20" style={{ minHeight: '600px' }}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-          
-          {/* Левая колонка - контент с заголовком */}
-          <div className="space-y-8 order-2 lg:order-1">
-            {/* Заголовок */}
-            <div className={`transition-all duration-700 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`} style={{ transitionDelay: '200ms', ['--fs-h1']: '70px' } as React.CSSProperties}>
-              <div className="space-y-1">
-                <SplitText
-                  text={t('title').split(' ')[0]}
-                  tag="h1"
-                  className="font-bold leading-[1.05] text-black dark:text-white"
-                  style={{
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 900,
-                    letterSpacing: '-0.02em',
-                    lineHeight: '1.05',
-                    textShadow: '0px 2px 4px rgba(0,0,0,0.1)'
-                  }}
-                  delay={30}
-                  duration={0.8}
-                  ease="power3.out"
-                  splitType="words"
-                  from={{ opacity: 0, y: 30 }}
-                  to={{ opacity: 1, y: 0 }}
-                  threshold={0.2}
-                  textAlign="left"
-                />
-                <SplitText
-                  text={t('title').split(' ').slice(1).join(' ')}
-                  tag="h1"
-                  className="font-bold leading-[1.05] text-black dark:text-white"
-                  style={{
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontWeight: 900,
-                    letterSpacing: '-0.02em',
-                    lineHeight: '1.05',
-                    textShadow: '0px 2px 4px rgba(0,0,0,0.1)'
-                  }}
-                  delay={30}
-                  duration={0.8}
-                  ease="power3.out"
-                  splitType="words"
-                  from={{ opacity: 0, y: 30 }}
-                  to={{ opacity: 1, y: 0 }}
-                  threshold={0.2}
-                  textAlign="left"
-                />
-              </div>
-            </div>
+    <>
+      <section className="relative w-full bg-white dark:bg-[#0b0b0b] py-20 sm:py-32">
+        {/* Заголовок */}
+        <div className="container-max-width relative z-10 mx-auto px-2 sm:px-6 text-center">
+          <h1
+            className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-black dark:text-white mb-6 leading-tight sm:whitespace-nowrap"
+            style={{
+              fontFamily: 'Montserrat, sans-serif',
+              fontWeight: 900,
+              letterSpacing: '-0.04em',
+            }}
+          >
+            {t('title')}
+          </h1>
 
+          {/* Подзаголовок сразу под заголовком */}
+          <p
+            className="mx-auto max-w-3xl text-lg md:text-xl lg:text-2xl text-slate-600 dark:text-slate-300 mb-8"
+            style={{ fontFamily: 'Montserrat, sans-serif' }}
+          >
+            {t('subtitleIntro')} <span className="font-bold italic" style={{ color: '#ea3c23' }}>{t('subtitleAccent')}</span>
+          </p>
 
-            {/* Подзаголовок с акцентом */}
-            <div className={`space-y-6 transition-all duration-700 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`} style={{ transitionDelay: '400ms' }}>
-              <div className="space-y-2 max-w-lg">
-                <p className="text-2xl text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {t('subtitleIntro')}
-                </p>
-                <p className="font-bold text-2xl italic" style={{ color: '#ea3c23' }}>
-                  {t('subtitleAccent')}
-                </p>
-              </div>
-            </div>
+          {/* Кнопки */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <InteractiveHoverButton
+              onClick={() => setIsOrderFormOpen(true)}
+              className="bg-[#EA3C23] text-white hover:bg-[#D63419] transition-colors whitespace-nowrap"
+              style={{
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: 600,
+                padding: '16px 40px',
+                borderRadius: '146.24px',
+                fontSize: '16px',
+              }}
+            >
+              {t('orderButton')}
+            </InteractiveHoverButton>
 
-            {/* Кнопки */}
-            <div className={`flex flex-col sm:flex-row gap-5 transition-all duration-700 ${
-              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`} style={{ transitionDelay: '600ms' }}>
-              <InteractiveHoverButton
-                className="bg-[#EA3C23] text-white flex items-center justify-center hover:bg-[#D63419] transition-colors"
-                style={{
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: 500,
-                  fontSize: 'var(--fs-ui)',
-                  letterSpacing: '0.8px',
-                  lineHeight: '1.219',
-                  padding: '16px 40px',
-                  borderRadius: '146.24px',
-                  minWidth: '180px'
-                }}
-              >
-                {t('callButton')}
-              </InteractiveHoverButton>
-              
-              <InteractiveHoverButton
-                className="bg-white text-black border border-black flex items-center justify-center hover:bg-gray-50 transition-colors"
-                style={{
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: 500,
-                  fontSize: 'var(--fs-ui)',
-                  letterSpacing: '0.8px',
-                  lineHeight: '1.219',
-                  padding: '16px 40px',
-                  borderRadius: '146.24px',
-                  minWidth: '140px'
-                }}
-              >
-                {t('servicesButton')}
-              </InteractiveHoverButton>
-            </div>
-
-          </div>
-
-          {/* Правая колонка - анимированный контент */}
-          <div className={`relative order-1 lg:order-2 transition-all duration-1000 ${
-            isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-          }`} style={{ transitionDelay: '600ms' }}>
-            {/* Основной контейнер с анимацией */}
-            <div className="relative">
-              {/* Декоративный фон */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-3xl blur-2xl animate-pulse" />
-              
-              {/* Основной блок с GIF */}
-              <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-700">
-                <div className="relative aspect-[4/3] lg:aspect-square overflow-hidden">
-                  <Image
-                    src="/Comp-1.gif"
-                    alt="Animation"
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                  
-                  {/* Оверлей с градиентом */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                </div>
-              </div>
-
-              {/* Плавающие элементы */}
-              <div 
-                className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-full shadow-lg animate-bounce"
-                style={{ animationDelay: '0.5s', animationDuration: '3s' }}
-              />
-              <div 
-                className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full shadow-lg animate-bounce"
-                style={{ animationDelay: '1s', animationDuration: '3s' }}
-              />
-            </div>
+            <InteractiveHoverButton
+              onClick={() => router.push(`/${locale}/services`)}
+              className="bg-white dark:bg-[#0b0b0b] text-black dark:text-white border-2 border-black dark:border-white hover:bg-gray-50 dark:hover:bg-[#1a1a1a] transition-colors whitespace-nowrap"
+              style={{
+                fontFamily: 'Montserrat, sans-serif',
+                fontWeight: 600,
+                padding: '16px 40px',
+                borderRadius: '146.24px',
+                fontSize: '16px',
+              }}
+            >
+              {t('servicesButton')}
+            </InteractiveHoverButton>
           </div>
         </div>
-      </div>
 
-      {/* Скролл индикатор */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-slate-400 dark:border-slate-600 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-slate-400 dark:bg-slate-600 rounded-full mt-2 animate-pulse" />
+        {/* Коллаж изображений */}
+        <div className="relative z-0 mt-12 h-[600px] flex items-center justify-center">
+          <div className="relative h-full w-full max-w-6xl">
+            {/* Центральное изображение */}
+            {serviceImages[0] && (
+              <img
+                src={serviceImages[0]}
+                alt="Main feature"
+                className="absolute left-1/2 top-1/2 h-auto w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-2xl z-20 animate-float-up"
+                style={{ animationDelay: '0s' }}
+              />
+            )}
+            {/* Top-Left */}
+            {serviceImages[1] && (
+              <img
+                src={serviceImages[1]}
+                alt="Feature 2"
+                className="absolute left-[22%] top-[15%] h-auto w-52 rounded-xl shadow-lg z-10 animate-float-up"
+                style={{ animationDelay: '-1.2s' }}
+              />
+            )}
+            {/* Top-Right */}
+            {serviceImages[2] && (
+              <img
+                src={serviceImages[2]}
+                alt="Feature 3"
+                className="absolute right-[24%] top-[10%] h-auto w-48 rounded-xl shadow-lg z-10 animate-float-up"
+                style={{ animationDelay: '-2.5s' }}
+              />
+            )}
+            {/* Bottom-Right */}
+            {serviceImages[3] && (
+              <img
+                src={serviceImages[3]}
+                alt="Feature 4"
+                className="absolute right-[20%] bottom-[12%] h-auto w-60 rounded-xl shadow-lg z-30 animate-float-up"
+                style={{ animationDelay: '-3.5s' }}
+              />
+            )}
+            {/* Far-Right */}
+            {serviceImages[4] && (
+              <img
+                src={serviceImages[4]}
+                alt="Feature 5"
+                className="absolute right-[5%] top-1/2 -translate-y-[60%] h-auto w-52 rounded-xl shadow-lg z-10 animate-float-up"
+                style={{ animationDelay: '-4.8s' }}
+              />
+            )}
+            {/* Bottom-Left */}
+            {serviceImages[5] && (
+              <img
+                src={serviceImages[5]}
+                alt="Feature 6"
+                className="absolute left-[18%] bottom-[8%] h-auto w-56 rounded-xl shadow-lg z-30 animate-float-up"
+                style={{ animationDelay: '-5.2s' }}
+              />
+            )}
+            {/* Far-Left */}
+            {serviceImages[6] && (
+              <img
+                src={serviceImages[6]}
+                alt="Feature 7"
+                className="absolute left-[5%] top-[25%] h-auto w-48 rounded-xl shadow-lg z-10 animate-float-up"
+                style={{ animationDelay: '-6s' }}
+              />
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+
+        <style jsx>{`
+          @keyframes float-up {
+            0% { transform: translateY(0px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+            50% { transform: translateY(-15px); box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3); }
+            100% { transform: translateY(0px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+          }
+          .animate-float-up {
+            animation: float-up 6s ease-in-out infinite;
+          }
+        `}</style>
+      </section>
+
+      {/* Модалка с формой заказа */}
+      <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={t('title')} />
+    </>
   );
 }

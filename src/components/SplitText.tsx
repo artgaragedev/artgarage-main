@@ -41,17 +41,20 @@ const SplitText: React.FC<SplitTextProps> = ({
 }) => {
   const ref = useRef<HTMLParagraphElement>(null);
   const animationCompletedRef = useRef(false);
-  const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
+  const [fontsLoaded, setFontsLoaded] = useState<boolean>(() => {
+    return typeof document !== 'undefined' && 'fonts' in document && document.fonts.status === 'loaded';
+  });
 
   useEffect(() => {
-    if (document.fonts.status === 'loaded') {
-      setFontsLoaded(true);
-    } else {
-      document.fonts.ready.then(() => {
-        setFontsLoaded(true);
-      });
-    }
-  }, []);
+    if (fontsLoaded) return;
+    let cancelled = false;
+    document.fonts.ready.then(() => {
+      if (!cancelled) setFontsLoaded(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [fontsLoaded]);
 
   useGSAP(
     () => {
@@ -63,7 +66,7 @@ const SplitText: React.FC<SplitTextProps> = ({
       if (el._rbsplitInstance) {
         try {
           el._rbsplitInstance.revert();
-        } catch (_) {}
+        } catch {}
         el._rbsplitInstance = undefined;
       }
 
@@ -128,7 +131,7 @@ const SplitText: React.FC<SplitTextProps> = ({
         });
         try {
           splitInstance.revert();
-        } catch (_) {}
+        } catch {}
         el._rbsplitInstance = undefined;
       };
     },
@@ -161,7 +164,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     switch (tag) {
       case 'h1':
         return (
-          <h1 ref={ref} style={{ ...combinedStyle, fontSize: 'var(--fs-h1)' }} className={classes}>
+          <h1 ref={ref} style={combinedStyle} className={classes}>
             {text}
           </h1>
         );

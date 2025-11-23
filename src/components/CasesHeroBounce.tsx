@@ -9,7 +9,7 @@ const CasesHeroBounce: FC = () => {
 
   return (
     <section className="w-screen bg-white dark:bg-[#0b0b0b] relative z-10">
-      <div className="container-max-width py-10 flex flex-col items-center text-center gap-6">
+      <div className="container-max-width py-10 px-2 sm:px-0 flex flex-col items-center text-center gap-6">
         <h1
           className="font-bold text-black dark:text-white"
           style={{

@@ -14,6 +14,7 @@ interface ServiceOrderFormProps {
   messageLabel?: string;
   messagePlaceholder?: string;
   fileSectionTitle?: string;
+  serviceName?: string;
   onSubmitted?: () => void;
 }
 
@@ -23,6 +24,7 @@ const ServiceOrderForm: FC<ServiceOrderFormProps> = ({
   messageLabel,
   messagePlaceholder,
   fileSectionTitle,
+  serviceName,
   onSubmitted
 }) => {
   const tForm = useTranslations('serviceOrderForm');
@@ -53,14 +55,51 @@ const ServiceOrderForm: FC<ServiceOrderFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    onSubmitted?.();
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', phone: '', email: '', message: '', files: [] });
-    }, 3000);
+
+    try {
+      // Создаем FormData для отправки
+      const submitData = new FormData();
+      submitData.append('name', formData.name);
+      submitData.append('phone', formData.phone);
+      if (formData.email) submitData.append('email', formData.email);
+      if (formData.message) submitData.append('message', formData.message);
+      if (serviceName) submitData.append('service_name', serviceName);
+
+      // Добавляем файлы
+      formData.files.forEach(file => {
+        submitData.append('files', file);
+      });
+
+      // Отправляем данные на API
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        body: submitData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        console.error('API Error:', result);
+        throw new Error(result.error || 'Failed to submit order');
+      }
+
+      console.log('Order created:', result);
+
+      setIsSubmitted(true);
+      onSubmitted?.();
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: '', phone: '', email: '', message: '', files: [] });
+      }, 3000);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      alert(`Произошла ошибка при отправке заявки: ${errorMessage}\n\nПожалуйста, попробуйте снова или свяжитесь с нами по телефону.`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
