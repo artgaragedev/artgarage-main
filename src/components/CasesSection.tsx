@@ -76,13 +76,18 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
 
   // Фильтрация работ по активной категории и подкатегории
   const filteredWorks = allWorks?.filter(work => {
+    // Если категория не выбрана, показываем все работы (защита от пустого экрана)
+    if (!activeCategory) return true;
+
     const categoryMatch = work.category?.name === activeCategory;
     const subcategoryMatch = activeSubcategory === t('all') || work.subcategory?.name === activeSubcategory;
     return categoryMatch && subcategoryMatch;
   }) || [];
 
-  // Показываем загрузку со skeleton loaders
-  if (categoriesLoading || worksLoading || !activeCategory) {
+  // Показываем загрузку со skeleton loaders только во время первоначальной загрузки данных
+  const isInitialLoading = (categoriesLoading || worksLoading) && (!categories || !allWorks);
+
+  if (isInitialLoading) {
     return (
       <section id="cases" className="w-screen bg-white dark:bg-[#0b0b0b] relative z-10">
         {/* Заголовок */}
