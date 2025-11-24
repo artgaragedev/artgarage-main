@@ -2,13 +2,16 @@
 
 import { FC, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import OrderFormModal from '@/components/OrderFormModal';
 import WorksCarousel from '@/components/WorksCarousel';
 
 const OutdoorHeroSection: FC = () => {
   const t = useTranslations('outdoorAdvertising');
+  const locale = useLocale();
+  const router = useRouter();
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
 
   return (
@@ -59,6 +62,7 @@ const OutdoorHeroSection: FC = () => {
             </InteractiveHoverButton>
 
             <InteractiveHoverButton
+              onClick={() => router.push(`/${locale}/cases`)}
               className="bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-black dark:border-white flex items-center justify-center hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors text-center"
               style={{
                 fontFamily: 'Montserrat, sans-serif',
