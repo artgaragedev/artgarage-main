@@ -103,33 +103,33 @@ const ServiceOrderForm: FC<ServiceOrderFormProps> = ({
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 shadow-xl border border-gray-100 dark:border-gray-800">
-      <div className="mb-8">
+    <div className="bg-white dark:bg-[#0b0b0b] rounded-3xl p-6 sm:p-10">
+      <div className="mb-10">
         <h3
-          className="text-3xl font-bold text-black dark:text-white mb-2"
+          className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-3 tracking-tight"
           style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700 }}
         >
           {resolvedTitle}
         </h3>
-        <p className="text-gray-600 dark:text-gray-400" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+        <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 400 }}>
           {resolvedSubtitle}
         </p>
       </div>
 
       {isSubmitted ? (
-        <div className="text-center py-8">
-          <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Check className="w-8 h-8 text-green-600 dark:text-green-400" />
+        <div className="text-center py-16 animate-in fade-in duration-500">
+          <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/30 animate-in zoom-in duration-700">
+            <Check className="w-10 h-10 text-white" strokeWidth={3} />
           </div>
-          <h4 className="text-xl font-semibold text-black dark:text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <h4 className="text-2xl font-bold text-black dark:text-white mb-3" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             {tForm('submittedTitle')}
           </h4>
-          <p className="text-gray-600 dark:text-gray-400" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-md mx-auto" style={{ fontFamily: 'Montserrat, sans-serif' }}>
             {tForm('submittedSubtitle')}
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-7">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ModernInput
               id="name"
@@ -178,8 +178,8 @@ const ServiceOrderForm: FC<ServiceOrderFormProps> = ({
             rows={4}
           />
 
-          <div>
-            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <div className="pt-2">
+            <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-5" style={{ fontFamily: 'Montserrat, sans-serif' }}>
               {resolvedFileSectionTitle}
             </h4>
             <FileUpload
@@ -190,18 +190,28 @@ const ServiceOrderForm: FC<ServiceOrderFormProps> = ({
             />
           </div>
 
-          <div className="flex flex-col items-center space-y-4 pt-6">
+          <div className="flex flex-col items-center space-y-5 pt-8">
             <InteractiveHoverButton
               type="submit"
               disabled={isSubmitting}
-              className="bg-gradient-to-r from-[#EA3C23] to-[#FF6B4A] text-white flex items-center justify-center hover:shadow-lg hover:shadow-[#EA3C23]/25 disabled:opacity-50 disabled:cursor-not-allowed px-8 py-3 rounded-xl w-full max-w-xs"
-              style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 600, fontSize: '16px' }}
+              className="bg-[#EA3C23] text-white flex items-center justify-center hover:bg-[#d63519] hover:shadow-xl hover:shadow-[#EA3C23]/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 px-10 py-4 rounded-2xl w-full font-bold text-lg"
+              style={{ fontFamily: 'Montserrat, sans-serif', fontWeight: 700 }}
             >
-              {isSubmitting ? tForm('submitSending') : tForm('submitLabel')}
+              {isSubmitting ? (
+                <span className="flex items-center gap-2">
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  {tForm('submitSending')}
+                </span>
+              ) : (
+                tForm('submitLabel')
+              )}
             </InteractiveHoverButton>
 
-            <div className="text-sm text-gray-500 dark:text-gray-400 text-center">
-              <p style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <div className="text-sm text-gray-500 dark:text-gray-400 text-center max-w-md">
+              <p style={{ fontFamily: 'Montserrat, sans-serif', lineHeight: '1.6' }}>
                 {tForm('privacyConsent')}
               </p>
             </div>

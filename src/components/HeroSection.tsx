@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { HeroCollage } from '@/components/ui/modern-hero-section';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import OrderFormModal from '@/components/OrderFormModal';
@@ -89,66 +90,129 @@ export function HeroSection() {
           <div className="relative h-full w-full max-w-6xl">
             {/* Центральное изображение */}
             {serviceImages[0] && (
-              <img
-                src={serviceImages[0]}
-                alt="Main feature"
-                className="absolute left-1/2 top-1/2 h-auto w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-2xl z-20 animate-float-up"
+              <div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 animate-float-up rounded-2xl"
                 style={{ animationDelay: '0s' }}
-              />
+              >
+                <Image
+                  src={serviceImages[0]}
+                  alt="Main feature"
+                  width={300}
+                  height={300}
+                  priority
+                  quality={90}
+                  sizes="(max-width: 768px) 250px, 300px"
+                  className="h-auto w-[300px] rounded-2xl shadow-2xl"
+                />
+              </div>
             )}
             {/* Top-Left */}
             {serviceImages[1] && (
-              <img
-                src={serviceImages[1]}
-                alt="Feature 2"
-                className="absolute left-[22%] top-[15%] h-auto w-52 rounded-xl shadow-lg z-10 animate-float-up"
+              <div
+                className="absolute left-[22%] top-[15%] z-10 animate-float-up rounded-xl"
                 style={{ animationDelay: '-1.2s' }}
-              />
+              >
+                <Image
+                  src={serviceImages[1]}
+                  alt="Feature 2"
+                  width={208}
+                  height={208}
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 150px, 208px"
+                  className="h-auto w-52 rounded-xl shadow-lg"
+                />
+              </div>
             )}
             {/* Top-Right */}
             {serviceImages[2] && (
-              <img
-                src={serviceImages[2]}
-                alt="Feature 3"
-                className="absolute right-[24%] top-[10%] h-auto w-48 rounded-xl shadow-lg z-10 animate-float-up"
+              <div
+                className="absolute right-[24%] top-[10%] z-10 animate-float-up rounded-xl"
                 style={{ animationDelay: '-2.5s' }}
-              />
+              >
+                <Image
+                  src={serviceImages[2]}
+                  alt="Feature 3"
+                  width={192}
+                  height={192}
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 120px, 192px"
+                  className="h-auto w-48 rounded-xl shadow-lg"
+                />
+              </div>
             )}
             {/* Bottom-Right */}
             {serviceImages[3] && (
-              <img
-                src={serviceImages[3]}
-                alt="Feature 4"
-                className="absolute right-[20%] bottom-[12%] h-auto w-60 rounded-xl shadow-lg z-30 animate-float-up"
+              <div
+                className="absolute right-[20%] bottom-[12%] z-30 animate-float-up rounded-xl"
                 style={{ animationDelay: '-3.5s' }}
-              />
+              >
+                <Image
+                  src={serviceImages[3]}
+                  alt="Feature 4"
+                  width={240}
+                  height={240}
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 180px, 240px"
+                  className="h-auto w-60 rounded-xl shadow-lg"
+                />
+              </div>
             )}
             {/* Far-Right */}
             {serviceImages[4] && (
-              <img
-                src={serviceImages[4]}
-                alt="Feature 5"
-                className="absolute right-[5%] top-1/2 -translate-y-[60%] h-auto w-52 rounded-xl shadow-lg z-10 animate-float-up"
+              <div
+                className="absolute right-[5%] top-1/2 -translate-y-[60%] z-10 animate-float-up rounded-xl"
                 style={{ animationDelay: '-4.8s' }}
-              />
+              >
+                <Image
+                  src={serviceImages[4]}
+                  alt="Feature 5"
+                  width={208}
+                  height={208}
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 150px, 208px"
+                  className="h-auto w-52 rounded-xl shadow-lg"
+                />
+              </div>
             )}
             {/* Bottom-Left */}
             {serviceImages[5] && (
-              <img
-                src={serviceImages[5]}
-                alt="Feature 6"
-                className="absolute left-[18%] bottom-[8%] h-auto w-56 rounded-xl shadow-lg z-30 animate-float-up"
+              <div
+                className="absolute left-[18%] bottom-[8%] z-30 animate-float-up rounded-xl"
                 style={{ animationDelay: '-5.2s' }}
-              />
+              >
+                <Image
+                  src={serviceImages[5]}
+                  alt="Feature 6"
+                  width={224}
+                  height={224}
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 160px, 224px"
+                  className="h-auto w-56 rounded-xl shadow-lg"
+                />
+              </div>
             )}
             {/* Far-Left */}
             {serviceImages[6] && (
-              <img
-                src={serviceImages[6]}
-                alt="Feature 7"
-                className="absolute left-[5%] top-[25%] h-auto w-48 rounded-xl shadow-lg z-10 animate-float-up"
+              <div
+                className="absolute left-[5%] top-[25%] z-10 animate-float-up rounded-xl"
                 style={{ animationDelay: '-6s' }}
-              />
+              >
+                <Image
+                  src={serviceImages[6]}
+                  alt="Feature 7"
+                  width={192}
+                  height={192}
+                  loading="lazy"
+                  quality={75}
+                  sizes="(max-width: 768px) 120px, 192px"
+                  className="h-auto w-48 rounded-xl shadow-lg"
+                />
+              </div>
             )}
           </div>
         </div>

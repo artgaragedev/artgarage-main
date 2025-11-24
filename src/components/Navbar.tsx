@@ -52,7 +52,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-full">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href={`/${resolvedLocale}`}>
+            <Link href={`/${resolvedLocale}`} style={{ cursor: 'pointer' }}>
               {/* Логотип для светлой темы */}
               <Image
                 src="/logo_white.png"
@@ -110,7 +110,8 @@ const Navbar = () => {
                       fontWeight: 600,
                       fontSize: 'var(--fs-ui)',
                       lineHeight: '1.219',
-                      letterSpacing: '-0.01em'
+                      letterSpacing: '-0.01em',
+                      cursor: 'pointer'
                     }}
                   >
                     {isActive && (
@@ -135,7 +136,7 @@ const Navbar = () => {
 
           {/* Phone number and Language toggle - hidden on mobile */}
           <div className="hidden md:flex items-center gap-3">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 dark:bg-[#1a1a1a] hover:bg-gray-100 dark:hover:bg-[#222222] transition-all duration-200">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-50 dark:bg-[#1a1a1a] hover:bg-gray-100 dark:hover:bg-[#222222] transition-all duration-200" style={{ cursor: 'pointer' }}>
               <Phone
                 className="text-[#ea3c23]"
                 style={{
@@ -148,7 +149,8 @@ const Navbar = () => {
                 className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 font-semibold transition-colors duration-200"
                 style={{
                   fontSize: 'var(--fs-ui)',
-                  fontFamily: 'Montserrat, sans-serif'
+                  fontFamily: 'Montserrat, sans-serif',
+                  cursor: 'pointer'
                 }}
               >
                 {t('phone')}
@@ -168,6 +170,7 @@ const Navbar = () => {
             <a
               href="tel:078886033"
               className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#ea3c23] hover:bg-[#d63620] active:scale-95 transition-all duration-200 shadow-md"
+              style={{ cursor: 'pointer' }}
             >
               <Phone className="w-5 h-5 text-white" />
             </a>
@@ -247,7 +250,8 @@ const Navbar = () => {
                         fontFamily: 'Montserrat, sans-serif',
                         fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
                         fontWeight: 600,
-                        letterSpacing: '-0.01em'
+                        letterSpacing: '-0.01em',
+                        cursor: 'pointer'
                       }}
                     >
                       {/* Левая полоска для активного элемента */}
@@ -286,6 +290,7 @@ const Navbar = () => {
                   style={{
                     fontSize: 'var(--fs-ui)',
                     fontFamily: 'Montserrat, sans-serif',
+                    cursor: 'pointer'
                   }}
                   onClick={() => setMobileOpen(false)}
                 >

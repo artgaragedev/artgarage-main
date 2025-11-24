@@ -124,7 +124,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
             }}
           >
             <div className="flex flex-col md:flex-row items-start md:items-start justify-start md:justify-between gap-4 md:gap-8 px-2 sm:px-0">
-              <div className="flex items-center gap-2">
+              <div className="flex items-stretch gap-2">
                 <div
                   className="px-4 py-2 md:px-6 md:py-3 flex items-center"
                   style={{
@@ -138,7 +138,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
                 <img
                   src="/titile.svg"
                   alt="Title decoration"
-                  className="h-8 md:h-10"
+                  className="h-8 md:h-12"
                 />
               </div>
             </div>
@@ -242,7 +242,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
         >
           <div className="px-2 sm:px-0">
             {/* Заголовок */}
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-stretch gap-2 mb-3">
               {/* Цветная плашка с заголовком */}
               <div
                 className="px-4 py-2 md:px-6 md:py-3 flex items-center"
@@ -261,7 +261,7 @@ const CasesSection: FC<{ showHeader?: boolean }> = ({ showHeader = true }) => {
               <img
                 src="/titile.svg"
                 alt="Title decoration"
-                className="h-8 md:h-10"
+                className="h-8 md:h-12"
               />
             </div>
 

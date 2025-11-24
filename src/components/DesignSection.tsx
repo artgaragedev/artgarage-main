@@ -2,6 +2,7 @@
 
 import { FC, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import OrderFormModal from '@/components/OrderFormModal';
 
@@ -25,7 +26,7 @@ const DesignSection: FC = () => {
         }`} style={{ transitionDelay: '100ms' }}>
           <div>
             {/* Заголовок */}
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-stretch gap-2 mb-3">
               {/* Цветная плашка с заголовком */}
               <div
                 className="px-4 py-2 md:px-6 md:py-3 flex items-center"
@@ -44,10 +45,12 @@ const DesignSection: FC = () => {
               </div>
 
               {/* SVG элемент справа */}
-              <img
+              <Image
                 src="/titile.svg"
                 alt="Title decoration"
-                className="h-8 md:h-10"
+                width={48}
+                height={48}
+                className="h-8 md:h-12 w-auto"
               />
             </div>
 
@@ -71,16 +74,23 @@ const DesignSection: FC = () => {
         }`} style={{ transitionDelay: '200ms' }}>
 
           {/* Left column - Image */}
-          <div className="relative overflow-hidden rounded-2xl bg-[#F3F3F3] dark:bg-slate-800 p-6">
-            <img
-              src="/Services/tree.png"
-              alt="Design tree illustration"
-              className="w-full h-auto object-contain max-h-[350px] md:max-h-[450px]"
-            />
+          <div className="relative overflow-hidden rounded-2xl bg-[#ffffff] dark:bg-slate-800 p-6 flex items-center justify-center">
+            <div className="relative w-full max-h-[350px] md:max-h-[450px] flex items-center justify-center">
+              <Image
+                src="/Services/tree.webp"
+                alt="Design tree illustration"
+                width={535}
+                height={936}
+                loading="lazy"
+                quality={85}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="w-auto h-auto object-contain max-h-[350px] md:max-h-[450px]"
+              />
+            </div>
           </div>
 
           {/* Right column - Content */}
-          <div className="relative overflow-hidden rounded-2xl bg-[#F3F3F3] dark:bg-slate-800 p-6 md:p-8">
+          <div className="relative overflow-hidden rounded-2xl bg-[#ffffff] dark:bg-slate-800 p-6 md:p-8">
             <div className="flex flex-col justify-center space-y-6 h-full">
 
               {/* 2D & 3D badge */}

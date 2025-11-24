@@ -148,7 +148,7 @@ const ContactsSection = () => {
                 <button
                   type="button"
                   onClick={() => handleCopy(sanitizedTel, 'phone')}
-                  className="flex-shrink-0 w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center transition-colors"
+                  className="flex-shrink-0 w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center transition-colors cursor-pointer"
                   aria-label={t('copy')}
                 >
                   {copiedItem === 'phone' ? (
@@ -183,7 +183,7 @@ const ContactsSection = () => {
                 <button
                   type="button"
                   onClick={() => handleCopy(emailAddress, 'email')}
-                  className="flex-shrink-0 w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center transition-colors"
+                  className="flex-shrink-0 w-10 h-10 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center transition-colors cursor-pointer"
                   aria-label={t('copy')}
                 >
                   {copiedItem === 'email' ? (

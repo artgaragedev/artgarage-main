@@ -1,10 +1,15 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   --color-background: #ffffff;
   --color-foreground: #000000;
   --color-background-dark: #0b0b0b;
   --color-foreground-dark: #ffffff;
+  --color-border: #e5e7eb;
+  --color-ring: #3b82f6;
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -44,4 +49,34 @@ body {
 /* Dark theme overrides */
 .dark {
   color-scheme: dark;
+}
+
+@theme inline {
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  @keyframes marquee {
+  from {
+    transform: translateX(0);
+    }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+    }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

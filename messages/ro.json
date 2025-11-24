@@ -286,7 +286,7 @@
     "subtitle": "Publicitatea exterioară este cel mai popular mod de comunicare, amplasată pe străzi sau în locuri publice, destinat să atragă atenția asupra brandului. Aceasta include panouri publicitare, autocolante pe geamuri, bannere, litere volumetrice și alte construcții care asigură o vizibilitate maximă și un impact puternic asupra audienței.",
     "consultation": "Solicitare consultanță",
     "ourWorks": "Lucrările noastre",
-    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesTitle": "SERVICII",
     "servicesSubtitle": "oferim o gamă completă de servicii în domeniul publicității exterioare — de la dezvoltare la instalare.",
     "volumetricLetters": "Litere volumetrice",
     "volumetricLettersDesc": "Litere volumetrice strălucitoare și vizibile pentru fațade și interioare",
@@ -311,7 +311,7 @@
     "subtitle": "Publicitatea interior este o modalitate eficientă de a crea o atmosferă unică în încăperi și de a atrage atenția vizitatorilor. Aceasta include litere volumetrice, cutii luminoase, indicatoare de navigație și alte elemente care ajută brandul să se distingă și să creeze o imagine memorabilă.",
     "consultation": "Solicitare consultanță",
     "ourWorks": "Lucrările noastre",
-    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesTitle": "SERVICII",
     "servicesSubtitle": "oferim o gamă completă de servicii în domeniul publicității interioare — de la dezvoltare la instalare.",
     "volumetricLetters": "Litere volumetrice",
     "volumetricLettersDesc": "Litere volumetrice strălucitoare și vizibile pentru interioare",
@@ -338,7 +338,7 @@
     "subtitle": "Materialele POS sunt instrumente de promovare în punctele de vânzare. Dezvoltăm și producem standuri, postere, stickere, pixuri, caiete, sacoșe și figuri la scară reală, care evidențiază brandul și atrag atenția clienților. Abordare personalizată, calitate înaltă și livrare la timp sunt garantate.",
     "consultation": "Solicitare consultanță",
     "ourWorks": "Lucrările noastre",
-    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesTitle": "SERVICII",
     "servicesSubtitle": "oferim o gamă completă de servicii în domeniul materialelor POS — de la dezvoltare la producție.",
     "brandedAccessories": "Accesorii branduite",
     "brandedAccessoriesDesc": "Accesorii branduite — o gamă variată de produse promoționale ce promovează eficient brandul și îl fac vizibil. Categoria include hanorace, tricouri, șepci, veste, dosare, șnururi, căni, caiete, sacoșe, pixuri, insigne și multe altele. Aceste articole sunt potrivite pentru evenimente corporative, campanii promoționale sau ca daruri pentru clienți.\n\nTipuri și caracteristici:\n• Produsele pot fi realizate în culori și mărimi diferite, cu logo sau elemente de brand aplicate prin serigrafie, termotransfer, broderie, sublimare, UV etc.\n• Se pot fabrica din materiale variate, în funcție de buget și obiective.\n\nPrețurile și termenele depind de tiraj, material și complexitatea designului. Oferim abordare personalizată, o gamă largă de modele și culori, în funcție de preferințele și nevoile dvs. Garantăm execuția la timp, la cel mai bun preț.",
@@ -359,7 +359,7 @@
     "subtitle": "Materialele tipografice sunt produse publicitare și informative eficiente, care ajută brandurile să transmită informațiile lor publicului. Această categorie include broșuri, carnete, mape, ecusoane, pliante, cărți de vizită, postere și alte materiale imprimate pe hârtie, ideale pentru promovarea afacerilor și prezentări, promoții.",
     "consultation": "Solicitare consultanță",
     "ourWorks": "Lucrările noastre",
-    "servicesTitle": "TIPURI DE SERVICII",
+    "servicesTitle": "SERVICII",
     "servicesSubtitle": "oferim o gamă completă de servicii în domeniul poligrafiei — de la design la tipărire.",
     "magazines": "Reviste, flyere, broșuri",
     "magazinesDesc": "Revistele, broșurile și pliantele sunt materiale publicitare eficiente care permit transmiterea informațiilor către publicul țintă. Aceste produse sunt utilizate pe larg în marketing, promovarea serviciilor și pentru distribuirea informațiilor importante despre companie sau produse.\n\nTipuri și caracteristici:\n• Revistele, broșurile și pliantele pot fi realizate în diferite formate și stiluri — de la pliante compacte la reviste colorate de mari dimensiuni.\n• Acestea pot fi tipărite pe diferite tipuri de hârtie, cu opțiuni de finisaj mat sau lucios, pentru a obține efectul vizual dorit și a sublinia calitatea conținutului.\n• De asemenea, este posibilă utilizarea diferitelor tipuri de fixări, cum ar fi spirala, scoabe sau clei.\n\nPrețurile și termenii de livrare depind de tiraj, format și complexitatea designului. Oferim un abordaj personalizat fiecărui proiect, creând produse care corespund cerințelor și bugetului dumneavoastră.",
@@ -638,5 +638,9 @@
     "errorFileType": "Tipul de fișier {type} nu este suportat. Tipuri permise: {accepted}",
     "errorFileSize": "Dimensiunea fișierului {name} depășește {maxSize}MB",
     "errorMaxFiles": "Maxim {maxFiles} fișiere. Încercați să adăugați {total} fișiere."
+  },
+  "serviceCard": {
+    "servicesLabel": "Servicii:",
+    "imageUnavailable": "Imagine indisponibilă"
   }
 }

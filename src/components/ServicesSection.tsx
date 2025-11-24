@@ -157,7 +157,7 @@ function ServicesSectionContent() {
 
 
   return (
-    <section className="w-full bg-[#F3F3F3] dark:bg-[#0b0b0b] relative overflow-visible">
+    <section className="w-full bg-[#ffffff] dark:bg-[#0b0b0b] relative overflow-visible">
       {/* Обработчик URL параметров */}
       <Suspense fallback={null}>
         <ServiceParamsHandler onServiceSelect={handleServiceFromUrl} />
@@ -172,7 +172,7 @@ function ServicesSectionContent() {
       >
         <div className="px-2 sm:px-0">
           {/* Заголовок */}
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-stretch gap-2 mb-3">
             {/* Цветная плашка с заголовком */}
             <div
                className="px-4 py-2 md:px-6 md:py-3 flex items-center"
@@ -191,7 +191,7 @@ function ServicesSectionContent() {
             <img
               src="/titile.svg"
               alt="Title decoration"
-              className="h-8 md:h-10"
+              className="h-8 md:h-12"
             />
           </div>
 
@@ -347,7 +347,7 @@ function ServicesSectionContent() {
 const ServicesSection: FC = () => {
   return (
     <Suspense fallback={
-      <section className="w-full bg-[#F3F3F3] dark:bg-[#0b0b0b] relative overflow-visible">
+      <section className="w-full bg-[#ffffff] dark:bg-[#0b0b0b] relative overflow-visible">
         <div className="container-max-width pt-16 pb-8 px-2 sm:px-0" style={{ padding: '4rem 0 2rem' }}>
           <div className="px-2 sm:px-0">
             <div className="flex items-center gap-2 mb-3">

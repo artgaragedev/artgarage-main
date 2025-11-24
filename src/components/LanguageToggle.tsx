@@ -60,7 +60,7 @@ export function LanguageToggle({ variant = 'default' }: LanguageToggleProps) {
             key={language.code}
             onClick={() => handleLanguageChange(language.code)}
             className={`
-              relative rounded-lg font-semibold transition-all duration-200
+              relative rounded-lg font-semibold transition-all duration-200 cursor-pointer
               ${isCompact ? 'px-2.5 py-1.5' : 'px-4 py-2'}
               ${isActive
                 ? 'text-white dark:text-black'

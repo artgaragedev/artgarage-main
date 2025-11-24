@@ -210,7 +210,7 @@ const ServiceDrawer: FC<ServiceDrawerProps> = ({ isOpen, onClose, serviceKey, se
                     .catch(err => console.log('Error copying:', err));
                 }
               }}
-              className="absolute top-4 right-16 z-10 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hidden sm:block"
+              className="absolute top-4 right-16 z-10 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hidden sm:block cursor-pointer"
             >
               <Share2 className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             </button>
@@ -272,7 +272,7 @@ const ServiceDrawer: FC<ServiceDrawerProps> = ({ isOpen, onClose, serviceKey, se
                     .catch(err => console.log('Error copying:', err));
                 }
               }}
-              className="absolute top-4 right-16 z-10 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hidden sm:block"
+              className="absolute top-4 right-16 z-10 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hidden sm:block cursor-pointer"
             >
               <Share2 className="w-5 h-5 text-gray-600 dark:text-gray-300" />
             </button>
@@ -378,7 +378,7 @@ const ServiceDrawer: FC<ServiceDrawerProps> = ({ isOpen, onClose, serviceKey, se
           {/* Кнопка поделиться */}
           <button
             onClick={handleShare}
-            className="absolute top-4 right-16 z-10 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hidden sm:block"
+            className="absolute top-4 right-16 z-10 p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors hidden sm:block cursor-pointer"
           >
             <Share2 className="w-5 h-5 text-gray-600 dark:text-gray-300" />
           </button>

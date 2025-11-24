@@ -97,13 +97,13 @@ function InteriorServicesSectionContent() {
   }, [searchParams]);
 
   return (
-    <section className="w-full bg-[#F3F3F3] dark:bg-[#0b0b0b] py-24">
+    <section className="w-full bg-[#ffffff] dark:bg-[#0b0b0b] py-24">
       <div className="container-max-width px-2 sm:px-0">
         {/* Заголовок секции */}
         <div className="mb-16 px-2 sm:px-0">
           <div>
             {/* Заголовок */}
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-stretch gap-2 mb-3">
               {/* Цветная плашка с заголовком */}
               <div
                 className="px-4 py-2 md:px-6 md:py-3 flex items-center"
@@ -125,7 +125,7 @@ function InteriorServicesSectionContent() {
               <img
                 src="/titile.svg"
                 alt="Title decoration"
-                className="h-8 md:h-10"
+                className="h-8 md:h-12"
               />
             </div>
 
@@ -144,7 +144,7 @@ function InteriorServicesSectionContent() {
         </div>
 
         {/* Сетка с карточками услуг */}
-        <div className="grid grid-cols-2 md:grid-cols-3 grid-flow-row-dense gap-4 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 grid-flow-row-dense gap-4 mb-16">
           {interiorServices.map((service, index) => (
             <ServiceCard
               key={`interior-service-${index}`}

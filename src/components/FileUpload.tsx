@@ -122,10 +122,10 @@ const FileUpload: FC<FileUploadProps> = ({
   return (
     <div className="w-full">
       <div
-        className={`relative border-2 border-dashed rounded-lg p-6 text-center transition-colors ${
+        className={`relative border-2 border-dashed rounded-xl p-4 text-center transition-all duration-300 ${
           dragActive
-            ? 'border-[#EA3C23] bg-[#EA3C23]/5'
-            : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+            ? 'border-[#EA3C23] bg-[#EA3C23]/5 scale-[1.02]'
+            : 'border-gray-300 dark:border-gray-700 hover:border-[#EA3C23]/50 hover:bg-gray-50/50 dark:hover:bg-gray-900/30'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -140,32 +140,35 @@ const FileUpload: FC<FileUploadProps> = ({
           onChange={handleChange}
           className="hidden"
         />
-        
+
         <div className="flex flex-col items-center justify-center space-y-2">
-          <Upload className="w-10 h-10 text-gray-400 mb-2" />
-          <p
-            className="text-gray-600 dark:text-gray-400 font-medium"
-            style={{
-              fontFamily: 'Montserrat, sans-serif'
-            }}
-          >
-            {t('dragDropText')}
-          </p>
-          <p
-            className="text-gray-500 dark:text-gray-500 text-sm"
-            style={{
-              fontFamily: 'Montserrat, sans-serif'
-            }}
-          >
-            {t('supportedFormats', { maxSize: maxSize.toString() })}
-          </p>
+          <div className={`p-2.5 rounded-full transition-all duration-300 ${dragActive ? 'bg-[#EA3C23]/10 scale-110' : 'bg-gray-100 dark:bg-gray-800'}`}>
+            <Upload className={`w-6 h-6 transition-colors ${dragActive ? 'text-[#EA3C23]' : 'text-gray-400'}`} />
+          </div>
+          <div className="space-y-1">
+            <p
+              className="text-gray-900 dark:text-white font-semibold text-base"
+              style={{
+                fontFamily: 'Montserrat, sans-serif'
+              }}
+            >
+              {t('dragDropText')}
+            </p>
+            <p
+              className="text-gray-500 dark:text-gray-400 text-xs"
+              style={{
+                fontFamily: 'Montserrat, sans-serif'
+              }}
+            >
+              {t('supportedFormats', { maxSize: maxSize.toString() })}
+            </p>
+          </div>
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
-            className="mt-2 px-4 py-2 bg-[#EA3C23] text-white rounded-lg hover:bg-[#D63419] transition-colors"
+            className="mt-1 px-4 py-2 bg-gray-900 dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200 font-semibold text-sm cursor-pointer"
             style={{
-              fontFamily: 'Montserrat, sans-serif',
-              fontWeight: 500
+              fontFamily: 'Montserrat, sans-serif'
             }}
           >
             {t('selectFilesButton')}
@@ -186,33 +189,36 @@ const FileUpload: FC<FileUploadProps> = ({
 
       {/* Отображение загруженных файлов */}
       {files.length > 0 && (
-        <div className="mt-4 space-y-2">
+        <div className="mt-3 space-y-2">
           <p
-            className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            className="text-xs font-semibold text-gray-900 dark:text-white flex items-center gap-1.5"
             style={{
               fontFamily: 'Montserrat, sans-serif'
             }}
           >
+            <CheckCircle className="w-3.5 h-3.5 text-green-500" />
             {t('uploadedFiles', { count: files.length.toString(), max: maxFiles.toString() })}
           </p>
           {files.map((file, index) => (
             <div
               key={index}
-              className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+              className="flex items-center justify-between p-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg hover:border-gray-300 dark:hover:border-gray-700 transition-all group"
             >
-              <div className="flex items-center space-x-3">
-                {getFileIcon(file.type)}
-                <div>
-                  <p 
-                    className="text-sm font-medium text-gray-900 dark:text-white truncate max-w-xs"
+              <div className="flex items-center space-x-2.5 flex-1 min-w-0">
+                <div className="flex-shrink-0">
+                  {getFileIcon(file.type)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p
+                    className="text-xs font-medium text-gray-900 dark:text-white truncate"
                     style={{
                       fontFamily: 'Montserrat, sans-serif'
                     }}
                   >
                     {file.name}
                   </p>
-                  <p 
-                    className="text-xs text-gray-500 dark:text-gray-400"
+                  <p
+                    className="text-[10px] text-gray-500 dark:text-gray-400 mt-0.5"
                     style={{
                       fontFamily: 'Montserrat, sans-serif'
                     }}
@@ -224,9 +230,9 @@ const FileUpload: FC<FileUploadProps> = ({
               <button
                 type="button"
                 onClick={() => removeFile(index)}
-                className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors group ml-2 cursor-pointer"
               >
-                <X className="w-4 h-4 text-gray-500" />
+                <X className="w-4 h-4 text-gray-400 group-hover:text-red-500 transition-colors" />
               </button>
             </div>
           ))}

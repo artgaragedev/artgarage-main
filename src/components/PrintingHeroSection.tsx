@@ -5,29 +5,19 @@ import { ArrowRight } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import OrderFormModal from '@/components/OrderFormModal';
+import WorksCarousel from '@/components/WorksCarousel';
 
 const PrintingHeroSection: FC = () => {
   const t = useTranslations('printingMaterials');
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
 
   return (
-    <section className="relative w-full h-[70vh] min-h-[600px] overflow-hidden bg-black">
-      {/* Фоновое изображение */}
-      <div className="absolute inset-0">
-        <img
-          src="/Services/printing-materials.jpg"
-          alt="Полиграфические материалы"
-          className="w-full h-full object-cover"
-        />
-        {/* Затемнение фона */}
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
-
-      {/* Контент */}
-      <div className="relative z-10 container-max-width h-full flex items-center px-2 sm:px-0">
-        <div className="max-w-3xl">
+    <section className="relative w-full bg-white dark:bg-[#0b0b0b]">
+      {/* Контент Hero */}
+      <div className="relative z-10 container-max-width min-h-[500px] flex items-center px-2 sm:px-0 py-16">
+        <div className="w-full flex flex-col items-center text-center">
           <h1
-            className="text-white font-bold mb-6 text-3xl sm:text-5xl md:text-6xl"
+            className="text-black dark:text-white font-bold mb-6 text-3xl sm:text-5xl md:text-6xl"
             style={{
               fontFamily: 'Montserrat, sans-serif',
               fontWeight: 900,
@@ -37,9 +27,9 @@ const PrintingHeroSection: FC = () => {
           >
             {t('title')}
           </h1>
-          
+
           <p
-            className="text-white/90 mb-8 max-w-2xl"
+            className="text-gray-700 dark:text-gray-300 mb-8 max-w-2xl"
             style={{
               fontFamily: 'Montserrat, sans-serif',
               fontSize: '16px',
@@ -49,11 +39,11 @@ const PrintingHeroSection: FC = () => {
           >
             {t('subtitle')}
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-5">
+
+          <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <InteractiveHoverButton
               onClick={() => setIsOrderFormOpen(true)}
-              className="bg-[#EA3C23] text-white flex items-center justify-center hover:bg-[#D63419] transition-colors"
+              className="bg-[#EA3C23] text-white flex items-center justify-center hover:bg-[#D63419] transition-colors text-center"
               style={{
                 fontFamily: 'Montserrat, sans-serif',
                 fontWeight: 500,
@@ -67,9 +57,9 @@ const PrintingHeroSection: FC = () => {
             >
               {t('consultation')}
             </InteractiveHoverButton>
-            
+
             <InteractiveHoverButton
-              className="bg-white text-black border border-black flex items-center justify-center hover:bg-gray-50 transition-colors"
+              className="bg-white dark:bg-[#1a1a1a] text-black dark:text-white border border-black dark:border-white flex items-center justify-center hover:bg-gray-50 dark:hover:bg-[#222222] transition-colors text-center"
               style={{
                 fontFamily: 'Montserrat, sans-serif',
                 fontWeight: 500,
@@ -86,6 +76,9 @@ const PrintingHeroSection: FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Карусель работ */}
+      <WorksCarousel categorySlug="poligraficheskie-materialy" />
 
       {/* Модалка с формой заказа */}
       <OrderFormModal open={isOrderFormOpen} onOpenChange={setIsOrderFormOpen} serviceName={t('title')} />

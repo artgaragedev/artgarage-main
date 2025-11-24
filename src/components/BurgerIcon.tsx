@@ -11,7 +11,7 @@ export const BurgerIcon = ({ isOpen, onClick, className = '', children }: Burger
   return (
     <button
       onClick={onClick}
-      className={`relative flex items-center justify-center gap-2 focus:outline-none group ${className}`}
+      className={`relative flex items-center justify-center gap-2 focus:outline-none group cursor-pointer ${className}`}
       aria-label={isOpen ? 'Закрыть меню' : 'Открыть меню'}
     >
       <div className="w-6 h-5 flex flex-col justify-center gap-[5px] flex-shrink-0">

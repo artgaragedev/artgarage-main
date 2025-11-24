@@ -12,8 +12,12 @@ import { PageTransition } from '@/components/PageTransition'
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  display: 'swap'
+  weight: ['400', '500', '600', '700', '900'],
+  display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
+  variable: '--font-montserrat'
 })
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -144,6 +148,11 @@ export default async function RootLayout({
 
   return (
     <html lang={resolvedLocale} suppressHydrationWarning>
+      <head>
+        {/* Preconnect to external origins for faster resource loading */}
+        <link rel="preconnect" href="https://rlcpynwvpgubxvsuvkew.supabase.co" />
+        <link rel="dns-prefetch" href="https://rlcpynwvpgubxvsuvkew.supabase.co" />
+      </head>
       <body className={`${montserrat.className} antialiased bg-white dark:bg-[#0b0b0b] text-black dark:text-white transition-colors duration-200`}>
         {/* Dev-only console filter to reduce Fast Refresh noise */}
         <DevConsoleSilencer />

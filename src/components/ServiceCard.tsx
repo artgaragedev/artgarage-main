@@ -4,6 +4,7 @@ import { FC, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface ServiceCardProps {
   title: string;
@@ -26,10 +27,11 @@ const ServiceCard: FC<ServiceCardProps> = ({
   href,
   onClick
 }) => {
+  const t = useTranslations('serviceCard');
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const isPrimary = variant === "primary";
   const router = useRouter();
   
@@ -102,7 +104,7 @@ const ServiceCard: FC<ServiceCardProps> = ({
             {imageError && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 z-10">
                 <div className="text-center p-4">
-                  <div className="text-gray-400 mb-2">Изображение недоступно</div>
+                  <div className="text-gray-400 mb-2">{t('imageUnavailable')}</div>
                   <div className="text-gray-500 text-sm">{title}</div>
                 </div>
               </div>
@@ -128,7 +130,7 @@ const ServiceCard: FC<ServiceCardProps> = ({
             {isHovered && subcategories && subcategories.length > 0 && (
               <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-black/80 to-transparent transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                 <div className="text-white text-xs sm:text-sm">
-                  <div className="font-medium mb-1 sm:mb-2">Услуги:</div>
+                  <div className="font-medium mb-1 sm:mb-2">{t('servicesLabel')}</div>
                   <div className="flex flex-wrap gap-1">
                     {subcategories.slice(0, 3).map((subcategory, index) => (
                       <span
@@ -150,7 +152,7 @@ const ServiceCard: FC<ServiceCardProps> = ({
           </div>
           
           {/* Text section at the bottom optimized for 5:3 ratio */}
-          <div className="bg-[#F3F3F3] dark:bg-[#1F1F1F] p-3 sm:p-5 flex flex-row items-center justify-between transition-colors duration-300 group-hover:bg-[#E8E8E8] dark:group-hover:bg-[#2A2A2A]">
+          <div className="bg-[#ffffff] dark:bg-[#1F1F1F] p-3 sm:p-5 flex flex-row items-center justify-between transition-colors duration-300 group-hover:bg-[#E8E8E8] dark:group-hover:bg-[#2A2A2A]">
             <h3
               className="text-[#1F1F1F] dark:text-white font-medium transition-all duration-300 leading-[1.22] text-base sm:text-lg"
               style={{
@@ -170,7 +172,7 @@ const ServiceCard: FC<ServiceCardProps> = ({
         </>
       ) : (
         /* Cards without image - optimized for 5:3 ratio */
-        <div className="flex flex-col justify-center items-center text-center h-full p-3 sm:p-5 bg-[#F3F3F3] dark:bg-[#1F1F1F] transition-colors duration-300 group-hover:bg-[#E8E8E8] dark:group-hover:bg-[#2A2A2A]">
+        <div className="flex flex-col justify-center items-center text-center h-full p-3 sm:p-5 bg-[#ffffff] dark:bg-[#1F1F1F] transition-colors duration-300 group-hover:bg-[#E8E8E8] dark:group-hover:bg-[#2A2A2A]">
           <h3
             className="text-[#1F1F1F] dark:text-white font-medium mb-3 transition-all duration-300 group-hover:scale-105 leading-[1.22] text-base sm:text-lg"
             style={{
