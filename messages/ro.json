@@ -642,5 +642,9 @@
   "serviceCard": {
     "servicesLabel": "Servicii:",
     "imageUnavailable": "Imagine indisponibilă"
+  },
+  "workCard": {
+    "orderButton": "Lăsați o cerere",
+    "freeConsultation": "Consultanță gratuită și calcul de cost"
   }
 }

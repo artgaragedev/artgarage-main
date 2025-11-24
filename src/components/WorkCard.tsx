@@ -3,6 +3,7 @@
 import { FC, useState, memo } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import OrderFormModal from '@/components/OrderFormModal';
 
 // Sanitize incoming image URLs from Supabase to avoid invalid src
@@ -23,6 +24,7 @@ interface WorkCardProps {
 }
 
 const WorkCard: FC<WorkCardProps> = ({ image, title, category }) => {
+  const t = useTranslations('workCard');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
 
@@ -155,11 +157,11 @@ const WorkCard: FC<WorkCardProps> = ({ image, title, category }) => {
                       <div className="flex items-center gap-2">
                         <div className="bg-white h-2 w-2 rounded-full transition-all duration-300 group-hover:scale-[100.8]"></div>
                         <span className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0">
-                           Оставить заявку
+                           {t('orderButton')}
                          </span>
                        </div>
                        <div className="text-white group-hover:text-black absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-2 opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100">
-                         <span>Оставить заявку</span>
+                         <span>{t('orderButton')}</span>
                         <svg className="w-4 h-4 group-hover:text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
@@ -168,7 +170,7 @@ const WorkCard: FC<WorkCardProps> = ({ image, title, category }) => {
 
                     {/* Дополнительная информация */}
                     <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 text-center sm:text-right mt-2">
-                      Бесплатная консультация и расчет стоимости
+                      {t('freeConsultation')}
                     </p>
                   </div>
                 </div>

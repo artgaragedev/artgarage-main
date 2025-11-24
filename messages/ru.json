@@ -642,5 +642,9 @@
   "serviceCard": {
     "servicesLabel": "Услуги:",
     "imageUnavailable": "Изображение недоступно"
+  },
+  "workCard": {
+    "orderButton": "Оставить заявку",
+    "freeConsultation": "Бесплатная консультация и расчет стоимости"
   }
 }

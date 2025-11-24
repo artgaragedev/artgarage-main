@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -27,9 +27,8 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { name: 'Facebook', icon: Facebook, href: '#', color: '#1877F2' },
-    { name: 'Instagram', icon: Instagram, href: '#', color: '#E4405F' },
-    { name: 'LinkedIn', icon: Linkedin, href: '#', color: '#0A66C2' }
+    { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/artgarage.creative.studio/', color: '#E4405F' },
+    { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/', color: '#1877F2' }
   ];
 
   return (
