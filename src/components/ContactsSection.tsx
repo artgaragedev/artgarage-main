@@ -94,7 +94,7 @@ const ContactsSection = () => {
             </div>
 
             {/* Main heading */}
-            <h1
+            <h2
               className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-black dark:text-white mb-8 max-w-5xl leading-[1.1]"
               style={{
                 fontFamily: 'Montserrat, sans-serif',
@@ -103,7 +103,7 @@ const ContactsSection = () => {
               }}
             >
               {t('title')}
-            </h1>
+            </h2>
 
             {/* Subtitle */}
             <p

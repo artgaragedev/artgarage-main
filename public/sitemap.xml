@@ -141,4 +141,32 @@
   <priority>0.6</priority>
 </url>
 
+<url>
+  <loc>https://artgarage.md/ru/terms</loc>
+  <lastmod>2025-12-01</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.3</priority>
+</url>
+
+<url>
+  <loc>https://artgarage.md/ro/terms</loc>
+  <lastmod>2025-12-01</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.3</priority>
+</url>
+
+<url>
+  <loc>https://artgarage.md/ru/privacy</loc>
+  <lastmod>2025-12-01</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.3</priority>
+</url>
+
+<url>
+  <loc>https://artgarage.md/ro/privacy</loc>
+  <lastmod>2025-12-01</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.3</priority>
+</url>
+
 </urlset>

@@ -31,9 +31,12 @@ export default async function AboutPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await params;
+  const { locale } = await params;
+  const isRu = locale === 'ru';
+
   return (
     <>
+      <h1 className="sr-only">{isRu ? 'О нас' : 'Despre noi'}</h1>
       <Suspense>
         <AboutSection />
       </Suspense>

@@ -31,9 +31,12 @@ export default async function ContactsPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  await params;
+  const { locale } = await params;
+  const isRu = locale === 'ru';
+
   return (
     <>
+      <h1 className="sr-only">{isRu ? 'Контакты' : 'Contacte'}</h1>
       <Suspense>
         <ContactsSection />
       </Suspense>
