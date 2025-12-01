@@ -1,40 +1,35 @@
 # robots.txt for artgarage.md
 # Art Garage - Рекламное агентство полного цикла
 
-# Allow all crawlers
+# Default rules for all crawlers
 User-agent: *
 Allow: /
-
-# Disallow private/admin paths
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
 
-# Allow specific API routes that are public (if any)
-# Allow: /api/public/
-
 # Sitemap location
 Sitemap: https://artgarage.md/sitemap.xml
 
-# Crawl-delay for good behavior (optional)
-# Crawl-delay: 1
-
-# Specific rules for major search engines
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 0
-
+# Yandex (supports Crawl-delay)
 User-agent: Yandex
 Allow: /
-Crawl-delay: 0
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Crawl-delay: 1
 
-# Block bad bots (optional - add as needed)
+# SEO tools - limit crawl rate
 User-agent: AhrefsBot
-Crawl-delay: 5
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Crawl-delay: 10
 
 User-agent: SemrushBot
-Crawl-delay: 5
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Crawl-delay: 10
