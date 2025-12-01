@@ -4,9 +4,13 @@ import { locales } from './src/i18n/request';
 export default createMiddleware({
   // A list of all locales that are supported
   locales,
-  
+
   // Used when no locale matches
-  defaultLocale: 'ru'
+  defaultLocale: 'ru',
+
+  // Отключаем автоматические HTTP hreflang headers от next-intl
+  // (используем только HTML link tags в metadata)
+  alternateLinks: false
 });
 
 export const config = {
