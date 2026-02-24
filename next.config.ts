@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ['@supabase/supabase-js'],
   // Настройки изображений для внешних хостов
   images: {
+    unoptimized: true,
     remotePatterns: supabaseHost ? [
       {
         protocol: 'https',
