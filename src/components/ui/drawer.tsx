@@ -61,12 +61,12 @@ function DrawerHandle({
 }
 
 const drawerOverlayVariants = cva(
-  "fixed inset-0 z-[110] bg-black/50 backdrop-blur-sm",
+  "fixed inset-0 z-[110] bg-black/50",
   {
     variants: {
       state: {
-        open: "animate-in fade-in-0",
-        closed: "animate-out fade-out-0"
+        open: "",
+        closed: ""
       }
     },
     defaultVariants: {
@@ -89,14 +89,14 @@ function DrawerOverlay({
 }
 
 const drawerContentVariants = cva(
-  "group/drawer-content bg-background fixed z-[120] flex h-auto flex-col",
+  "group/drawer-content bg-background fixed z-[120] flex h-auto flex-col will-change-transform",
   {
     variants: {
       direction: {
-        top: "inset-x-0 top-0 mb-24 max-h-[80vh] rounded-b-lg border-b data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
-        bottom: "inset-x-0 bottom-0 max-h-[100dvh] rounded-t-lg border-t data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
-        right: "inset-y-0 right-0 w-3/4 border-l sm:max-w-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
-        left: "inset-y-0 left-0 w-3/4 border-r sm:max-w-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left"
+        top: "inset-x-0 top-0 mb-24 max-h-[80vh] rounded-b-lg border-b",
+        bottom: "inset-x-0 bottom-0 max-h-[100dvh] rounded-t-lg border-t",
+        right: "inset-y-0 right-0 w-3/4 border-l sm:max-w-sm",
+        left: "inset-y-0 left-0 w-3/4 border-r sm:max-w-sm"
       }
     },
     defaultVariants: {
@@ -120,6 +120,7 @@ function DrawerContent({
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [isScrollable, setIsScrollable] = React.useState(false);
   const [scrollProgress, setScrollProgress] = React.useState(0);
+  const rafRef = React.useRef<number>(0);
 
   React.useEffect(() => {
     const element = contentRef.current;
@@ -130,17 +131,22 @@ function DrawerContent({
     };
 
     const handleScroll = () => {
-      const progress = element.scrollTop / (element.scrollHeight - element.clientHeight);
-      setScrollProgress(progress);
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        const progress = element.scrollTop / (element.scrollHeight - element.clientHeight);
+        setScrollProgress(progress);
+        rafRef.current = 0;
+      });
     };
 
     checkScrollable();
-    element.addEventListener('scroll', handleScroll);
+    element.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', checkScrollable);
 
     return () => {
       element.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', checkScrollable);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 

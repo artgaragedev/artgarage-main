@@ -133,13 +133,11 @@ const ServiceDrawer: FC<ServiceDrawerProps> = ({ isOpen, onClose, serviceKey, se
     printingMaterials: 'printing-materials',
     additionalServices: ''
   };
-  const categoryRoute = categoryRoutes[serviceCategory] || serviceCategory;
-  const baseRoute = categoryRoute ? `/${currentLocale}/${categoryRoute}` : `/${currentLocale}`;
-  const serviceUrl = categoryRoute
-    ? `/${currentLocale}/${categoryRoute}/${serviceKey}`
-    : `/${currentLocale}?service=${serviceKey}`;
+  const categoryRoute = categoryRoutes[serviceCategory] || '';
+  const basePath = categoryRoute ? `/${currentLocale}/${categoryRoute}` : `/${currentLocale}/services`;
+  const serviceUrl = `${basePath}?service=${serviceKey}`;
 
-  // Закрытие drawer при нажатии на Escape
+  // Закрытие drawer при нажатии на Escape (vaul handles body scroll lock)
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -149,14 +147,10 @@ const ServiceDrawer: FC<ServiceDrawerProps> = ({ isOpen, onClose, serviceKey, se
 
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import {
   Category,
@@ -14,6 +14,41 @@ import {
   WorksFilter,
   DataState
 } from '@/types/supabase'
+
+// Simple in-memory cache to prevent duplicate Supabase requests across components
+const cache = new Map<string, { data: any; timestamp: number; promise?: Promise<any> }>();
+const CACHE_TTL = 60_000; // 60 seconds
+
+function getCached<T>(key: string): T | null {
+  const entry = cache.get(key);
+  if (entry && Date.now() - entry.timestamp < CACHE_TTL) {
+    return entry.data as T;
+  }
+  return null;
+}
+
+function setCache(key: string, data: any) {
+  cache.set(key, { data, timestamp: Date.now() });
+}
+
+// Dedup in-flight requests
+function getInflight(key: string): Promise<any> | null {
+  const entry = cache.get(key);
+  if (entry?.promise) return entry.promise;
+  return null;
+}
+
+function setInflight(key: string, promise: Promise<any>) {
+  const entry = cache.get(key) || { data: null, timestamp: 0 };
+  cache.set(key, { ...entry, promise });
+}
+
+function clearInflight(key: string) {
+  const entry = cache.get(key);
+  if (entry) {
+    delete entry.promise;
+  }
+}
 
 // Утилита локализации полей по текущей локали
 const localizeField = (obj: any, baseKey: string, locale: 'ru' | 'ro') => {
@@ -45,27 +80,51 @@ const localizeData = (item: any, locale: 'ru' | 'ro') => {
 
 // Хук для получения категорий
 export const useCategories = (locale: 'ru' | 'ro' = 'ru') => {
+  const cacheKey = `categories_${locale}`;
+  const cached = getCached<LocalizedCategory[]>(cacheKey);
+
   const [state, setState] = useState<DataState<LocalizedCategory[]>>({
-    data: null,
-    isLoading: true,
+    data: cached,
+    isLoading: !cached,
     error: null
   })
 
-  const fetchCategories = useCallback(async () => {
+  const fetchCategories = useCallback(async (force = false) => {
+    if (!force) {
+      const hit = getCached<LocalizedCategory[]>(cacheKey);
+      if (hit) {
+        setState({ data: hit, isLoading: false, error: null });
+        return;
+      }
+    }
+
+    // Dedup in-flight requests
+    const inflight = getInflight(cacheKey);
+    if (inflight) {
+      const result = await inflight;
+      setState({ data: result, isLoading: false, error: null });
+      return;
+    }
+
     try {
-      setState(prev => ({ ...prev, isLoading: true, error: null }))
-      
-      const { data, error } = await supabase
-        .from('categories')
-        .select('*')
-        .eq('is_active', true)
-        .order('display_order', { ascending: true })
+      setState(prev => ({ ...prev, isLoading: !prev.data, error: null }))
 
-      if (error) throw error
+      const promise = (async () => {
+        const { data, error } = await supabase
+          .from('categories')
+          .select('*')
+          .eq('is_active', true)
+          .order('display_order', { ascending: true });
+        if (error) throw error;
+        return data?.map((category: Category) =>
+          localizeData(category, locale) as LocalizedCategory
+        ) || [];
+      })();
 
-      const localizedData = data?.map((category: Category) => 
-        localizeData(category, locale) as LocalizedCategory
-      ) || []
+      setInflight(cacheKey, promise);
+      const localizedData = await promise;
+      setCache(cacheKey, localizedData);
+      clearInflight(cacheKey);
 
       setState({
         data: localizedData,
@@ -73,36 +132,22 @@ export const useCategories = (locale: 'ru' | 'ro' = 'ru') => {
         error: null
       })
     } catch (error) {
-      setState({
-        data: null,
+      clearInflight(cacheKey);
+      setState(prev => ({
+        data: prev.data,
         isLoading: false,
         error: error instanceof Error ? error.message : 'Ошибка загрузки категорий'
-      })
+      }))
     }
-  }, [locale])
+  }, [locale, cacheKey])
 
   useEffect(() => {
-    fetchCategories()
-  }, [fetchCategories])
-
-  // Перезагружаем данные при возврате на страницу
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
-        fetchCategories()
-      }
-    }
-
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-    }
-  }, [fetchCategories])
+    if (!cached) fetchCategories();
+  }, [fetchCategories, cached])
 
   return {
     ...state,
-    refetch: fetchCategories
+    refetch: () => fetchCategories(true)
   }
 }
 
@@ -166,12 +211,6 @@ export const useSubcategories = (categoryId?: string, locale: 'ru' | 'ro' = 'ru'
 
 // Хук для получения работ
 export const useWorks = (filter: WorksFilter = {}, locale: 'ru' | 'ro' = 'ru') => {
-  const [state, setState] = useState<DataState<LocalizedWork[]>>({
-    data: null,
-    isLoading: true,
-    error: null
-  })
-
   // Мемоизируем фильтр для предотвращения бесконечного цикла
   const memoizedFilter = useMemo(() => filter, [
     filter.categoryId,
@@ -182,67 +221,92 @@ export const useWorks = (filter: WorksFilter = {}, locale: 'ru' | 'ro' = 'ru') =
     filter.offset
   ])
 
-  const fetchWorks = useCallback(async () => {
+  const cacheKey = `works_${locale}_${JSON.stringify(memoizedFilter)}`;
+  const cached = getCached<LocalizedWork[]>(cacheKey);
+
+  const [state, setState] = useState<DataState<LocalizedWork[]>>({
+    data: cached,
+    isLoading: !cached,
+    error: null
+  })
+
+  const fetchWorks = useCallback(async (force = false) => {
+    // Если явно задан лимит 0, возвращаем пустой результат без запроса
+    if (memoizedFilter.limit === 0) {
+      setState({ data: [], isLoading: false, error: null })
+      return
+    }
+
+    if (!force) {
+      const hit = getCached<LocalizedWork[]>(cacheKey);
+      if (hit) {
+        setState({ data: hit, isLoading: false, error: null });
+        return;
+      }
+    }
+
+    // Dedup in-flight requests
+    const inflight = getInflight(cacheKey);
+    if (inflight) {
+      const result = await inflight;
+      setState({ data: result, isLoading: false, error: null });
+      return;
+    }
+
     try {
-      setState(prev => ({ ...prev, isLoading: true, error: null }))
-      
-      // Если явно задан лимит 0, возвращаем пустой результат без запроса
-      if (memoizedFilter.limit === 0) {
-        setState({ data: [], isLoading: false, error: null })
-        return
-      }
+      setState(prev => ({ ...prev, isLoading: !prev.data, error: null }))
 
-      let query = supabase
-        .from('works')
-        .select(`
-          *,
-          category:categories(*),
-          subcategory:subcategories(*),
-          work_images(*)
-        `)
-        .eq('is_active', memoizedFilter.isPublished ?? true)
-        .order('display_order', { ascending: true })
+      const promise = (async () => {
+        let query = supabase
+          .from('works')
+          .select(`
+            *,
+            category:categories(*),
+            subcategory:subcategories(*),
+            work_images(*)
+          `)
+          .eq('is_active', memoizedFilter.isPublished ?? true)
+          .order('display_order', { ascending: true })
 
-      // Применяем фильтры
-      if (memoizedFilter.categoryId) {
-        query = query.eq('category_id', memoizedFilter.categoryId)
-      }
-      
-      if (memoizedFilter.subcategoryId) {
-        query = query.eq('subcategory_id', memoizedFilter.subcategoryId)
-      }
-      
-      if (memoizedFilter.isFeatured !== undefined) {
-        query = query.eq('is_featured', memoizedFilter.isFeatured)
-      }
+        if (memoizedFilter.categoryId) {
+          query = query.eq('category_id', memoizedFilter.categoryId)
+        }
+        if (memoizedFilter.subcategoryId) {
+          query = query.eq('subcategory_id', memoizedFilter.subcategoryId)
+        }
+        if (memoizedFilter.isFeatured !== undefined) {
+          query = query.eq('is_featured', memoizedFilter.isFeatured)
+        }
+        if (memoizedFilter.limit !== undefined) {
+          query = query.limit(memoizedFilter.limit)
+        }
+        if (memoizedFilter.offset !== undefined) {
+          const start = memoizedFilter.offset
+          const end = start + ((memoizedFilter.limit ?? 10) - 1)
+          query = query.range(start, end)
+        }
 
-      // Применяем лимит и оффсет (учитываем 0 и 0)
-      if (memoizedFilter.limit !== undefined) {
-        query = query.limit(memoizedFilter.limit)
-      }
-      
-      if (memoizedFilter.offset !== undefined) {
-        const start = memoizedFilter.offset
-        const end = start + ((memoizedFilter.limit ?? 10) - 1)
-        query = query.range(start, end)
-      }
+        const { data, error } = await query
+        if (error) throw error
 
-      const { data, error } = await query
+        return data?.map((work: Work & {
+          category: Category,
+          subcategory: Subcategory,
+          work_images: WorkImage[]
+        }) => ({
+          ...localizeData(work, locale),
+          category: work.category ? localizeData(work.category, locale) as LocalizedCategory : undefined,
+          subcategory: work.subcategory ? localizeData(work.subcategory, locale) as LocalizedSubcategory : undefined,
+          work_images: work.work_images?.map((image: WorkImage) =>
+            localizeData(image, locale) as LocalizedWorkImage
+          ) || []
+        } as LocalizedWork)) || []
+      })();
 
-      if (error) throw error
-
-      const localizedData = data?.map((work: Work & { 
-        category: Category, 
-        subcategory: Subcategory,
-        work_images: WorkImage[]
-      }) => ({
-        ...localizeData(work, locale),
-        category: work.category ? localizeData(work.category, locale) as LocalizedCategory : undefined,
-        subcategory: work.subcategory ? localizeData(work.subcategory, locale) as LocalizedSubcategory : undefined,
-        work_images: work.work_images?.map((image: WorkImage) => 
-          localizeData(image, locale) as LocalizedWorkImage
-        ) || []
-      } as LocalizedWork)) || []
+      setInflight(cacheKey, promise);
+      const localizedData = await promise;
+      setCache(cacheKey, localizedData);
+      clearInflight(cacheKey);
 
       setState({
         data: localizedData,
@@ -250,36 +314,22 @@ export const useWorks = (filter: WorksFilter = {}, locale: 'ru' | 'ro' = 'ru') =
         error: null
       })
     } catch (error) {
-      setState({
-        data: null,
+      clearInflight(cacheKey);
+      setState(prev => ({
+        data: prev.data,
         isLoading: false,
         error: error instanceof Error ? error.message : 'Ошибка загрузки работ'
-      })
+      }))
     }
-  }, [memoizedFilter, locale])
+  }, [memoizedFilter, locale, cacheKey])
 
   useEffect(() => {
-    fetchWorks()
-  }, [fetchWorks])
-
-  // Перезагружаем данные при возврате на страницу
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
-        fetchWorks()
-      }
-    }
-
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-    }
-  }, [fetchWorks])
+    if (!cached) fetchWorks();
+  }, [fetchWorks, cached])
 
   return {
     ...state,
-    refetch: fetchWorks
+    refetch: () => fetchWorks(true)
   }
 }
 

@@ -1,8 +1,8 @@
 'use client';
 
-import { FC, useState, useEffect, Suspense } from 'react';
+import { FC, useState, useEffect, useCallback, Suspense } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import ServiceCard from './ServiceCard';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import ServiceDrawer from './ServiceDrawer';
@@ -15,6 +15,7 @@ function OutdoorServicesSectionContent() {
   const tCases = useTranslations('cases');
   const locale = useLocale() as 'ru' | 'ro';
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string>('');
   const [isOrderFormOpen, setIsOrderFormOpen] = useState(false);
@@ -72,15 +73,22 @@ function OutdoorServicesSectionContent() {
     }
   ];
 
-  const handleServiceClick = (serviceKey: string) => {
+  const handleServiceClick = useCallback((serviceKey: string) => {
     setSelectedService(serviceKey);
     setIsDrawerOpen(true);
-  };
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('service', serviceKey);
+    window.history.replaceState(null, '', `${pathname}?${params.toString()}`);
+  }, [searchParams, pathname]);
 
-  const handleCloseDrawer = () => {
+  const handleCloseDrawer = useCallback(() => {
     setIsDrawerOpen(false);
     setSelectedService('');
-  };
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('service');
+    const qs = params.toString();
+    window.history.replaceState(null, '', `${pathname}${qs ? '?' + qs : ''}`);
+  }, [searchParams, pathname]);
 
   // Проверяем URL параметры при загрузке компонента
   useEffect(() => {

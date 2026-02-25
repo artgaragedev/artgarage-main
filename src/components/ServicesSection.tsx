@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState, Suspense, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation';
 import ServiceCard from './ServiceCard';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import ServiceDrawer from './ServiceDrawer';
@@ -35,7 +35,6 @@ function ServicesSectionContent() {
   const tPrint = useTranslations('printingMaterials');
   const tAdditional = useTranslations('services.additionalServices');
 
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -140,20 +139,16 @@ function ServicesSectionContent() {
   const handleServiceClick = useCallback((serviceKey: string) => {
     setSelectedService(serviceKey);
     setIsDrawerOpen(true);
-
-    // Обновляем URL используя Next.js router (правильный способ)
     const newQueryString = createQueryString('service', serviceKey);
-    router.push(`${pathname}?${newQueryString}`, { scroll: false });
-  }, [createQueryString, pathname, router]);
+    window.history.replaceState(null, '', `${pathname}?${newQueryString}`);
+  }, [createQueryString, pathname]);
 
   const handleCloseDrawer = useCallback(() => {
     setIsDrawerOpen(false);
     setSelectedService('');
-
-    // Удаляем параметр из URL используя Next.js router
     const newQueryString = removeQueryParam('service');
-    router.push(`${pathname}${newQueryString ? '?' + newQueryString : ''}`, { scroll: false });
-  }, [removeQueryParam, pathname, router]);
+    window.history.replaceState(null, '', `${pathname}${newQueryString ? '?' + newQueryString : ''}`);
+  }, [removeQueryParam, pathname]);
 
 
   return (
